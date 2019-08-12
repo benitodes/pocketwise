@@ -10,10 +10,82 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_083530) do
+ActiveRecord::Schema.define(version: 2019_08_12_122000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.text "answer_content"
+    t.boolean "correct"
+    t.bigint "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.boolean "complete"
+    t.string "picture"
+    t.bigint "category_id"
+    t.bigint "wallet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_courses_on_category_id"
+    t.index ["wallet_id"], name: "index_courses_on_wallet_id"
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.integer "goal_allowance"
+    t.integer "goal_price"
+    t.integer "goal_current_saving"
+    t.boolean "complete"
+    t.bigint "wallet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wallet_id"], name: "index_goals_on_wallet_id"
+  end
+
+  create_table "lectures", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "picture"
+    t.boolean "complete"
+    t.bigint "level_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level_id"], name: "index_lectures_on_level_id"
+  end
+
+  create_table "levels", force: :cascade do |t|
+    t.string "name"
+    t.integer "number"
+    t.boolean "complete"
+    t.string "picture"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_levels_on_course_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.text "question_content"
+    t.boolean "complete"
+    t.text "hint"
+    t.string "picture"
+    t.bigint "level_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level_id"], name: "index_questions_on_level_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +95,35 @@ ActiveRecord::Schema.define(version: 2019_08_12_083530) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "username"
+    t.string "avatar"
+    t.string "gender"
+    t.integer "age"
+    t.boolean "parent"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wallets", force: :cascade do |t|
+    t.integer "payout_amount"
+    t.string "payout_frequency"
+    t.bigint "kid_id"
+    t.bigint "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kid_id"], name: "index_wallets_on_kid_id"
+    t.index ["parent_id"], name: "index_wallets_on_parent_id"
+  end
+
+  add_foreign_key "answers", "questions"
+  add_foreign_key "courses", "categories"
+  add_foreign_key "courses", "wallets"
+  add_foreign_key "goals", "wallets"
+  add_foreign_key "lectures", "levels"
+  add_foreign_key "levels", "courses"
+  add_foreign_key "questions", "levels"
+  add_foreign_key "wallets", "users", column: "kid_id"
+  add_foreign_key "wallets", "users", column: "parent_id"
 end
