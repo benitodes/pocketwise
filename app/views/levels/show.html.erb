@@ -1,2 +1,11 @@
-<h1>Levels#show</h1>
-<p>Find me in app/views/levels/show.html.erb</p>
+<h3>Level show page</h3>
+Course: <%= @course.name %>
+<br>
+
+Level <%= @level.number %>
+<br>
+<%= @level.name %>
+<br>
+<%= link_to "Lecture", level_lecture_path(1), class: 'btn-primary' %>
+<!-- user should only be able to practice once lecture is complete -->
+<%= link_to "Practice", level_question_path(1), class: 'btn-primary' %>
