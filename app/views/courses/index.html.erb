@@ -1,2 +1,8 @@
-<h1>Courses#index</h1>
-<p>Find me in app/views/courses/index.html.erb</p>
+<h1>All Courses</h1>
+
+<% @courses.each do |course| %>
+<btn class="btn btn-primary"><%= course.name %></btn>
+<%= link_to "View", course_levels_path(course), class: 'btn-ghost' %>
+<br>
+<% end %>
+

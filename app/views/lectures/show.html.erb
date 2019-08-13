@@ -1,2 +1,13 @@
-<h1>Lectures#show</h1>
-<p>Find me in app/views/lectures/show.html.erb</p>
+<h3>lectures show page</h3>
+<br>
+
+<h3><%= @lecture.title %></h3>
+<br>
+
+<p><%= @lecture.description %></p>
+
+<% if @next_lecture %>
+<%= link_to "Next", level_lecture_path(@level, @next_lecture), class: 'btn-primary' %>
+<% else %>
+<%= link_to "Next", dashboard_user_path(@user) %>
+<% end  %>

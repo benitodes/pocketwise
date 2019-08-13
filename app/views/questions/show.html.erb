@@ -1,2 +1,16 @@
-<h1>Questions#show</h1>
-<p>Find me in app/views/questions/show.html.erb</p>
+<h3>Question show page</h3>
+<br>
+
+<h3><%= @question.question_content %></h3>
+<br>
+
+<% @answers.each do |a| %>
+<%= a.answer_content %>
+<br>
+<% end %>
+
+<% if @next_question %>
+<%= link_to "Next", level_question_path(@level, @next_question), class: 'btn-primary' %>
+<% else %>
+<%= link_to "Next", dashboard_user_path(@user) %>
+<% end  %>
