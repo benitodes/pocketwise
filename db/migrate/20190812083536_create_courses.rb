@@ -6,7 +6,6 @@ class CreateCourses < ActiveRecord::Migration[5.2]
       t.boolean :complete
       t.string :picture
       t.references :category, foreign_key: true
-      t.references :wallet, foreign_key: true
 
       t.timestamps
     end
