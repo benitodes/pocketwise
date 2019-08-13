@@ -12,7 +12,6 @@ class LevelsController < ApplicationController
 
   def show
     @course = Course.find(@level.course_id)
-
   end
 
   private
@@ -20,6 +19,4 @@ class LevelsController < ApplicationController
   def set_level
     @level = Level.find(params[:id])
   end
-
-
 end
