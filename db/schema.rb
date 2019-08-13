@@ -36,11 +36,9 @@ ActiveRecord::Schema.define(version: 2019_08_12_122000) do
     t.boolean "complete"
     t.string "picture"
     t.bigint "category_id"
-    t.bigint "wallet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_courses_on_category_id"
-    t.index ["wallet_id"], name: "index_courses_on_wallet_id"
   end
 
   create_table "goals", force: :cascade do |t|
@@ -87,6 +85,15 @@ ActiveRecord::Schema.define(version: 2019_08_12_122000) do
     t.index ["level_id"], name: "index_questions_on_level_id"
   end
 
+  create_table "user_courses", force: :cascade do |t|
+    t.bigint "course_id"
+    t.bigint "kid_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_user_courses_on_course_id"
+    t.index ["kid_id"], name: "index_user_courses_on_kid_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -119,11 +126,12 @@ ActiveRecord::Schema.define(version: 2019_08_12_122000) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "courses", "categories"
-  add_foreign_key "courses", "wallets"
   add_foreign_key "goals", "wallets"
   add_foreign_key "lectures", "levels"
   add_foreign_key "levels", "courses"
   add_foreign_key "questions", "levels"
+  add_foreign_key "user_courses", "courses"
+  add_foreign_key "user_courses", "users", column: "kid_id"
   add_foreign_key "wallets", "users", column: "kid_id"
   add_foreign_key "wallets", "users", column: "parent_id"
 end
