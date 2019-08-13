@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+  get 'users/dashboard'
+  get 'users/new'
+  get 'users/create'
+  get 'users/destroy'
+  get 'questions/show'
+  get 'lectures/show'
+  get 'levels/index'
+  get 'levels/show'
+  get 'categories/index'
+  get 'courses/index'
+  get 'wallets/edit'
+  get 'wallets/show'
+  get 'wallets/update'
+  get 'goals/index'
+  get 'goals/new'
+  get 'goals/create'
+  get 'goals/edit'
+  get 'goals/update'
+  get 'goals/destroy'
   devise_for :users
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
