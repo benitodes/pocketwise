@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_091506) do
+ActiveRecord::Schema.define(version: 2019_08_13_131159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(version: 2019_08_13_091506) do
     t.boolean "complete"
     t.bigint "wallet_id"
     t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "name"
     t.string "picture"
-    t.datetime "updated_at", null: false
     t.index ["wallet_id"], name: "index_goals_on_wallet_id"
   end
 
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_091506) do
     t.bigint "level_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number"
     t.index ["level_id"], name: "index_lectures_on_level_id"
   end
 
@@ -84,6 +85,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_091506) do
     t.bigint "level_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number"
     t.index ["level_id"], name: "index_questions_on_level_id"
   end
 

@@ -3,18 +3,14 @@ class QuestionsController < ApplicationController
 
   def show
     @level = Level.find(params[:level_id])
-   # @questions = Question.select { |q| q.level_id == @level.id }
     @question = Question.find(params[:id])
+    @answers = Answer.where(question_id: @question)
     @next_question = Question.where(level: @level).find_by(number: @question.number + 1)
-    # @questions = Question.all
-    # @questions = @questions.select { |q| q.level_id == @level }
-    # @answers = Answer.all
-    # @answers = @answers.select { |q| q.question_id == @question.id }
+    byebug
   end
 
   private
 
   def set_questions
-
   end
 end
