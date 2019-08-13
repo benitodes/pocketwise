@@ -1,2 +1,8 @@
-<h1>Questions#show</h1>
-<p>Find me in app/views/questions/show.html.erb</p>
+<h3>Question show page</h3>
+
+<% @questions.each do |q| %>
+<%= q %>
+<%= q.question_content %>
+<% end %>
+
+
