@@ -6,4 +6,8 @@
 <%= a.answer_content %>
 <br>
 <% end  %>
+<% if @next_question %>
 <%= link_to "Next", level_question_path(@level, @next_question), class: 'btn-primary' %>
+<% else %>
+<%= link_to "Next", dashboard_user_path(@user) %>
+<% end  %>

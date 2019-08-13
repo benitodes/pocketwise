@@ -141,12 +141,12 @@ question_list = [
   ['What is HTML use for?', 'CSS is for the style so HTML is for [...]? :)', true, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 1, Level.first.id],
   ['How many headings to we know?', '3*2 = ? ;)', true, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 2, Level.first.id],
   ['Is it possible to display content outside of the body tag?', 'think', true, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 3, Level.first.id],
-  ['Why do we need tables in HTML?', 'think', false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 4, Level.second.id],
-  ['Which element do we use to create a table?', 'To create a body on your page, you will use : <body></body> right?',false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 5, Level.second.id],
-  ['Which element allow us to create a row element?', 'To create a table on your page, you will use : <table></table> right?', false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 6, Level.second.id],
-  ['Why do we use form in HTML?', 'Why do we use form in real life?', false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 7, Level.third.id],
-  ['To create a form, you need an action and a [...]?', 'How do we call POST and GET ?', false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 7, Level.third.id],
-  ['What do we need inside our form?', 'think', false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 8, Level.third.id]
+  ['Why do we need tables in HTML?', 'think', false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 1, Level.second.id],
+  ['Which element do we use to create a table?', 'To create a body on your page, you will use : <body></body> right?',false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 2, Level.second.id],
+  ['Which element allow us to create a row element?', 'To create a table on your page, you will use : <table></table> right?', false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 3, Level.second.id],
+  ['Why do we use form in HTML?', 'Why do we use form in real life?', false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 1, Level.third.id],
+  ['To create a form, you need an action and a [...]?', 'How do we call POST and GET ?', false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 2, Level.third.id],
+  ['What do we need inside our form?', 'think', false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 3, Level.third.id]
 ]
 
 question_list.each do |question_content, hint, complete, picture, number, level_id|

@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @answers = Answer.where(question_id: @question)
     @next_question = Question.where(level: @level).find_by(number: @question.number + 1)
-    byebug
+    @user = current_user
   end
 
   private
