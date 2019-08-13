@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_122000) do
+ActiveRecord::Schema.define(version: 2019_08_13_091506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2019_08_12_122000) do
     t.boolean "complete"
     t.bigint "wallet_id"
     t.datetime "created_at", null: false
+    t.string "name"
+    t.string "picture"
     t.datetime "updated_at", null: false
     t.index ["wallet_id"], name: "index_goals_on_wallet_id"
   end
@@ -120,6 +122,8 @@ ActiveRecord::Schema.define(version: 2019_08_12_122000) do
     t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "total_allowance"
+    t.string "payout_day"
     t.index ["kid_id"], name: "index_wallets_on_kid_id"
     t.index ["parent_id"], name: "index_wallets_on_parent_id"
   end
