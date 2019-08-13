@@ -1,2 +1,13 @@
 <h1>Goals#new</h1>
 <p>Find me in app/views/goals/new.html.erb</p>
+
+<div class="">
+    <%= simple_form_for [@wallet, @goal] do |f| %>
+      <%= f.input :name %>
+      <%= f.input :goal_allowance %>
+      <%= f.input :goal_price %>
+      <%= f.input :picture %>
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    <% end %>
+    <%= link_to "Back to goals", wallet_goals_path(@wallet), class: "btn btn-danger" %>
+</div>
