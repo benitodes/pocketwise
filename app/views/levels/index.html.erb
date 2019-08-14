@@ -1,8 +1,10 @@
 <h3>COURSE: <%= @course.name  %></h2>
 <!-- button should display start if level one complete = false, otherwise it should show resume  -->
-<%= link_to "Resume", level_path(@level_current), class: 'btn-primary' %>
+<%= link_to "Resume", level_question_path(@level_current, @question_current), class: 'btn-primary' %>
 <br>
+currently at level <%= @level_current %>, question <%= @question_current.number %>
 <br>
+
 <h3>Levels:</h3>
 
 <% @levels.each do |level| %>
