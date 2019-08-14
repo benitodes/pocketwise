@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_040952) do
+ActiveRecord::Schema.define(version: 2019_08_14_041517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 2019_08_14_040952) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "completed_levels", force: :cascade do |t|
+    t.bigint "user_course_id"
+    t.bigint "level_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level_id"], name: "index_completed_levels_on_level_id"
+    t.index ["user_course_id"], name: "index_completed_levels_on_user_course_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -132,6 +141,8 @@ ActiveRecord::Schema.define(version: 2019_08_14_040952) do
   end
 
   add_foreign_key "answers", "questions"
+  add_foreign_key "completed_levels", "levels"
+  add_foreign_key "completed_levels", "user_courses"
   add_foreign_key "courses", "categories"
   add_foreign_key "goals", "wallets"
   add_foreign_key "lectures", "levels"
