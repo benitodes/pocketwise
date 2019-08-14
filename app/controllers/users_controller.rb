@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:dashboard, :destroy]
-  mount_uploader :avatar, PhotoUploader
 
   def dashboard
     @user = User.find(params[:id])
