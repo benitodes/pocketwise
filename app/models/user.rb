@@ -7,5 +7,4 @@ class User < ApplicationRecord
   has_one :kid_wallet, foreign_key: "kid_id", class_name: "Wallet", dependent: :destroy
   has_many :user_courses, foreign_key: "kid_id", class_name: "UserCourse", dependent: :destroy
   has_many :goals, through: :wallet
-  validates :username, :gender, :age, :parent, presence: true
 end
