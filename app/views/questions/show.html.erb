@@ -5,12 +5,17 @@
 <br>
 
 <% @answers.each do |a| %>
-<%= a.answer_content %>
-<br>
+  <div class="custom-control custom-radio">
+    <input type="radio" id="customRadio<%= a.id %>" value="<%= a.correct %>" class="custom-control-input">
+      <% if a.correct %>
+        <% if @next_question %>
+          <%= link_to a.answer_content, level_question_path(@level, @next_question) %>
+        <% else %>
+          <%= link_to a.answer_content, level_increase_level_path(@level) %>
+        <% end %>
+      <% else %>
+        <%= link_to a.answer_content, '#' %>
+      <% end %>
+  </div>
 <% end %>
 
-<% if @next_question %>
-<%= link_to "Next", level_question_path(@level, @next_question), class: 'btn-primary' %>
-<% else %>
-<%= link_to "Next", dashboard_user_path(@user) %>
-<% end  %>

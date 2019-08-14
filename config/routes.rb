@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :levels, only: [:show] do
     resources :lectures, only: [:show]
     resources :questions, only: [:show]
+    get 'increase_level', to: 'questions#increase_level'
   end
 
 end
