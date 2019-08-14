@@ -4,10 +4,10 @@ class LevelsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @levels = Level.all
-    # only display levels for specific category
+    # only display levels for specific course
     @levels = @levels.select { |l| l.course_id == @course.id }
     # finds first level that is not completed
-    @level_current = @levels.find { |l| l.complete == false }
+    @level_current = @levels.first.course.user_course.last_level
   end
 
   def show
