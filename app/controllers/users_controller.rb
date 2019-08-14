@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     if @user.parent?
       @wallets = @user.parent_wallets
     else
-      @wallets = @user.kid_wallet
+      @wallet = @user.kid_wallet
     end
   end
 
@@ -18,8 +18,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.parent = false
     if @user.save
-      Wallet.create!(kid_id: @user.id, parent_id: current_user.id)
-      redirect_to dashboard_user_path(current_user)
+      @wallet = Wallet.create!(kid_id: @user.id, parent_id: current_user.id)
+      redirect_to edit_wallet_path(@wallet.id)
     else
       render "new"
     end
