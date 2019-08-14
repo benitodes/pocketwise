@@ -22,7 +22,7 @@ class GoalsController < ApplicationController
 
   def update
     @goal.update(goal_params)
-    redirect_to wallet_goals_path(@wallet)
+    redirect_to wallet_goals_path(@goal.wallet)
   end
 
   def destroy
