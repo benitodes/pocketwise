@@ -1,6 +1,7 @@
 # at least 2 levels for html
 
 # desroy first: Class with references:
+UserCourse.destroy_all
 Course.destroy_all
 Wallet.destroy_all
 User.destroy_all
@@ -100,6 +101,9 @@ end
 
 puts "courses have been created"
 
+
+
+
 # create levels
 
 level_list = [
@@ -159,7 +163,7 @@ puts "questions have been created"
 
 answer_list = [
   ['HTML provides structure to the content appearing on a website, such as images, text, or videos.', false, Question.first.id],
-  ['6', true, Question.first.id],
+  ['6', false, Question.first.id],
   ['No', true, Question.first.id],
   ['To present tabular data to users.', false, Question.second.id],
   ['<table></table>', false, Question.second.id],
@@ -174,3 +178,19 @@ answer_list.each do |answer_content, correct, question_id|
 end
 
 puts "answers have been created"
+
+
+# create user_courses
+
+user_course_list = [
+  [Course.first.id, User.second.id, 2, 2, 3, false],
+  [Course.first.id, User.second.id, 1, 3, 3, true]
+]
+
+
+user_course_list.each do |course_id, kid_id, last_level, last_question, last_lecture, complete|
+  UserCourse.create!(course_id: course_id, kid_id: kid_id, last_level: last_level, last_question: last_question, last_lecture: last_lecture, complete: complete)
+end
+
+puts "user_course list has been completed"
+

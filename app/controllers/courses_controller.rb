@@ -1,9 +1,16 @@
 class CoursesController < ApplicationController
-
   def index
     @category = Category.find(params[:category_id])
-    @courses = Course.all
     # only display courses for specific category
-    @courses = @courses.select { |t| t.category == @category }
+    @courses = Course.select { |t| t.category == @category }
+    # display complete when course is complete
+    # iterate through course
+    @courses.each do |course|
+      unless course.user_course.nil?
+        # course is complete if last_level = number of course levels + 1
+        course.user_course.complete = true if course.user_course.last_level == course.levels.length + 1
+      end
+    end
+    # to do : if user course is there then enroll @message
   end
 end
