@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'user_courses/create'
   devise_for :users
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -25,11 +26,14 @@ Rails.application.routes.draw do
 
   resources :courses, only: [] do
     resources :levels, only: [:index]
+    resources :user_courses, only: [:create]
   end
 
   resources :levels, only: [:show] do
     resources :lectures, only: [:show]
     resources :questions, only: [:show]
   end
+
+
 
 end
