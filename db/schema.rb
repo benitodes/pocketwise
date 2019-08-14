@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_104948) do
+ActiveRecord::Schema.define(version: 2019_08_14_040952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 2019_08_13_104948) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.boolean "complete"
     t.string "picture"
     t.bigint "category_id"
     t.datetime "created_at", null: false
@@ -58,7 +57,6 @@ ActiveRecord::Schema.define(version: 2019_08_13_104948) do
     t.string "title"
     t.text "description"
     t.string "picture"
-    t.boolean "complete"
     t.bigint "level_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -69,17 +67,16 @@ ActiveRecord::Schema.define(version: 2019_08_13_104948) do
   create_table "levels", force: :cascade do |t|
     t.string "name"
     t.integer "number"
-    t.boolean "complete"
     t.string "picture"
     t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number_of_questions"
     t.index ["course_id"], name: "index_levels_on_course_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.text "question_content"
-    t.boolean "complete"
     t.text "hint"
     t.string "picture"
     t.bigint "level_id"
@@ -94,6 +91,10 @@ ActiveRecord::Schema.define(version: 2019_08_13_104948) do
     t.bigint "kid_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "last_level"
+    t.integer "last_question"
+    t.integer "last_lecture"
+    t.boolean "complete"
     t.index ["course_id"], name: "index_user_courses_on_course_id"
     t.index ["kid_id"], name: "index_user_courses_on_kid_id"
   end
