@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def dashboard
     @user = User.find(params[:id])
+    authorize @user
     if @user.parent?
       @wallets = @user.parent_wallets
     else
@@ -11,11 +12,13 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new(parent: false)
+    @user = User.new
+    authorize current_user
   end
 
   def create
     @user = User.new(user_params)
+    authorize current_user
     @user.parent = false
     if @user.save
       @wallet = Wallet.create!(kid_id: @user.id, parent_id: current_user.id)

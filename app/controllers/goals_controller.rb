@@ -3,29 +3,39 @@ class GoalsController < ApplicationController
   before_action :set_wallet, only: [:index, :new, :create]
 
   def index
-    @goals = @wallet.goals
+    @wallet = Wallet.find(params[:wallet_id])
+    if @wallet.parent == current_user || @wallet.kid == current_user
+      @goals = @wallet.goals
+    else
+      redirect_to root_path
+    end
   end
 
   def new
-    @goal = Goal.new
+    @goal = Goal.new(wallet: @wallet)
+    authorize @goal
   end
 
   def create
     @goal = Goal.new(goal_params)
     @goal.wallet = @wallet
+    authorize @goal
     @goal.save
     redirect_to wallet_goals_path(@wallet)
   end
 
   def edit
+    authorize @goal
   end
 
   def update
+    authorize @goal
     @goal.update(goal_params)
     redirect_to wallet_goals_path(@goal.wallet)
   end
 
   def destroy
+    authorize @goal
     @goal.destroy
     redirect_to wallet_goals_path(@goal.wallet)
   end

@@ -1,6 +1,7 @@
 class WalletsController < ApplicationController
   def edit
     @wallet = Wallet.find(params[:id])
+    authorize @wallet
   end
 
   def update
