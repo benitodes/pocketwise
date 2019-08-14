@@ -1,0 +1,17 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <h1>Welcome to your Dashboard </h1>
+      <% wallets.each do |wallet| %>
+      <div class="card my-4">
+        <h2>Wallet of<%= wallet.kid.username %></h2>
+        <%= link_to "Destroy kid", destroy_user_path(wallet.kid.id), method: :delete %>
+        <%= link_to "Edit Wallet", edit_wallet_path(wallet.id) %>
+        <%= link_to "Dashboard of #{wallet.kid.username}", dashboard_user_path(wallet.kid.id) %>
+      </div>
+      <% end %>
+      <%= link_to "Create a child", new_user_path %>
+    </div>
+  </div>
+</div>
