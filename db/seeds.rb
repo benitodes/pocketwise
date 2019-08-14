@@ -94,8 +94,8 @@ course_list = [
 
 # create new courses from array
 
-course_list.each do |name, description, complete, picture, category_id|
-  course = Course.create!( name: name, description: description, complete: complete, picture: picture, category_id: category_id)
+course_list.each do |name, description, picture, category_id|
+  course = Course.create!( name: name, description: description, picture: picture, category_id: category_id)
 end
 
 puts "courses have been created"
@@ -108,8 +108,8 @@ level_list = [
   ['Forms', 3, false, 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1280px-HTML5_logo_and_wordmark.svg.png', Course.first.id]
 ]
 
-level_list.each do |name, number, complete, picture, course_id|
-  Level.create!(name: name, number: number, complete: complete, picture: picture, course_id: course_id)
+level_list.each do |name, number, picture, course_id|
+  Level.create!(name: name, number: number, picture: picture, course_id: course_id)
 end
 
 puts "levels have been created"
@@ -129,8 +129,8 @@ lecture_list = [
   ['Text Input', 'If we want to create an input field in our <form>, we’ll need the help of the <input> element. The <input> element has a type attribute which determines how it renders on the web page and what kind of data it can accept.', false, 'https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_802,f_auto,q_auto/v1498411917/required-input_xkqd8x.png', 2, Level.third.id]
 ]
 
-lecture_list.each do |title, description, complete, picture, number, level_id|
-  Lecture.create!(title: title, description: description, complete: complete, picture: picture, number: number, level_id: level_id)
+lecture_list.each do |title, description, picture, number, level_id|
+  Lecture.create!(title: title, description: description, picture: picture, number: number, level_id: level_id)
 end
 
 puts "lectures have been created"
@@ -149,8 +149,8 @@ question_list = [
   ['What do we need inside our form?', 'think', false, 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 3, Level.third.id]
 ]
 
-question_list.each do |question_content, hint, complete, picture, number, level_id|
-  Question.create!(question_content: question_content, hint: hint, complete: complete, picture: picture, number: number, level_id: level_id)
+question_list.each do |question_content, hint, picture, number, level_id|
+  Question.create!(question_content: question_content, hint: hint, picture: picture, number: number, level_id: level_id)
 end
 
 puts "questions have been created"
