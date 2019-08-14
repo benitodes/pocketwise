@@ -4,6 +4,7 @@
     <% @goals.each do |goal| %>
       <a><%= goal.id %></a></br>
       <a><%= goal.name %></a></br>
+      <%= cl_image_tag goal.picture, height: 300, width: 400, crop: :fill %>
       <a><%= link_to 'edit', edit_goal_path(goal.id), class: "btn btn-success"%></a></br>
     <% end %>
 
