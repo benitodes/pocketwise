@@ -6,6 +6,7 @@ class WalletsController < ApplicationController
 
   def update
     @wallet = Wallet.find(params[:id])
+    authorize @wallet
     @wallet.update(wallet_params)
     redirect_to dashboard_user_path(current_user)
   end

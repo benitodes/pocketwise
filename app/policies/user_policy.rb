@@ -6,18 +6,19 @@ class UserPolicy < ApplicationPolicy
   end
 
   def dashboard?
-    record == user || record.kid_wallet.parent == user
+    return record == user if user.kid
+    return record == user || user.is_parent_of?(record)
   end
 
   def new?
-    record.parent
+    user.parent
   end
 
   def create?
-    record.parent
+    user.parent
   end
 
   def destroy?
-    record.kid_wallet.parent == user
+    user.is_parent_of?(record)
   end
 end

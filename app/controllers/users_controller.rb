@@ -30,6 +30,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    authorize @user
     @user.destroy
     redirect_to dashboard_user_path(current_user)
   end
