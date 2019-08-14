@@ -2,12 +2,56 @@
 <br>
 
 <h3><%= @lecture.title %></h3>
+
 <br>
+question: <%= @question.number %>
+levelno <%= @level.number %>
 
 <p><%= @lecture.description %></p>
 
 <% if @next_lecture %>
 <%= link_to "Next", level_lecture_path(@level, @next_lecture), class: 'btn-primary' %>
 <% else %>
-<%= link_to "Next", dashboard_user_path(@user) %>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Next
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h2>
+              Review complete
+            </h2>
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img src="https://icon-library.net/images/check-circle-icon/check-circle-icon-4.jpg" alt="Tick" style="width:300px;height:300px;">
+          <div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= link_to "Continue to quiz", level_question_path(@level, @question.number), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end  %>
+
+
+
+
+
+
+
+
+
+
+
+
