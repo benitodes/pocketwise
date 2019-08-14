@@ -1,10 +1,9 @@
-<h1>Users#dashboard</h1>
-<p>Find me in app/views/users/dashboard.html.erb</p>
-
-
-<% @wallets.each do |wallet| %>
-  <p><%= wallet.kid.username %></p>
-  <%= link_to "Destroy kid", destroy_user_path(wallet.kid), method: :delete %>
+<% if @user.parent? %>
+ <%= render "parent_dashboard", user: @user, wallets: @wallets %>
+<% else %>
+ <%= render "kid_dashboard", user: @user, wallet: @wallet %>
 <% end %>
 
-<%= link_to "Create a child", new_user_path %>
+
+
+
