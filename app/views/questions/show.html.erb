@@ -27,16 +27,19 @@
       </div>
       <% end %>
     </div>
+    <div style="height: 10vh;">
 
-    <div class="submit-answer wrong" style="display: none">
-      <%= link_to "submit", "#", class: "btn btn-info btn-submit" %>
-    </div>
-    <div class="submit-answer right" style="display: none">
-      <% if @next_question %>
-        <%= link_to "submit", level_question_path(@level, @next_question), class: "btn btn-info btn-submit" %>
-      <% else %>
-        <%= link_to "submit", level_increase_level_path(@level), class: "btn btn-info btn-submit" %>
-      <% end %>
+      <div class="submit-answer wrong" style="display: none">
+        <%= link_to "submit", "#", class: "btn btn-info btn-submit" %>
+      </div>
+      <div class="submit-answer right" style="display: none">
+        <% if @next_question %>
+          <%= link_to "submit", level_question_path(@level, @next_question), class: "btn btn-info btn-submit" %>
+        <% else %>
+          <%= link_to "submit", level_increase_level_path(@level), class: "btn btn-info btn-submit" %>
+        <% end %>
+      </div>
+
     </div>
   </div>
 </div>
