@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+
   def show
     @level = Level.find(params[:level_id])
     @question = Question.find(params[:id])
@@ -11,7 +12,7 @@ class QuestionsController < ApplicationController
   def increase_level
     # find actual level
     level = Level.find(params[:level_id])
-    authorize @question
+    skip_authorization
     # find current user_course in which kid is enrolled
     user_course = level.course.user_course
     # only increase level by one if last_level is inferior to the current level
