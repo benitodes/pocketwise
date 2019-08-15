@@ -143,14 +143,14 @@ puts "lectures have been created"
 
 question_list = [
   ['What is HTML use for?', 'CSS is for the style so HTML is for [...]? :)', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 1, Level.first.id],
-  ['How many headings to we know?', '3*2 = ? ;)', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 2, Level.first.id],
+  ['How many headings do we know?', '3*2 = ? ;)', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 2, Level.first.id],
   ['Is it possible to display content outside of the body tag?', 'think', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 3, Level.first.id],
-  ['Why do we need tables in HTML?', 'think', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 1, Level.second.id],
-  ['Which element do we use to create a table?', 'To create a body on your page, you will use : <body></body> right?','https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 2, Level.second.id],
-  ['Which element allow us to create a row element?', 'To create a table on your page, you will use : <table></table> right?', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 3, Level.second.id],
-  ['Why do we use form in HTML?', 'Why do we use form in real life?', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 1, Level.third.id],
-  ['To create a form, you need an action and a [...]?', 'How do we call POST and GET ?', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 2, Level.third.id],
-  ['What do we need inside our form?', 'think', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 3, Level.third.id]
+  ['Why do we need tables in HTML?', 'think', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 4, Level.second.id],
+  ['Which element do we use to create a table?', 'To create a body on your page, you will use : <body></body> right?','https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 5, Level.second.id],
+  ['Which element allow us to create a row element?', 'To create a table on your page, you will use : <table></table> right?', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 6, Level.second.id],
+  ['Why do we use form in HTML?', 'Why do we use form in real life?', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 7, Level.third.id],
+  ['To create a form, you need an action and [...]?', 'How do we call POST and GET ?', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 8, Level.third.id],
+  ['What do we need to POST a form?', 'think', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 9, Level.third.id]
 ]
 
 question_list.each do |question_content, hint, picture, number, level_id|
@@ -162,15 +162,33 @@ puts "questions have been created"
 # create answers
 
 answer_list = [
-  ['HTML provides structure to the content appearing on a website, such as images, text, or videos.', false, Question.first.id],
-  ['6', false, Question.first.id],
-  ['No', true, Question.first.id],
-  ['To present tabular data to users.', false, Question.second.id],
-  ['<table></table>', false, Question.second.id],
-  ['<tr></tr>', false, Question.second.id],
-  ['HTML <form> element is responsible for collecting information to send somewhere else', false, Question.third.id],
-  ['Method', false, Question.third.id],
-  ['An input', false, Question.third.id]
+  ['HTML provides structure to the content appearing on a website, such as images, text, or videos.', true, Question.find_by(number: 1).id],
+  ['HTML provides style to the content of our webpage', false, Question.find_by(number: 1).id],
+  ['HTML is a language which allow the client (my computer + my browser) and a server to communicate', false, Question.find_by(number: 1).id],
+  ['2', false, Question.find_by(number: 2).id],
+  ['6', true, Question.find_by(number: 2).id],
+  ['4', false, Question.find_by(number: 2).id],
+  ['It depends', false, Question.find_by(number: 3).id],
+  ['Yes', false, Question.find_by(number: 3).id],
+  ['No', true, Question.find_by(number: 3).id],
+  ['To collect informationS from our user.', false, Question.find_by(number: 4).id],
+  ['To present tabular data to users.', true, Question.find_by(number: 4).id],
+  ['For fun.', false, Question.find_by(number: 4).id],
+  ['<table></table>', true, Question.find_by(number: 5).id],
+  ['<body></body>', false, Question.find_by(number: 5).id],
+  ['<form></form>', false, Question.find_by(number: 5).id],
+  ['<td></td>', false, Question.find_by(number: 6).id],
+  ['<th></th>', false, Question.find_by(number: 6).id],
+  ['<tr></tr>', true, Question.find_by(number: 6).id],
+  ['HTML <form> element is responsible for collecting information to send somewhere else', true, Question.find_by(number: 7).id],
+  ['HTML <form> element is responsible for handling the content of our web page', false, Question.find_by(number: 7).id],
+  ['HTML <form> element allow us to present tabular data to users', false, Question.find_by(number: 7).id],
+  ['a Method', true, Question.find_by(number: 8).id],
+  ['a Background image', false, Question.find_by(number: 8).id],
+  ['a stackoverflow account', false, Question.find_by(number: 8).id],
+  ['A submit button', true, Question.find_by(number: 9).id],
+  ['an input', false, Question.find_by(number: 9).id],
+  ['an uploader', false, Question.find_by(number: 9).id]
 ]
 
 answer_list.each do |answer_content, correct, question_id|
