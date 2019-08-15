@@ -42,36 +42,52 @@
           <!-- Button trigger modal -->
           <%= link_to "submit", level_increase_level_path(@level), class: "btn btn-info btn-submit", data: {toggle: "modal", target: "#open1"} %>
 
-          <!-- Modal -->
-          <div class="modal fade" id="open1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="height: 100vh;">
+          <!-- Modal 1 -->
+        <% end %>
+      </div>
+
+
+
+<!-- code for modals:  -->
+
+          <div class="modal fade modal-to-close" id="open1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="height: 100vh;">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">Nice work! You released your weekly allowance. Ask mom for it on Saturday</h5>
+                  <h4 class="modal-title" id="exampleModalLongTitle"></h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <img src="https://ecdn.teacherspayteachers.com/thumbitem/Class-Dojo-Karate-Monster-Avatars-1459512636/original-1884141-4.jpg" alt="Tick" style="">
-                  <div>
-
+                  <div id="carouselExampleControls" class="carousel slide" data-ride="false">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                      <h5>Nice work! You released your weekly allowance. Ask mom for it on Saturday</h5>
+                        <img src="https://ecdn.teacherspayteachers.com/thumbitem/Class-Dojo-Karate-Monster-Avatars-1459512636/original-1884141-4.jpg" alt="Tick" style="">
+                      <%= link_to "Continue", "#carouselExampleControls", class: 'carousel-control-next btn btn-primary carousel-control-next' %>
+                      </div>
+                      <div class="carousel-item">
+                        THIS IS A TEST
+                       <%= link_to "Continue", level_question_path(@level, @question), class: 'btn btn-primary carousel-control-next' %>
+                      </div>
+                    </div>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <%= link_to "Continue", level_question_path(@level, @question), class: 'btn btn-primary' %>
                 </div>
               </div>
             </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+            </div>
 
 
-<!-- JavaScript for submit button  -->
+
+
+
 
 <script>
   const submitWrongButton = document.querySelector(".submit-answer.wrong")
@@ -92,6 +108,7 @@
 </script>
 
 
+<!-- JavaScript for Modals -->
 
 
 
