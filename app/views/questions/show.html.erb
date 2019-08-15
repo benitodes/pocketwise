@@ -33,16 +33,45 @@
         <%= link_to "submit", "#", class: "btn btn-info btn-submit" %>
       </div>
       <div class="submit-answer right" style="display: none">
+
+        <!-- check if question is correct and redirect accordingly -->
         <% if @next_question %>
           <%= link_to "submit", level_question_path(@level, @next_question), class: "btn btn-info btn-submit" %>
         <% else %>
-          <%= link_to "submit", level_increase_level_path(@level), class: "btn btn-info btn-submit" %>
+
+          <!-- Button trigger modal -->
+          <%= link_to "submit", level_increase_level_path(@level), class: "btn btn-info btn-submit", data: {toggle: "modal", target: "#open1"} %>
+
+          <!-- Modal -->
+          <div class="modal fade" id="open1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="height: 100vh;">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Nice work! You released your weekly allowance. Ask mom for it on Saturday</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <img src="https://ecdn.teacherspayteachers.com/thumbitem/Class-Dojo-Karate-Monster-Avatars-1459512636/original-1884141-4.jpg" alt="Tick" style="">
+                  <div>
+
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <%= link_to "Continue", level_question_path(@level, @question), class: 'btn btn-primary' %>
+                </div>
+              </div>
+            </div>
+          </div>
         <% end %>
       </div>
-
     </div>
   </div>
 </div>
+
+
+<!-- JavaScript for submit button  -->
 
 <script>
   const submitWrongButton = document.querySelector(".submit-answer.wrong")
@@ -61,3 +90,11 @@
     })
   })
 </script>
+
+
+
+
+
+
+
+
