@@ -19,6 +19,7 @@ class LevelsController < ApplicationController
 
   def show
     @course = Course.find(@level.course_id)
+    authorize @level
   end
 
   private

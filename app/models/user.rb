@@ -9,7 +9,6 @@ class User < ApplicationRecord
   has_many :goals, through: :wallet
   mount_uploader :avatar, PhotoUploader
 
-
   def kid
     !self.parent
   end
