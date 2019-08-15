@@ -58,13 +58,16 @@ aside {
   display: inline-block;
   cursor: pointer;
 }
-.navicon {
+.avatar {
   width: 40px;
   height: 40px;
   background: url("navicon.png") no-repeat;
   background-size: cover;
   display: block;
-
+}
+.row_avatar {
+  text-align: center;
+  margin: 15px;
 }
 .toggle, .biglabel {
   display: none;
