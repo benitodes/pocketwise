@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 mx-auto">
-      <h1>Welcome to your Dashboard </h1>
+      <h1>Welcome <%= @parent.username %></h1>
       <% wallets.each do |wallet| %>
       <div class="card my-4">
-        <h2>Wallet of<%= wallet.kid.username %></h2>
+        <h2>Wallet of <%= wallet.kid.username %></h2>
 
         <% if policy(wallet.kid).destroy? %>
           <%= link_to "Destroy kid", destroy_user_path(wallet.kid.id), method: :delete %>

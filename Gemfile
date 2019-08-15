@@ -19,7 +19,6 @@ gem 'simple_form'
 gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.2'
 gem 'pundit'
-gem 'money-rails'
 
 
 group :development do
