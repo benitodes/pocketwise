@@ -1,9 +1,6 @@
 <h1>Users#new</h1>
 <p>Find me in app/views/users/new.html.erb</p>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 mx-auto">
       <%= simple_form_for @user, url: create_user_path do |f| %>
         <%= f.input :email %>
         <%= f.input :password %>
@@ -15,6 +12,3 @@
         <%= f.input :age %>
         <%= f.button 'submit' %>
       <% end %>
-    </div>
-  </div>
-</div>

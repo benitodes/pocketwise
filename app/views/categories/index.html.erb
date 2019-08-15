@@ -1,8 +1,14 @@
 <h1>Categories</h1>
 
-<% @categories.each do |category| %>
-<btn class="btn btn-primary"><%= category.name %></btn>
-<%= link_to "view", category_courses_path(category), class: 'btn-ghost' %>
-<br>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <% @categories.each do |category| %>
+        <btn class="btn btn-primary"><%= category.name %></btn>
+        <%= link_to "view", category_courses_path(category), class: 'btn-ghost' %>
+        <br>
+        <% end %>
+    </div>
+  </div>
+</div>
 
