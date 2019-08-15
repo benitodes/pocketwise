@@ -34,10 +34,8 @@ a {
 .radio-tile-group {
   display: flex;
   flex-wrap: wrap;
-  // justify-content: center;
+  align-items: center;
   flex-direction: column;
-
-
   //set dimensions for invisible container
   .input-container {
     position: relative;

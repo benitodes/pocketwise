@@ -1,5 +1,4 @@
 
-
 <div class="quiz-container">
   <div>
     <h3><%= @question.question_content %></h3>
@@ -29,10 +28,33 @@
       <% end %>
     </div>
 
-    <div>
-      <button class="btn btn-info btn-submit"></a>Submit</button>
+    <div class="submit-answer wrong" style="display: none">
+      <%= link_to "submit", "#", class: "btn btn-info btn-submit" %>
     </div>
-
-
+    <div class="submit-answer right" style="display: none">
+      <% if @next_question %>
+        <%= link_to "submit", level_question_path(@level, @next_question), class: "btn btn-info btn-submit" %>
+      <% else %>
+        <%= link_to "submit", level_increase_level_path(@level), class: "btn btn-info btn-submit" %>
+      <% end %>
+    </div>
   </div>
 </div>
+
+<script>
+  const submitWrongButton = document.querySelector(".submit-answer.wrong")
+  const submitRightButton = document.querySelector(".submit-answer.right")
+  const answerButtons = document.querySelectorAll(".radio-button")
+
+  answerButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      if (event.currentTarget.value == "false") {
+        submitRightButton.style.display = "none"
+        submitWrongButton.style.display = "block"
+      } else {
+        submitWrongButton.style.display = "none"
+        submitRightButton.style.display = "block"
+      }
+    })
+  })
+</script>
