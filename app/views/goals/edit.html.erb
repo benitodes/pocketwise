@@ -1,14 +1,20 @@
-<h1>Goals#edit</h1>
-<p>Find me in app/views/goals/edit.html.erb</p>
-
-<div class="">
-    <%= simple_form_for @goal do |f| %>
-      <%= f.input :name %>
-      <%= f.input :goal_allowance %>
-      <%= f.input :goal_price %>
-      <%= f.input :picture %>
-      <%= f.submit "Submit", class: "btn btn-primary" %>
-    <% end %>
-    <%= link_to "Delete goal", goal_path(@goal), method: :delete, class: "btn btn-danger" %>
-    <%= link_to "Back to goals", wallet_goals_path(@goal.wallet), class: "btn btn-danger" %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <h1>Edit your goal</h1>
+        <%= simple_form_for @goal do |f| %>
+        <%= f.input :name %>
+        <%= f.input :goal_allowance %>
+        <%= f.input :goal_price %>
+        <%= f.input :picture %>
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+        <% end %>
+        <%= link_to "Delete goal", goal_path(@goal), method: :delete, class: "btn btn-danger" %>
+        <%= link_to "Back to goals", wallet_goals_path(@goal.wallet), class: "btn btn-danger" %>
+    </div>
+  </div>
 </div>
+
+
+
+

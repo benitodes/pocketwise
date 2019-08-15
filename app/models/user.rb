@@ -8,4 +8,13 @@ class User < ApplicationRecord
   has_many :user_courses, foreign_key: "kid_id", class_name: "UserCourse", dependent: :destroy
   has_many :goals, through: :wallet
   mount_uploader :avatar, PhotoUploader
+
+
+  def kid
+    !self.parent
+  end
+
+  def is_parent_of?(record)
+    record.kid && record.kid_wallet.parent == self
+  end
 end

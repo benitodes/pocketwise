@@ -1,6 +1,10 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1>Welcome to PocketWise</h1>
+<p>Easy for parents
+Fun for kids</p>
 
 <% if user_signed_in? %>
 <%= link_to "Your Dashboard", dashboard_user_path(current_user.id) %>
+   <% else %>
+   <%= link_to "Signin", new_user_session_path %>
+   <%= link_to "Parent Signup", new_user_registration_path %>
 <% end %>
