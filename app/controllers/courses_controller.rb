@@ -6,9 +6,9 @@ class CoursesController < ApplicationController
     # display complete when course is complete
     # iterate through course
     @courses.each do |course|
-      unless course.user_course.nil?
+      unless course.user_courses.where(kid: current_user).first.nil?
         # course is complete if last_level = number of course levels + 1
-        course.user_course.complete = true if course.user_course.last_level == course.levels.length + 1
+        course.user_courses.where(kid: current_user).first.complete = true if course.user_courses.where(kid: current_user).first.last_level == course.levels.length + 1
       end
     end
     # to do : if user course is there then enroll @message

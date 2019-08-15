@@ -7,6 +7,6 @@ class LecturesController < ApplicationController
     # find user to get back to user dashboard
     @user = current_user
     # find question so modal can route to first question of current level
-    @question = Question.where(level_id: params[:id]).find_by(number: 1)
+    @question = Question.where(level_id: params[:level_id]).find_by(number: 1)
   end
 end
