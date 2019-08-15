@@ -12,7 +12,7 @@ class CompletedLevel < ApplicationRecord
     else
       @wallet.payout_amount = @wallet.total_allowance - @goal.goal_allowance
       @goal.goal_current_saving += @goal.goal_allowance
-      if @goal.goal_current_saving > @goal.goal_price
+      if @goal.goal_current_saving >= @goal.goal_price
         @goal.completed == true
       end
       @goal.save
