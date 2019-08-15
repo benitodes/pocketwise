@@ -1,3 +1,12 @@
+.container {
+  width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -29,9 +38,10 @@
   display: table;
 }
 nav li {
-  padding: 8px;
+  padding: 5px;
 }
 aside {
+  padding-top: 40px;
   background-color: #F4F4F4;
   color: #4A4A4A;
   border-radius: 5px;
@@ -66,8 +76,8 @@ aside {
   display: block;
 }
 .row_avatar {
-  text-align: center;
   margin: 15px;
+  border-bottom: 2px;
 }
 .toggle, .biglabel {
   display: none;
