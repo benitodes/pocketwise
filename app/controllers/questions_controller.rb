@@ -31,4 +31,11 @@ class QuestionsController < ApplicationController
     # in any case redirect to dashboard
     redirect_to dashboard_user_path(current_user)
   end
+
+  def increase_question_number
+    byebug
+    # Increase the last_question of the user course.
+    # redirect to the next question
+    # check the available params with byebug
+  end
 end
