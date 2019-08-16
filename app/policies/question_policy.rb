@@ -12,4 +12,8 @@ class QuestionPolicy < ApplicationPolicy
   def increase_level?
     true
   end
+
+  def increase_question_number?
+    true
+  end
 end
