@@ -1,7 +1,7 @@
 class UserCoursesController < ApplicationController
   def create
     course = Course.find(params[:course_id])
-    usercourse = UserCourse.new(
+    @usercourse = UserCourse.new(
       course: course,
       kid: current_user,
       last_level: 1,
@@ -9,9 +9,9 @@ class UserCoursesController < ApplicationController
       last_lecture: 1,
       complete: false
     )
-
+    authorize @usercourse
     # find level with current course id and select level 1
-    level = Level.where(course: usercourse.course).find_by(number: usercourse.last_level)
+    level = Level.where(course: @usercourse.course).find_by(number: usercourse.last_level)
 
     if usercourse.save
       redirect_to level_path(level)
