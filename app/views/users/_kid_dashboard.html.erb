@@ -47,12 +47,13 @@ a {
 </style>
 
 <div class="container-main">
-
    <div class="container-header">
   <!-- Add this line if you need the menu -->
      <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
       <h1 class ="header">Welcome <%= user.first_name %></h1>
    </div>
+
+
    <div class="card-dashboard">
     <h2>Pocket Money</h2>
     <p><%= @wallet.payout_amount %></p>
