@@ -1,10 +1,32 @@
-<h1>Welcome to PocketWise</h1>
-<p>Easy for parents
-Fun for kids</p>
+<!-- inline css -->
 
-<% if user_signed_in? %>
-<%= link_to "Your Dashboard", dashboard_user_path(current_user.id) %>
-   <% else %>
-   <%= link_to "Signin", new_user_session_path %>
-   <%= link_to "Parent Signup", new_user_registration_path %>
-<% end %>
+<style>
+body {
+  background-color: #D4A2E3;
+  color: white; }
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px; }
+ p {
+  font-size: 20px
+  padding: 20px; }
+</style>
+
+<!-- Html -->
+
+<div class="container-devise">
+  <h1>Welcome to PocketWise</h1>
+  <p>Easy for parents, fun for kids</p>
+
+  <% if user_signed_in? %>
+    <div class="container-devise-btn">
+      <%= link_to "GO TO YOUR DASHBORD", dashboard_user_path(current_user.id), class: "button-red" %>
+    </div>
+    <% else %>
+    <div class="container-devise-btn">
+      <%= link_to "SIGN IN", new_user_session_path, class: "button-red" %>
+      <%= link_to "PARENT SIGN UP", new_user_registration_path, class: "button-red" %>
+    </div>
+  <% end %>
+</div>

@@ -1,4 +1,26 @@
-<h2>Log in</h2>
+<!-- inline css -->
+
+<style>
+body {
+  background-color: #D4A2E3;
+  color: white; }
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px; }
+p {
+  font-size: 20px
+  padding: 20px; }
+a {
+  font-size: 16px;
+  color: white; }
+</style>
+
+<!-- Html -->
+
+<div class="container-devise">
+
+<h1>Log in</h1>
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
@@ -13,8 +35,11 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
+    <%= f.button :submit, "LOG IN", class: "button-red" %>
   </div>
 <% end %>
+  <div class="sharedlinks">
+    <%= render "devise/shared/links" %>
+  </div>
 
-<%= render "devise/shared/links" %>
+</div>

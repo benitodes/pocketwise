@@ -5,9 +5,15 @@
    <aside>
     <nav>
      <ul>
-      <li><%= link_to "dashboard", dashboard_user_path(current_user.id), class: "nav-link" %></li>
-      <li><%= link_to "profile", edit_user_registration_path, class: "nav-link" %></li>
-      <li><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+      <div>
+        <li class="fas fa-user-circle"><%= link_to "Dashboard", dashboard_user_path(current_user.id), class: "navlink" %></li>
+      </div>
+      <div>
+        <li class="fa fa-cog"><%= link_to "Profile", edit_user_registration_path, class: "navlink" %></li>
+      </div>
+      <div>
+      <li class="fas fa-sign-out-alt"><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "navlink" %></li>
+    </div>
      </ul>
     </nav>
    </aside>
