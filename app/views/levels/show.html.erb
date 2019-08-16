@@ -1,5 +1,59 @@
-<h3>Level show page</h3>
-Course: <%= @course.name %>
+<!-- inline css -->
+
+<style>
+body {
+  background-color: #F8CE69;}
+.card-dashboard {
+  background-color: white;
+  border-radius: 5px;
+  padding: 12px;
+  margin-top: 12px;
+  text-align: center; }
+.container-header {
+  display: flex;
+  border-bottom: :1px white; }
+.header {
+  margin: auto;
+  margin-left: 12px;
+  font-size: 20px;
+  font-weight: bold; }
+.container-dashboard-button {
+  display: flex;
+  padding: 6px;
+}
+section {
+  background-color: #E34E53;
+  background-size: 30% 100%;
+}
+h1 {
+  color: white;
+}
+h2 {
+  margin: auto;
+  margin-left: 12px;
+  font-size: 16px;
+  font-weight: bold;}
+h3 {
+  margin: auto;
+  font-size: 14px;
+  font-weight: bold; }
+p {
+  margin: auto;
+  font-size: 12px; }
+a {
+  margin: auto;
+  font-size: 12px;
+}
+</style>
+
+<div class="container-main">
+   <div class="container-header">
+  <!-- Add this line if you need the menu -->
+     <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
+      <h1 class ="header">COURSE: <%= @course.name %></h1>
+   </div>
+
+<div class="card-dashboard">
 <br>
 
 Level <%= @level.number %>

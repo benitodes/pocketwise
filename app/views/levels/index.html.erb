@@ -1,9 +1,67 @@
-<h3>COURSE: <%= @course.name  %></h2>
+<!-- inline css -->
+
+<style>
+body {
+  background-color: #F8CE69;}
+.card-dashboard {
+  background-color: white;
+  border-radius: 5px;
+  padding: 12px;
+  margin-top: 12px;
+  text-align: center; }
+.container-header {
+  display: flex;
+  border-bottom: :1px white; }
+.header {
+  margin: auto;
+  margin-left: 12px;
+  font-size: 20px;
+  font-weight: bold; }
+.container-dashboard-button {
+  display: flex;
+  padding: 6px;
+}
+section {
+  background-color: #E34E53;
+  background-size: 30% 100%;
+}
+h1 {
+  color: white;
+}
+h2 {
+  margin: auto;
+  margin-left: 12px;
+  font-size: 16px;
+  font-weight: bold;}
+h3 {
+  margin: auto;
+  font-size: 14px;
+  font-weight: bold; }
+p {
+  margin: auto;
+  font-size: 12px; }
+a {
+  margin: auto;
+  font-size: 12px;
+}
+</style>
+
+<div class="container-main">
+   <div class="container-header">
+  <!-- Add this line if you need the menu -->
+     <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
+      <h1 class ="header">COURSE: <%= @course.name  %></h1>
+   </div>
+
+<div class="card-dashboard">
+
   <!-- button displays start if there is no user course table yet (if kid hasn't started course, otherwise it shows resulme  -->
 <% if @course.user_courses.where(kid: current_user).first  %>
-  <%= link_to "Resume", level_question_path(@level_current, @question_current), class: 'btn-primary' %>
+  <%= link_to "RESUME", level_question_path(@level_current, @question_current), class: 'button-red' %>
 <% else  %>
-  <%= link_to "Start", course_user_courses_path(@course), method: :post, class: 'btn-warning' %>
+
+  <%= link_to "START", course_user_courses_path(@course), method: :post, class: 'button-red' %>
+
 <% end  %>
 <br>
 currently at level <%= @level_current %>, question <%= @question_current %>
@@ -16,3 +74,4 @@ currently at level <%= @level_current %>, question <%= @question_current %>
 <%= link_to "view", level_path(level), class: 'btn-ghost' %>
 <br>
 <% end %>
+</div>

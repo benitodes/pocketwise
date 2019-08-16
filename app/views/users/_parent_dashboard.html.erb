@@ -104,6 +104,7 @@ a {
           </div>
         <!-- Goals div -->
           <div>
+            <% unless wallet.goals.empty? %>
              <h3>Savings for goals</h3>
                <% wallet.goals.each do |goal| %>
                  <p>Saving for : <%= goal.name %></p>
@@ -112,6 +113,8 @@ a {
                  <p>Saved so far :<%= goal.goal_current_saving %>$</p>
                <% end %>
           </div>
+          <% end %>
+
        <!--  Learning div -->
 
        <% unless wallet.kid.user_courses.empty? %>
@@ -130,6 +133,8 @@ a {
       </div>
     <% end %>
   <% end %>
+</div>
+</div>
     <div class="container-dashboard-button">
       <%= link_to "ADD NEW KID", new_user_path, class: "button-white" %>
     </div>
