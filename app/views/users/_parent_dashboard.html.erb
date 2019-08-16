@@ -2,17 +2,19 @@
 
 <style>
 body {
-  background-color: #E3E8EB;}
+  background-color: #E34E53}
 .card-dashboard {
   background-color: white;
   border-radius: 5px;
   padding: 12px;
-  margin-top: 12px;}
+  margin-top: 12px;
+  text-align: center; }
 .container-header {
   display: flex;
   border-bottom: :1px white; }
 .header {
   margin: auto;
+  margin-left: 12px;
   font-size: 20px;
   font-weight: bold; }
 .container-dashboard-button {
@@ -28,6 +30,7 @@ h1 {
 }
 h2 {
   margin: auto;
+  margin-left: 12px;
   font-size: 16px;
   font-weight: bold;}
 h3 {
@@ -41,7 +44,7 @@ a {
   margin: auto;
   font-size: 12px;
 }
-.background {
+/*.background {
     position: fixed;
     top: 0;
     left: 0;
@@ -49,14 +52,14 @@ a {
     height: 120px;
     background-color: #E34E53;
     z-index: -1;
-}
+}*/
 </style>
 
 <!-- Html -->
 
 <div class="container-main">
-  <div class="background">
-  </div>
+<!--   <div class="background">
+  </div> -->
   <div class="container-header">
   <!-- Add this line if you need the menu -->
      <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
@@ -66,8 +69,8 @@ a {
       <div class="card-dashboard">
       <!-- Header Tom -->
         <div class="container-header">
-         <div class="avatar-large">
-             <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-large" %>
+         <div>
+             <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar" %>
           </div>
           <h2><%= wallet.kid.username %>'s Wallet</h2>
         </div>
@@ -77,11 +80,11 @@ a {
              <p>Pocket money : <%= wallet.total_allowance %>$</p>
              <p>Frequency : <%= wallet.payout_frequency %></p>
              <p>Each : <%= wallet.payout_day %></p>
-             <% if policy(wallet).edit? %>
+            <!--  <#% if policy(wallet).edit? %>
                <div class="container-dashboard-button">
-                 <%= link_to "SEE #{wallet.kid.username.upcase} DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-red" %>
+                 <#%= link_to "SEE #{wallet.kid.username.upcase} DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-red" %>
                </div>
-             <% end %>
+             <#% end %> -->
              <% if policy(current_user).dashboard? %>
                <div class="container-dashboard-button">
                  <%= link_to "CHANGE #{wallet.kid.username.upcase} ALLOWANCE", edit_wallet_path(wallet.id), class: "button-white" %>
@@ -106,7 +109,7 @@ a {
        <!--  Learning div -->
           <div>
              <h3>Progress summary</h3>
-               <p>Enrolled : <%#= @course.name %></p>
+               <p>Enrolled : <%= @course.name %></p>
                <p>Last Level : <%= @last_level %></p>
                <p>Last question : <%= @last_question %></p>
                <p>Last lecture : <%= @last_lecture %></p>
@@ -114,6 +117,6 @@ a {
       </div>
     <% end %>
     <div class="container-dashboard-button">
-      <%= link_to "ADD NEW KID", new_user_path, class: "button-red" %>
+      <%= link_to "ADD NEW KID", new_user_path, class: "button-white" %>
     </div>
   </div>
