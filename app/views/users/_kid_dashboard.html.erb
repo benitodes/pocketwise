@@ -1,27 +1,73 @@
+<!-- inline css -->
 
-<div class="container">
+<style>
+body {
+  background-color: #88CF8F;}
+.card-dashboard {
+  background-color: white;
+  border-radius: 5px;
+  padding: 12px;
+  margin-top: 12px;
+  text-align: center; }
+.container-header {
+  display: flex;
+  border-bottom: :1px white; }
+.header {
+  margin: auto;
+  margin-left: 12px;
+  font-size: 20px;
+  font-weight: bold; }
+.container-dashboard-button {
+  display: flex;
+  padding: 6px;
+}
+section {
+  background-color: #E34E53;
+  background-size: 30% 100%;
+}
+h1 {
+  color: white;
+}
+h2 {
+  margin: auto;
+  margin-left: 12px;
+  font-size: 16px;
+  font-weight: bold;}
+h3 {
+  margin: auto;
+  font-size: 14px;
+  font-weight: bold; }
+p {
+  margin: auto;
+  font-size: 12px; }
+a {
+  margin: auto;
+  font-size: 12px;
+}
+</style>
+
+<div class="container-main">
    <div class="container-header">
   <!-- Add this line if you need the menu -->
      <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
       <h1 class ="header">Welcome <%= user.first_name %></h1>
-  </div>
-  <div class="row">
-    <div class="col-md-6 mx-auto">
-      <div class="card my-3">
-        <h2>Pocket Money</h1>
-          <p><%= @wallet.payout_amount %></p>
-      </div>
+   </div>
 
+
+   <div class="card-dashboard">
+    <h2>Pocket Money</h2>
+    <p><%= @wallet.payout_amount %></p>
+   </div>
+    <div class="card-dashboard">
       <%= link_to categories_path do %>
-      <div class="card my-3">
-        <h2>Learn</h1>
-      </div>
+        <h2>Learn</h2>
       <% end %>
+    </div>
+    <div class="card-dashboard">
       <%= link_to wallet_goals_path(wallet) do %>
-        <div class="card my-3">
-          <h2>Goals</h1>
-        </div>
+      <h2>Goals</h2>
       <% end %>
+    </div>
     </div>
   </div>
 </div>
