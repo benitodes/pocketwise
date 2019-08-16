@@ -36,7 +36,7 @@
 
         <!-- check if question is correct and redirect accordingly -->
         <% if @next_question %>
-        <%= link_to "submit", level_question_path(@level, @next_question), class: "btn btn-info btn-submit" %>
+          <%= link_to "submit", level_increase_question_number_path(@level, @next_question), method: :post, class: "btn btn-info btn-submit" %>
         <% else %>
 
         <!-- Button trigger modal -->

@@ -6,7 +6,7 @@ class CompletedLevel < ApplicationRecord
   def release_money
     user = self.user_course.kid
     @wallet = user.kid_wallet
-    @goal = @wallet.goals.first
+    @goal = @wallet.goals.where(complete: false).first
     if @goal.nil?
       @wallet.payout_amount = @wallet.total_allowance
     else

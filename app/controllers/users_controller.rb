@@ -10,19 +10,19 @@ class UsersController < ApplicationController
       @wallet = @user.kid_wallet
     end
 
-    # if @user.parent?
-    #   @wallets.each do |wallet|
-    #     @kid = wallet.kid
-    #   end
-    #     @enrolled = @kid.user_courses.where(complete: false)
-    #     @enrolled.each do |user_course|
-    #       @course_id = user_course.course_id
-    #       @course = Course.find(@course_id)
-    #       @last_level = user_course.last_level
-    #       @last_question = user_course.last_question
-    #       @last_lecture = user_course.last_lecture
-    #     end
-    # end
+    if @user.parent?
+      @wallets.each do |wallet|
+        @kid = wallet.kid
+      end
+        @enrolled = @kid.user_courses.where(complete: false)
+        @enrolled.each do |user_course|
+          @course_id = user_course.course_id
+          @course = Course.find(@course_id)
+          @last_level = user_course.last_level
+          @last_question = user_course.last_question
+          @last_lecture = user_course.last_lecture
+        end
+    end
   end
 
   def new
