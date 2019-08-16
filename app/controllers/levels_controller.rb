@@ -10,11 +10,12 @@ class LevelsController < ApplicationController
 
     # fetch current levelnumber from user course table
 
-    # find all questions of current level by level id
+    # find level id by level number
     @level_current = 1
     @question_current = 1
     @level = @levels.find { |l| l.number == @level_current }
     @questions = Question.where(level_id: @level.id)
+
     # find first question that is not complete
     unless @user_course.nil?
       @level_current = @user_course.last_level
