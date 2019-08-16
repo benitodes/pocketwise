@@ -4,7 +4,7 @@
 }
 
 $primary-color: #3fc1c9;
-$secondary-color: black;
+$secondary-color: white;
 
 body {
   background-color: $secondary-color;
@@ -23,7 +23,7 @@ a {
 
 .quiz-container {
   border-color: white;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
