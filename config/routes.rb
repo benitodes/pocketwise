@@ -33,10 +33,7 @@ Rails.application.routes.draw do
     resources :lectures, only: [:show]
     resources :questions, only: [:show]
     # convention: make post method if making changes to db
-    post "questions/:id", to: "questions#increase_question_number", as: :increase_question_number
     get 'increase_level', to: 'questions#increase_level'
   end
-
-
 
 end

@@ -17,8 +17,8 @@ class LevelsController < ApplicationController
     @questions = Question.where(level_id: @level.id)
     # find first question that is not complete
     unless @user_course.nil?
-      @question_current = @questions.find { |q| q.number == @user_course.last_question }.number
       @level_current = @user_course.last_level
+      @question_current = @questions.find { |q| q.number == @user_course.last_question }.number
     end
   end
 

@@ -9,6 +9,7 @@ class QuestionsController < ApplicationController
     @user = current_user
     #update your current question
     @user_course.last_question = @question.number
+    @user_course.save
   end
 
   def increase_level
@@ -32,17 +33,4 @@ class QuestionsController < ApplicationController
     redirect_to dashboard_user_path(current_user)
   end
 
-  def increase_question_number
-    # Increase the last_question of the user course.
-    @level = Level.find(params[:level_id])
-    @question = Question.find(params[:id])
-    authorize @question
-    user_course = UserCourse.where(kid: current_user, course: @level.course).first
-    user_course.last_question += 1
-    user_course.save
-    # redirect to the next question
-    @next_question = Question.where(level: @level).find_by(number: @question.number + 1)
-    redirect_to level_question_path(@level, @next_question)
-    # check the available params with byebug
-  end
 end
