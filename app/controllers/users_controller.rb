@@ -8,6 +8,7 @@ class UsersController < ApplicationController
       @wallets = @user.parent_wallets
     else
       @wallet = @user.kid_wallet
+      @goals = Goal.where(wallet_id: @wallet)
     end
 
   #   if @user.parent?

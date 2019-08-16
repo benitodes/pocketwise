@@ -67,6 +67,17 @@ a {
       <%= link_to wallet_goals_path(wallet) do %>
       <h2>Goals</h2>
       <% end %>
+      <% unless @goals.nil? %>
+        <% @goals.each do |goal| %>
+        <br>
+            <%= goal.name %>, <%= goal.goal_price %> €
+            <br>
+            already saved: <%= goal.goal_current_saving %> €
+            <br>
+            <img src="<%= goal.picture %>" alt="" style="width: 30vh; height: 20vh;">
+            <br>
+        <% end %>
+      <% end  %>
     </div>
     </div>
   </div>
