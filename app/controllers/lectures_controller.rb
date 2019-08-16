@@ -7,7 +7,7 @@ class LecturesController < ApplicationController
     # find user to get back to user dashboard
     @user = current_user
     # find question so modal can route to first question of current level
-    last_question_id = @level.course.user_course.last_question
+    last_question_id = @level.course.user_courses.where(kid: current_user).first.last_question
     @question = Question.where(level_id: params[:level_id]).find_by(number: last_question_id)
     # retreieve the last question based on any quiz in progress
   end
