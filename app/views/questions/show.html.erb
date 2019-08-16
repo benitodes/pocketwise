@@ -1,20 +1,116 @@
-<h3>Question show page</h3>
-<br>
 
-<h3><%= @question.question_content %></h3>
-<br>
-
-<% @answers.each do |a| %>
-  <div class="custom-control custom-radio">
-    <input type="radio" id="customRadio<%= a.id %>" value="<%= a.correct %>" class="custom-control-input">
-      <% if a.correct %>
-        <% if @next_question %>
-          <%= link_to a.answer_content, level_question_path(@level, @next_question) %>
-        <% else %>
-          <%= link_to a.answer_content, level_increase_level_path(@level) %>
-        <% end %>
-      <% else %>
-        <%= link_to a.answer_content, '#' %>
-      <% end %>
+<div class="quiz-container">
+  <div>
+    <h3><%= @question.question_content %></h3>
   </div>
-<% end %>
+
+  <div>
+
+
+    <div class="radio-tile-group">
+      <% @answers.each do |a| %>
+      <div class="input-container">
+        <input id="customRadio<%= a.id %>" class="radio-button" type="radio" name="radio" value="<%= a.correct %>"/>
+        <div class="radio-tile">
+          <label for="answer" class="radio-tile-label">
+            <% if a.correct %>
+            <% if @next_question %>
+            <%= link_to a.answer_content, level_question_path(@level, @next_question) %>
+            <% else %>
+            <%= link_to a.answer_content, level_increase_level_path(@level) %>
+            <% end %>
+            <% else %>
+            <%= link_to a.answer_content, '#' %>
+            <% end %>
+          </label>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <div style="height: 10vh;">
+
+      <div class="submit-answer wrong" style="display: none">
+        <%= link_to "submit", "#", class: "btn btn-info btn-submit" %>
+      </div>
+      <div class="submit-answer right" style="display: none">
+
+        <!-- check if question is correct and redirect accordingly -->
+        <% if @next_question %>
+        <%= link_to "submit", level_question_path(@level, @next_question), class: "btn btn-info btn-submit" %>
+        <% else %>
+
+        <!-- Button trigger modal -->
+        <%= link_to "submit", level_increase_level_path(@level), class: "btn btn-info btn-submit", data: {toggle: "modal", target: "#open1"} %>
+
+        <!-- Modal 1 -->
+        <% end %>
+      </div>
+
+
+
+      <!-- code for modals:  -->
+
+      <div class="modal fade modal-to-close" id="open1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="height: 100vh;">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div id="carouselExampleControls" class="carousel slide">
+                <div class="carousel-inner">
+
+
+
+                  <div class="carousel-item active">
+                    <h5>Nice work! You released your weekly allowance. Ask mom for it on Saturday</h5>
+                    <img src="https://ecdn.teacherspayteachers.com/thumbitem/Class-Dojo-Karate-Monster-Avatars-1459512636/original-1884141-4.jpg" alt="Tick" style="">
+                    <a class="carousel-control-next btn btn-primary" href="#carouselExampleControls" role="button" data-slide="next" style="position:relative !important; width: 100%" >
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+
+
+
+                  <div class="carousel-item">
+                      <h5>Nice work! You released your weekly allowance. Ask mom for it on Saturday</h5>
+
+                    <img src="https://ecdn.teacherspayteachers.com/thumbitem/Class-Dojo-Karate-Monster-Avatars-1459512636/original-1884141-4.jpg" alt="Tick" style="">
+                    <%= link_to "Continue", level_increase_level_path(@level), class: "carousel-control-next btn btn-primary screenwidth", style: "position:relative !important"%>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <script>
+        const submitWrongButton = document.querySelector(".submit-answer.wrong")
+        const submitRightButton = document.querySelector(".submit-answer.right")
+        const answerButtons = document.querySelectorAll(".radio-button")
+
+        answerButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            if (event.currentTarget.value == "false") {
+              submitRightButton.style.display = "none"
+              submitWrongButton.style.display = "block"
+            } else {
+              submitWrongButton.style.display = "none"
+              submitRightButton.style.display = "block"
+            }
+          })
+        })
+      </script>
+
+
+      <!-- JavaScript for Modals -->
+
+
+
+
+
+

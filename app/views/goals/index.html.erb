@@ -2,8 +2,7 @@
     <%= link_to 'Add new goal', new_wallet_goal_path, class: "btn btn-primary"%>
     <% @goals.each do |goal| %>
 
-      <a><%= goal.id %></a></br>
-      <a>Balance: <%= goal.goal_current_saving %></a></br>
+      <a>Total current saving for goal: <%= goal.goal_current_saving %></a></br>
       <a>Target: <%= goal.goal_price %></a></br>
       <a>Complete: <%= goal.complete %></a></br>
       <a><%= goal.name %></a></br>
