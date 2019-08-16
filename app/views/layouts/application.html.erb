@@ -7,26 +7,16 @@
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
-          <%= render 'shared/offcanvasnavigation' %>
-         <!--  <%#= render 'shared/navbar' %>
-          <%#= render 'shared/flashes' %> -->
 
-  <div class="section">
-    <div class="container">
-       <label for="offcanvas" class="biglabel"></label>
-  <div class="container">
-    <div class="row_avatar">
-      <label for="offcanvas" class="toggler">
-        <span class="avatar"></span>
-      </label>
-    </div>
-  </div>
-      <%= yield %>
-    </div>
-  </div>
+    <%= render 'shared/offcanvasnavigation' %>
+      <div class="section">
+        <div class="container">
+           <label for="offcanvas" class="biglabel"></label>
+          <%= yield %>
+        </div>
+      </div>
 
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>

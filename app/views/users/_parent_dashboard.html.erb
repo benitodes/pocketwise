@@ -1,26 +1,101 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 mx-auto">
-      <h1>Welcome to your Dashboard </h1>
+<!-- inline css -->
+
+<style>
+body {
+  background-color: #E3E8EB;}
+.card-dashboard {
+  background-color: white;
+  border-radius: 3px;
+  padding: 12px;
+  margin-top: 34px;}
+.container-header {
+  display: flex;
+  border-bottom: :1px white; }
+.header {
+  margin: auto;
+  font-size: 20px;
+  font-weight: bold; }
+.container-dashboard-button {
+  display: flex;
+  padding: 6px;
+}
+h2 {
+  margin: auto;
+  font-size: 20px;
+  font-weight: bold;}
+h3 {
+  margin: auto;
+  font-size: 20px;
+  font-weight: bold; }
+p {
+  margin: auto;
+  font-size: 12px
+  padding: 20px; }
+a {
+  margin: auto;
+  font-size: 12px;
+</style>
+
+<!-- Html -->
+
+<div class="container-main">
+  <div class="container-header">
+  <!-- Add this line if you need the menu -->
+     <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
+      <h1 class ="header">Welcome <%= user.first_name %></h1>
+  </div>
       <% wallets.each do |wallet| %>
-      <div class="card my-4">
-        <h2>Wallet of<%= wallet.kid.username %></h2>
-
-        <% if policy(wallet.kid).destroy? %>
-          <%= link_to "Destroy kid", destroy_user_path(wallet.kid.id), method: :delete %>
-        <% end %>
-
-        <% if policy(wallet).edit? %>
-          <%= link_to "Edit Wallet", edit_wallet_path(wallet.id) %>
-        <% end %>
-
-        <% if policy(current_user).dashboard? %>
-        <%= link_to "Dashboard of #{wallet.kid.username}", dashboard_user_path(wallet.kid.id) %>
-        <% end %>
-
+      <div class="card-dashboard">
+      <!-- Header Tom -->
+        <div class="container-header">
+         <div class="avatar-large">
+             <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-large" %>
+          </div>
+          <h2><%= wallet.kid.username %>'s Wallet</h2>
+        </div>
+      <!-- Pocket Money div -->
+          <div>
+             <h3>Pocket money summary</h3>
+             <p>Pocket money : <%= wallet.total_allowance %>$</p>
+             <p>Frequency : <%= wallet.payout_frequency %></p>
+             <p>Each : <%= wallet.payout_day %></p>
+             <% if policy(wallet).edit? %>
+               <div class="container-dashboard-button">
+                 <%= link_to "SEE #{wallet.kid.username.upcase} DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-red" %>
+               </div>
+             <% end %>
+             <% if policy(current_user).dashboard? %>
+               <div class="container-dashboard-button">
+                 <%= link_to "CHANGE #{wallet.kid.username.upcase} ALLOWANCE", edit_wallet_path(wallet.id), class: "button-white" %>
+               </div>
+            <% end %>
+              <% if policy(wallet.kid).destroy? %>
+                <div class="container-dashboard-button">
+                  <%= link_to "DELETE KID", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
+                </div>
+            <% end %>
+          </div>
+        <!-- Goals div -->
+          <div>
+             <h3>Savings for goals</h3>
+               <% wallet.kid.kid_wallet.goals.each do |goal| %>
+                 <p>Saving for : <%= goal.name %></p>
+                 <p>Goal price : <%= goal.goal_price %>$</p>
+                 <p>Weekly savings : <%= goal.goal_allowance %>$</p>
+                 <p>Saved so far :<%= goal.goal_current_saving %>$</p>
+               <% end %>
+          </div>
+       <!--  Learning div -->
+          <div>
+             <h3>Progress summary</h3>
+               <p>Enrolled : <%#= @course.name %></p>
+               <p>Last Level : <%= @last_level %></p>
+               <p>Last question : <%= @last_question %></p>
+               <p>Last lecture : <%= @last_lecture %></p>
+          </div>
       </div>
-      <% end %>
-      <%= link_to "Create a child", new_user_path %>
+    <% end %>
+    <div class="container-dashboard-button">
+      <%= link_to "ADD NEW KID", new_user_path, class: "button-red" %>
     </div>
   </div>
-</div>
