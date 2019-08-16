@@ -13,7 +13,7 @@ class LevelsController < ApplicationController
       @level_current = 1
       @user_course = UserCourse.create!(course_id: 1, last_level: 1, last_lecture: 1, last_question: 1, kid_id: current_user.id, complete: false)
     else
-       @level_current = @user_course.last_level
+      @level_current = @user_course.last_level
     end
     # find level id by level number
     @level = @levels.find { |l| l.number == @level_current }
