@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_074215) do
+ActiveRecord::Schema.define(version: 2019_08_15_111120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 2019_08_14_074215) do
   create_table "goals", force: :cascade do |t|
     t.integer "goal_allowance"
     t.integer "goal_price"
-    t.integer "goal_current_saving"
-    t.boolean "complete"
+    t.integer "goal_current_saving", default: 0
+    t.boolean "complete", default: false
     t.bigint "wallet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_074215) do
   end
 
   create_table "wallets", force: :cascade do |t|
-    t.integer "payout_amount"
+    t.integer "payout_amount", default: 0
     t.string "payout_frequency"
     t.bigint "kid_id"
     t.bigint "parent_id"

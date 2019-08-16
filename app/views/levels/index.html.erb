@@ -1,6 +1,6 @@
 <h3>COURSE: <%= @course.name  %></h2>
   <!-- button displays start if there is no user course table yet (if kid hasn't started course, otherwise it shows resulme  -->
-<% if @course.user_course  %>
+<% if @course.user_courses.where(kid: current_user).first  %>
 <%= link_to "Resume", level_question_path(@level_current, @question_current), class: 'btn-primary' %>
 <% else  %>
 <%= link_to "Start", course_user_courses_path(@course), method: :post %>
