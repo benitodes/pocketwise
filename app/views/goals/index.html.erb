@@ -1,16 +1,80 @@
-<h1>Your goals</h1>
-<%= link_to 'Add new goal', new_wallet_goal_path, class: "btn btn-primary"%>
-<% @goals.each do |goal| %>
-  <a>Total current saving for goal: <%= goal.goal_current_saving %></a></br>
-  <a>Target: <%= goal.goal_price %></a></br>
-  <a>Complete: <%= goal.complete %></a></br>
-  <a><%= goal.name %></a></br>
-  <%= cl_image_tag goal.picture, height: 250, width: 300, crop: :fill %>
-  <% unless goal.complete? %>
-    <a><%= link_to 'edit', edit_goal_path(goal.id), class: "btn btn-success"%></a></br>
-  <% end %>
-<% end %>
 
+<!-- inline css -->
+
+<style>
+body {
+  background-color: #88CF8F;}
+.card-dashboard {
+  background-color: white;
+  border-radius: 5px;
+  padding: 12px;
+  margin-top: 12px;
+  text-align: center; }
+.container-header {
+  display: flex;
+  border-bottom: :1px white; }
+.header {
+  margin: auto;
+  margin-left: 12px;
+  font-size: 20px;
+  font-weight: bold; }
+.container-dashboard-button {
+  display: flex;
+  padding: 6px;
+}
+section {
+  background-color: #E34E53;
+  background-size: 30% 100%;
+}
+h1 {
+  color: white;
+}
+h2 {
+  margin: auto;
+  margin-left: 12px;
+  font-size: 16px;
+  font-weight: bold;}
+h3 {
+  margin: auto;
+  font-size: 14px;
+  font-weight: bold; }
+p {
+  margin: auto;
+  font-size: 12px; }
+a {
+  margin: auto;
+  font-size: 12px;
+}
+</style>
+
+<div class="container-main">
+   <div class="container-header">
+  <!-- Add this line if you need the menu -->
+     <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
+      <h1 class ="header">Your goals</h1>
+   </div>
+
+<div class="card-dashboard">
+    <% if @goals.empty? %>
+    no goals
+    <% else %>
+    <% @goals.each do |goal| %>
+      <%= cl_image_tag goal.picture, height: 250, width: 300, crop: :fill %></br>
+      <a>Total current saving for goal: <%= goal.goal_current_saving %></a></br>
+      <a>Target: <%= goal.goal_price %></a></br>
+      <a>Complete: <%= goal.complete %></a></br>
+      <a><%= goal.name %></a></br>
+      <% unless goal.complete? %>
+        <a><%= link_to 'edit', edit_goal_path(goal.id), class: "button-white"%></a></br>
+      <% end %>
+      <% end %>
+    <% end %>
+</div>
+
+  <div class="container-dashboard-button">
+      <%= link_to 'Add new goal', new_wallet_goal_path, class: "button-red"%>
+    </div>
+</div>
 
 
 
