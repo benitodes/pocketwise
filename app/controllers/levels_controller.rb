@@ -9,18 +9,18 @@ class LevelsController < ApplicationController
     @user_course = UserCourse.where(kid_id: current_user.id, complete: false).first
 
     # fetch current levelnumber from user course table
-    if @user_course.nil?
-      @level_current = 1
-      @user_course = UserCourse.create!(course_id: 1, last_level: 1, last_lecture: 1, last_question: 1, kid_id: current_user.id, complete: false)
-    else
-      @level_current = @user_course.last_level
-    end
+
     # find level id by level number
+    @level_current = 1
+    @question_current = 1
     @level = @levels.find { |l| l.number == @level_current }
-    # find all questions of current level by level id
     @questions = Question.where(level_id: @level.id)
+
     # find first question that is not complete
-    @question_current = @questions.find { |q| q.number == @user_course.last_question }
+    unless @user_course.nil?
+      @level_current = @user_course.last_level
+      @question_current = @questions.find { |q| q.number == @user_course.last_question }.number
+    end
   end
 
   def show
