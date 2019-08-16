@@ -36,6 +36,4 @@ Rails.application.routes.draw do
     get 'increase_level', to: 'questions#increase_level'
   end
 
-
-
 end
