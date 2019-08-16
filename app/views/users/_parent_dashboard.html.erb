@@ -5,9 +5,9 @@ body {
   background-color: #E3E8EB;}
 .card-dashboard {
   background-color: white;
-  border-radius: 3px;
+  border-radius: 5px;
   padding: 12px;
-  margin-top: 34px;}
+  margin-top: 12px;}
 .container-header {
   display: flex;
   border-bottom: :1px white; }
@@ -19,26 +19,44 @@ body {
   display: flex;
   padding: 6px;
 }
+section {
+  background-color: #E34E53;
+  background-size: 30% 100%;
+}
+h1 {
+  color: white;
+}
 h2 {
   margin: auto;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;}
 h3 {
   margin: auto;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold; }
 p {
   margin: auto;
-  font-size: 12px
-  padding: 20px; }
+  font-size: 12px; }
 a {
   margin: auto;
   font-size: 12px;
+}
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background-color: #E34E53;
+    z-index: -1;
+}
 </style>
 
 <!-- Html -->
 
 <div class="container-main">
+  <div class="background">
+  </div>
   <div class="container-header">
   <!-- Add this line if you need the menu -->
      <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
