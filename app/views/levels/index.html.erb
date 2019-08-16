@@ -3,7 +3,7 @@
 <% if @course.user_courses.where(kid: current_user).first  %>
   <%= link_to "Resume", level_question_path(@level_current, @question_current), class: 'btn-primary' %>
 <% else  %>
-  <%= link_to "Start", course_user_courses_path(@course), method: :post %>
+  <%= link_to "Start", course_user_courses_path(@course), method: :post, class: 'btn-warning' %>
 <% end  %>
 <br>
 currently at level <%= @level_current %>, question <%= @question_current %>
