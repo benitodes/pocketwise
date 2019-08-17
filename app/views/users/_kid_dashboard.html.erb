@@ -65,14 +65,14 @@ a {
       <% end %>
       <!-- display learning progess -->
       <div class="d-flex justify-content-around align-items-center">
-        <% unless @user_course.nil?  %>
+        <% unless @user_course.first.nil?  %>
           <div>
             <p><%= @course.first.name %></p>
             <p>Level: <%= @user_course.first.last_level %></p>
             <p>Question: <%= @user_course.first.last_question %></p>
           </div>
           <div>
-            <% unless @user_course.complete %>
+            <% unless @user_course.first.complete %>
               <%= link_to "RESUME", level_question_path(@user_course.first.last_level, @user_course.first.last_question), class: 'button-red' %>
             <% end %>
           </div>

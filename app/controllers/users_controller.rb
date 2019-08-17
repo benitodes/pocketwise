@@ -10,7 +10,9 @@ class UsersController < ApplicationController
       @wallet = @user.kid_wallet
       @goals = Goal.where(wallet_id: @wallet)
       @user_course = UserCourse.where(kid: current_user)
-      @course = Course.where(id: @user_course.first.course_id)
+      unless @user_course.first.nil?
+        @course = Course.where(id: @user_course.first.course_id)
+      end
     end
   #   if @user.parent?
   #     @wallets.each do |wallet|
