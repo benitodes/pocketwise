@@ -20,10 +20,10 @@ class LevelsController < ApplicationController
   end
 
   def show
-    @lectures_complete = lectures_complete?
     @course = Course.find(@level.course_id)
     authorize @level
-    raise
+    @user_course = UserCourse.where(kid_id: current_user.id, course_id: @course).first
+    @lectures_complete = lectures_complete?(@user_course)
   end
 
   private
@@ -32,20 +32,28 @@ class LevelsController < ApplicationController
     @level = Level.find(params[:id])
   end
 
-  def lectures_complete?
+  def lectures_complete?(user_course)
     # find current course
     @user_course = UserCourse.where(kid_id: current_user.id, course_id: @course).first
+    # check if user course is nil
     if @user_course
-      # find first level user has not completed (not necessarily current level!!)
-      level_current = @user_course.last_level
-      # find number of questions in current level
+      # find number of lectures in current level
       @lectures = Lecture.where(level_id: params[:id])
-      number_of_lectures = @lectures.length
+      @number_of_lectures = @lectures.length
       # find current lecture number
-      @lecture_current = @lectures.find { |l| l.number == @user_course.last_lecture }.number
-      # if current question number equals total amount of lectures OR Course complete, then
-      # lectures complete. WHAT ABOUT LEVEL COMPLETE?
-      @lecture_current == number_of_lectures   ? true : false
+      @lecture_current = @lectures.find { |l| l.number == @user_course.last_lecture }
+      # if no current lecture number then user hasn't done lectures yet --> default to one
+      # NOT NECESSARY IF LEVEL DISABLED IF IT IS NOT DONE YET
+      if @lecture_current.nil?
+        @lecture_current = 1
+      else
+        @lecture_current = @lecture_current.number
+      end
+      # is level complete?
+      @level_complete = CompletedLevel.where(level_id: params[:id], user_course_id: @user_course).first
+      @level_complete.nil? ? @level_complete = false : @level_complete = true
+      # if current lecture number equals total amount of lectures OR Course complete OR level complete then return true
+      @lecture_current == @number_of_lectures || @user_course.complete || @level_complete
     else
       false
     end
