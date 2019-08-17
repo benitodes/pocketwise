@@ -83,15 +83,19 @@ a {
 
       <!--  notification div -->
       <% if wallet.payout_amount != 0 %>
+      <div class="payout-notification">
+
         <div class="card-dashboard d-flex justify-content-between">
           <div class="container-header">
             <p><%= wallet.kid.username %> completed his exercise, it's paytime! Give <%= wallet.payout_amount %>€ to him/her. </p>
           </div>
           <div>
-            <button class= "button-red"> confirm </button>
+            <button class= "button-red button-confirm"> CONFIRM </button>
           </div>
 
         </div>
+
+      </div>
       <% end %>
 
 
@@ -155,3 +159,15 @@ a {
       <%= link_to "ADD NEW KID", new_user_path, class: "button-white" %>
     </div>
   </div>
+
+
+
+<script>
+  const payoutNotification = document.querySelector(".payout-notification")
+  const confirmButton = document.querySelector(".button-confirm")
+  confirmButton.addEventListener("click", () => {
+    console.log('test');
+        payoutNotification.style.display = "none"
+      }
+  )
+</script>
