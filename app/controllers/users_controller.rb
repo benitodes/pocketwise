@@ -9,8 +9,9 @@ class UsersController < ApplicationController
     else
       @wallet = @user.kid_wallet
       @goals = Goal.where(wallet_id: @wallet)
+      @user_course = UserCourse.where(kid: current_user)
+      @course = Course.where(id: @user_course.first.course_id)
     end
-
   #   if @user.parent?
   #     @wallets.each do |wallet|
   #       @kid = wallet.kid
