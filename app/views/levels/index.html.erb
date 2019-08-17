@@ -71,14 +71,14 @@ currently at level <%= @level_current %>, question <%= @question_current %>
 <% if @user_course %>
   <% @levels.each do |level| %>
     <% if level.number > @user_course.last_level || @user_course.complete %>
-      <%= link_to level.name, level_path(level), class: 'btn button-white disabled' %>
+      <%= link_to level.name, level_path(level), class: 'btn button-white disabled', style: "color: grey" %>
     <% else %>
       <%= link_to level.name, level_path(level), class: 'btn button-white' %>
     <% end %>
   <% end %>
 <% else %>
   <% @levels.each do |level| %>
-    <%= link_to level.name, level_path(level), class: 'btn button-white disabled' %>
+    <%= link_to level.name, level_path(level), class: 'btn button-white disabled', style: 'color: grey' %>
   <% end %>
 <% end %>
 <br>

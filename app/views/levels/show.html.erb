@@ -65,13 +65,12 @@ Level <%= @level.number %>
 
 
 
-<%= link_to "Lecture", level_lecture_path(@level, @level.lectures.first), class: 'btn btn-primary' %>
+<%= link_to "Lecture", level_lecture_path(@level, @level.lectures.first), class: 'btn button-white' %>
 <!-- user should only be able to practice once lectures complete (or level or course complete) -->
-<%= @lectures_complete %>
 <% if @lectures_complete  %>
-  <%= link_to "Practice", level_question_path(@level, @level.questions.first), class: "btn btn-primary" %>
+  <%= link_to "Practice", level_question_path(@level, @level.questions.first), class: "btn button-white" %>
 <% else %>
-  <a href="#" class="btn btn-primary disabled" role="button" aria-disabled="true">Practice</a>
+  <a href="#" class="btn button-white disabled" style="color: grey"  role="button" aria-disabled="true">Practice</a>
 <% end %>
 
 
