@@ -68,10 +68,19 @@ currently at level <%= @level_current %>, question <%= @question_current %>
 <br>
 
 <h3>Levels:</h3>
-
-<% @levels.each do |level| %>
-<btn class="btn btn-primary"><%= level.name %></btn>
-<%= link_to "view", level_path(level), class: 'btn-ghost' %>
-<br>
+<% if @user_course %>
+  <% @levels.each do |level| %>
+    <% if level.number > @user_course.last_level || @user_course.complete %>
+      <%= link_to level.name, level_path(level), class: 'btn button-white disabled' %>
+    <% else %>
+      <%= link_to level.name, level_path(level), class: 'btn button-white' %>
+    <% end %>
+  <% end %>
+<% else %>
+  <% @levels.each do |level| %>
+    <%= link_to level.name, level_path(level), class: 'btn button-white disabled' %>
+  <% end %>
 <% end %>
+<br>
+
 </div>

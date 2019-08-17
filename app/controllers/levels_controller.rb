@@ -11,7 +11,6 @@ class LevelsController < ApplicationController
     @question_current = 1
     @level = @levels.find { |l| l.number == @level_current }
     @questions = Question.where(level_id: @level.id)
-
     # find first question that is not complete
     unless @user_course.nil?
       @level_current = @user_course.last_level
@@ -33,8 +32,6 @@ class LevelsController < ApplicationController
   end
 
   def lectures_complete?(user_course)
-    # find current course
-    @user_course = UserCourse.where(kid_id: current_user.id, course_id: @course).first
     # check if user course is nil
     if @user_course
       # find number of lectures in current level
@@ -57,5 +54,9 @@ class LevelsController < ApplicationController
     else
       false
     end
+  end
+
+  def enable_level?
+
   end
 end
