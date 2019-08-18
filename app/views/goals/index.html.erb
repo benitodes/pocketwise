@@ -64,7 +64,7 @@ a {
    <div class="container-header">
   <!-- Add this line if you need the menu -->
      <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
-      <h1 class ="header">You goals</h1>
+      <h1 class ="header">Your goals</h1>
    </div>
 
 <div class="card-dashboard">
@@ -74,12 +74,20 @@ a {
       <a>Target: <%= goal.goal_price %></a></br>
       <a>Complete: <%= goal.complete %></a></br>
       <a><%= goal.name %></a></br>
+
+      <% unless current_user.parent %>
       <a><%= link_to 'edit', edit_goal_path(goal.id), class: "button-white"%></a></br>
       <% end %>
+
+    <% end %>
 </div>
 
   <div class="container-dashboard-button">
+
+    <% unless current_user.parent %>
       <%= link_to 'Add new goal', new_wallet_goal_path, class: "button-red"%>
+    <% end %>
+
     </div>
 </div>
 
