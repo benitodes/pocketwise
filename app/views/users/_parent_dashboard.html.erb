@@ -2,13 +2,14 @@
 
 <style>
 body {
-  background-color: #E3E8EB}
+  background-color: #7FC5BC}
 .card-dashboard {
   background-color: white;
   padding: 12px;
   margin-top: 12px;
   text-align: center;
-  border-radius: 2px; }
+  border-radius: 2px;
+   box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 .container-header {
   display: flex;
   border-bottom: :1px white; }
@@ -31,14 +32,15 @@ h1 {
 h2 {
   color: #282A2D;
   margin: auto;
+  margin-top: 12px;
   margin-left: 12px;
   font-size: 14px;
-  font-weight: bold;}
+  font-weight: bold; }
 h3 {
   color: #282A2D;
   margin: auto;
   font-size: 12px;
-  font-weight: bold; }
+  font-weight: lighter; }
 p {
   color: #282A2D;
   margin: auto;
@@ -85,8 +87,6 @@ a {
      <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
       <h1 class ="header">Welcome <%= user.first_name %></h1>
   </div>
-  <div class="background">
-  </div>
     <% if wallets.empty? %>
       <div class="card-dashboard">
         <p>This is pretty empty here, let's add your first kid</p>
@@ -97,7 +97,7 @@ a {
         <!-- Header Tom -->
           <div class="container-header">
             <div>
-              <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar" %>
+              <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-kid" %>
             </div>
             <div>
               <h2><%= wallet.kid.first_name %>'s summary</h2>
@@ -108,7 +108,7 @@ a {
       <!--  notification div -->
       <% if wallet.payout_amount != 0 %>
         <div class="payout-notification">
-          <div class="card-dashboard d-flex justify-content-between">
+          <div class="d-flex justify-content-between">
             <div class="container-header">
               <h3><%= wallet.kid.username %> completed his exercise, it's paytime! Give <%= wallet.payout_amount %>€ to him/her. </h3>
             </div>
@@ -143,6 +143,9 @@ a {
       <% unless wallet.kid.user_courses.empty? %>
         <% wallet.kid.user_courses.each do |user_course| %>
           <% unless user_course.complete? %>
+           <div class="col">
+              <h2>Learning progress</h2>
+            </div>
           <div class="card-dashboard d-flex align-middle justify-content-around border-top">
             <div class="col">
               <%= image_tag 'progress.png', style:"height: 150px; width: 150px;" %>
@@ -162,9 +165,12 @@ a {
       <!--  End of Learning div -->
 
       <!--  Goal div -->
-
-      <div class="card-dashboard d-flex justify-content-around border-top">
+        <div class="col">
+          <h2>Saving progress</h2>
+        </div>
         <% unless wallet.goals.empty? %>
+        <div class="card-dashboard d-flex justify-content-around border-top">
+
         <div  class="col">
           <%= image_tag 'progress.png', style:"height: 150px; width: 150px;" %>
         </div>
@@ -173,7 +179,7 @@ a {
         </div>
            <% end %>
         </div>
-        <div class="card-dashboard d-flex justify-content-around border-top">
+        <div class="d-flex justify-content-around border-top">
           <% if policy(wallet).edit? %>
             <div class="container-dashboard-button">
                 <%= link_to "SEE DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-red" %>
