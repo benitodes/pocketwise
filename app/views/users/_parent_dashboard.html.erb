@@ -55,11 +55,11 @@ a {
   color: black;
 }
 .chart-text {
-  color: #282A2D;
+  color: #999999;
   margin-top: 30px;
   margin-left: 0px;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: lighter;
 }
 .chart-button {
   margin-top: 20px;
@@ -143,17 +143,18 @@ a {
       <% unless wallet.kid.user_courses.empty? %>
         <% wallet.kid.user_courses.each do |user_course| %>
           <% unless user_course.complete? %>
-            <div class="card-dashboard d-flex justify-content-around border-top">
-              <div>
-                 <h3 class="chart-text"><%= user_course.kid.first_name %> is currently enrolled in <%= user_course.course.name %> at level <%= user_course.last_level %></h3>
-              </div>
-              <div>
-                 <%= image_tag 'progress.png', style:"height: 150px; width: 150px;" %>
-              </div>
+          <div class="card-dashboard d-flex align-middle justify-content-around border-top">
+            <div class="col">
+              <%= image_tag 'progress.png', style:"height: 150px; width: 150px;" %>
+            </div>
+            <div class="col">
+              <h3 class="chart-text"><%= user_course.kid.first_name %> is learning <%= user_course.course.name %></h3>
             </div>
           <% end %>
         <% end %>
       <% end %>
+    </div>
+
 
       <!--  End of Learning div -->
 
@@ -161,12 +162,11 @@ a {
 
       <div class="card-dashboard d-flex justify-content-around border-top">
         <% unless wallet.goals.empty? %>
-        <div>
+        <div  class="col">
           <%= image_tag 'progress.png', style:"height: 150px; width: 150px;" %>
         </div>
-        <div>
-
-            <h3 class="chart-text"><%= wallet.kid.first_name %> is saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency %> to buy a <%= wallet.goals.first.name %></h3>
+        <div  class="col">
+          <h3 class="chart-text"><%= wallet.kid.first_name %> is saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency %> to buy a <%= wallet.goals.first.name %></h3>
         </div>
            <% end %>
         </div>
