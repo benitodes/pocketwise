@@ -67,10 +67,17 @@ Level <%= @level.number %>
 
 <%= link_to "Lecture", level_lecture_path(@level, @level.lectures.first), class: 'btn button-white' %>
 <!-- user should only be able to practice once lectures complete (or level or course complete) -->
-<% if @lectures_complete  %>
-  <%= link_to "Practice", level_question_path(@level, @level.questions.first), class: "btn button-white" %>
+<% if !current_user.parent %>
+  <% if @lectures_complete  %>
+    <%= link_to "Practice", level_question_path(@level, @level.questions.first), class: "btn button-white" %>
+  <% else %>
+    <a href="#" class="btn button-white disabled" style="color: grey"  role="button" aria-disabled="true">Practice</a>
+  <% end %>
 <% else %>
-  <a href="#" class="btn button-white disabled" style="color: grey"  role="button" aria-disabled="true">Practice</a>
+<!-- if current user is parent -->
+    <%= link_to "Practice", level_question_path(@level, @level.questions.first), class: "btn button-white disabled" %>
+    <br>
+    Sorry <%= current_user.first_name %>, you can't play the quiz for your kid!
 <% end %>
 
 
