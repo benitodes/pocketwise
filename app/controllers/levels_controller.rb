@@ -6,7 +6,7 @@ class LevelsController < ApplicationController
     # only display levels for specific course
     @levels = Level.select { |l| l.course_id == @course.id }
     # create link to usercourse table to fetch current level and current question faster
-    @user_course = UserCourse.where(kid_id: current_user.id).first
+    @user_course = UserCourse.where(kid_id: current_user.id, course_id: @course).first
     @level_current = 1
     @question_current = 1
     @level = @levels.find { |l| l.number == @level_current }
