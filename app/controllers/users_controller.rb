@@ -9,9 +9,14 @@ class UsersController < ApplicationController
     else
       @wallet = @user.kid_wallet
       @goals = Goal.where(wallet_id: @wallet)
-      @user_course = UserCourse.where(kid: current_user)
-      unless @user_course.first.nil?
-        @course = Course.where(id: @user_course.first.course_id)
+      @user_course = UserCourse.where(kid: current_user).first
+      unless @user_course.nil?
+        @course = Course.where(id: @user_course.course_id)
+        # check if course is complete. if level nr > number of levels in current course then complete
+        if @user_course.last_level > Level.where(course_id: @course).length
+          @user_course.complete = true
+          @user_course.save
+        end
       end
     end
   #   if @user.parent?
