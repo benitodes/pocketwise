@@ -6,7 +6,7 @@ class LevelsController < ApplicationController
     # only display levels for specific course
     @levels = Level.select { |l| l.course_id == @course.id }
     # create link to usercourse table to fetch current level and current question faster
-    @user_course = UserCourse.where(kid_id: current_user.id, complete: false).first
+    @user_course = UserCourse.where(kid_id: current_user.id).first
     @level_current = 1
     @question_current = 1
     @level = @levels.find { |l| l.number == @level_current }
@@ -15,10 +15,13 @@ class LevelsController < ApplicationController
     unless @user_course.nil?
       @level_current = @user_course.last_level
       @question_current = @questions.find { |q| q.number == @user_course.last_question }.number
+      # reset last level, question and lecture if course is complete so kid can start over again
+      reset_course_if_complete
     end
   end
 
   def show
+    reset_course_if_complete
     @course = Course.find(@level.course_id)
     authorize @level
     @user_course = UserCourse.where(kid_id: current_user.id, course_id: @course).first
@@ -56,7 +59,12 @@ class LevelsController < ApplicationController
     end
   end
 
-  def enable_level?
-
+  def reset_course_if_complete
+    if @user_course.complete
+      @user_course.last_level = 1
+      @user_course.last_question = 1
+      @user_course.last_lecture = 1
+      @user_course.save
+    end
   end
 end
