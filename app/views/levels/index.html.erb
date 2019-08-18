@@ -56,7 +56,7 @@ a {
 <div class="card-dashboard">
 
  <!-- button displays start if there is no user course table yet (if kid hasn't started course, otherwise it shows resulme  -->
-<% if @user_course && @course.user_courses.where(kid: current_user).first.complete  %>
+<% if @user_course && @course.user_courses.where(kid: current_user).first.complete %>
   <%= link_to "START OVER", level_question_path(@level_current, @question_current), class: 'button-red' %>
   <% elsif @course.user_courses.where(kid: current_user).first %>
     <%= link_to "RESUME", level_question_path(@level_current, @question_current), class: 'button-red' %>
