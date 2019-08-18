@@ -12,19 +12,22 @@ class CompletedLevel < ApplicationRecord
       @wallet.payout_amount = @wallet.total_allowance
     else
       @wallet.payout_amount = @wallet.total_allowance - @goal.goal_allowance
-      @goal.goal_current_saving += @goal.goal_allowance
-      if @goal.goal_current_saving >= @goal.goal_price
+      remaining_for_goal = @goal.goal_price - @goal.goal_current_saving
+      if remaining_for_goal >= @goal.goal_allowance
+        @goal.goal_current_saving += @goal.goal_allowance
+      else
+        @goal.goal_current_saving += remaining_for_goal
         @goal.complete = true
-        @exceeded_amount = @goal.goal_current_saving - @goal.goal_price
+        @exceeded_amount = @goal.goal_allowance - remaining_for_goal
         if @next_goal
-          @next_goal.goal_current_saving = @exceeded_amount if @exceeded_amount > 0
+          @next_goal.goal_current_saving = @exceeded_amount if @exceeded_amount.positive?
           @next_goal.save
         else
-          @wallet.payout_amount += @exceeded_amount if @exceeded_amount > 0
+          @wallet.payout_amount += @exceeded_amount if @exceeded_amount.positive?
         end
       end
       @goal.save
+      @wallet.save
     end
-    @wallet.save
   end
 end
