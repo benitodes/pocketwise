@@ -21,11 +21,11 @@ class LevelsController < ApplicationController
   end
 
   def show
+    reset_course_if_complete
     @course = Course.find(@level.course_id)
     authorize @level
     @user_course = UserCourse.where(kid_id: current_user.id, course_id: @course).first
     @lectures_complete = lectures_complete?(@user_course)
-    reset_course_if_complete
   end
 
   private
