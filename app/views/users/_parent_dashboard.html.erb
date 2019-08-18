@@ -53,6 +53,8 @@ a {
     background-color: #E34E53;
     z-index: -1;
 }*/
+
+
 </style>
 
 <!-- Html -->
@@ -71,70 +73,93 @@ a {
         <p>This is pretty empty here, let's add your first kid</p>
       </div>
     <% else %>
-      <% wallets.each do |wallet| %>
-      <div class="card-dashboard">
-      <!-- Header Tom -->
-        <div class="container-header">
-         <div>
-             <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar" %>
-          </div>
-          <h2><%= wallet.kid.first_name %>'s Wallet</h2>
-        </div>
-      <!-- Pocket Money div -->
-          <div>
-             <h3>Pocket money summary</h3>
-             <p>Pocket money : <%= wallet.total_allowance %>$</p>
-             <p>Frequency : <%= wallet.payout_frequency %></p>
-             <p>Each : <%= wallet.payout_day %></p>
-             <% if policy(wallet).edit? %>
-               <div class="container-dashboard-button">
-                 <%= link_to "SEE #{wallet.kid.first_name.upcase} DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-red" %>
-               </div>
-             <% end %>
-             <% if policy(current_user).dashboard? %>
-               <div class="container-dashboard-button">
-                 <%= link_to "CHANGE #{wallet.kid.first_name.upcase} ALLOWANCE", edit_wallet_path(wallet.id), class: "button-white" %>
-               </div>
-            <% end %>
-              <% if policy(wallet.kid).destroy? %>
-                <div class="container-dashboard-button">
-                  <%= link_to "DELETE KID", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
+
+          <% wallets.each do |wallet| %>
+              <div class="card-dashboard">
+              <!-- Header Tom -->
+                <div class="container-header">
+                  <div>
+                     <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar" %>
+                  </div>
+                  <h2><%= wallet.kid.first_name %>'s Wallet</h2>
                 </div>
-            <% end %>
-          </div>
-        <!-- Goals div -->
-          <div>
-            <% unless wallet.goals.empty? %>
-             <h3>Savings for goals</h3>
-               <% wallet.goals.each do |goal| %>
-                 <p>Saving for : <%= goal.name %></p>
-                 <p>Goal price : <%= goal.goal_price %>$</p>
-                 <p>Weekly savings : <%= goal.goal_allowance %>$</p>
-                 <p>Saved so far :<%= goal.goal_current_saving %>$</p>
-               <% end %>
-          </div>
+              <!-- End Header Tom -->
+
+              <!-- Pocket Money div -->
+                <div>
+                   <h3>Pocket money summary</h3>
+                   <p>Pocket money : <%= wallet.total_allowance %>$</p>
+                   <p>Frequency : <%= wallet.payout_frequency %></p>
+                   <p>Each : <%= wallet.payout_day %></p>
+                   <% if policy(wallet).edit? %>
+                     <div class="container-dashboard-button">
+                         <%= link_to "SEE #{wallet.kid.first_name.upcase} DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-red" %>
+                     </div>
+                   <% end %>
+                   <% if policy(current_user).dashboard? %>
+                     <div class="container-dashboard-button">
+                       <%= link_to "CHANGE #{wallet.kid.first_name.upcase} ALLOWANCE", edit_wallet_path(wallet.id), class: "button-white" %>
+                     </div>
+                   <% end %>
+                   <% if policy(wallet.kid).destroy? %>
+                     <div class="container-dashboard-button">
+                       <%= link_to "DELETE KID", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
+                     </div>
+                    <% end %>
+                </div>
+              <!-- End Pocket Money div -->
+
+                <!-- Goals div -->
+                    <% unless wallet.goals.empty? %>
+                      <h3>Savings for goals</h3>
+                        <% wallet.goals.each do |goal| %>
+                        <div>
+                          <p>Saving for : <%= goal.name %></p>
+
+                          <div class="row">
+
+
+                            <div class="col-">
+                              <img src="<%= goal.picture %>" alt="" style="width: 15vh; height: 10vh;">
+                            </div>
+
+                          <div class="col-">
+                            <p>Goal price : <%= goal.goal_price %>$</p>
+                            <p>Weekly savings : <%= goal.goal_allowance %>$</p>
+                            <p>Saved so far :<%= goal.goal_current_saving %>$</p>
+                          </div>
+
+                        </div>
+
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%= ((goal.goal_current_saving.to_f / goal.goal_price) * 100 ).ceil %>%;" aria-valuenow="<%= ((goal.goal_current_saving.to_f / goal.goal_price) * 100 ).ceil %>" aria-valuemin="0" aria-valuemax="100"><%= ((goal.goal_current_saving.to_f / goal.goal_price) * 100 ).ceil %>%
+                              </div>
+                            </div>
+                        </div>
+
+                      <% end %>
+                    <% end %>
+s
+                <!-- End Goals div -->
+
+               <!--  Learning div -->
+                   <div>
+                     <% unless wallet.kid.user_courses.empty? %>
+                       <% wallet.kid.user_courses.each do |user_course| %>
+                         <h3>Progress summary</h3>
+                         <p>Enrolled : <%= user_course.course.name %></p>
+                         <p>Last Level : <%= user_course.last_level %></p>
+                         <p>Last question : <%= user_course.last_question %></p>
+                         <p>Last lecture : <%= user_course.last_lecture %></p>
+                         <p>Last lecture : <%= user_course.complete %></p>
+                       <% end %>
+                      <% end %>
+                   </div>
+                <!--  End Learning div -->
+           </div>
           <% end %>
-
-       <!--  Learning div -->
-
-       <% unless wallet.kid.user_courses.empty? %>
-       <% wallet.kid.user_courses.each do |user_course| %>
-          <div>
-             <h3>Progress summary</h3>
-             <p>Enrolled : <%= user_course.course.name %></p>
-             <p>Last Level : <%= user_course.last_level %></p>
-             <p>Last question : <%= user_course.last_question %></p>
-             <p>Last lecture : <%= user_course.last_lecture %></p>
-             <p>Last lecture : <%= user_course.complete %></p>
-          </div>
-
        <% end %>
-        <% end %>
-      </div>
-    <% end %>
-  <% end %>
-</div>
-</div>
+  </div>
     <div class="container-dashboard-button">
       <%= link_to "ADD NEW KID", new_user_path, class: "button-white" %>
     </div>
