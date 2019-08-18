@@ -44,6 +44,12 @@ a {
   margin: auto;
   font-size: 12px;
 }
+.money {
+  margin: auto;
+  font-size: 100px;
+  font-weight: bold;
+  color: black;
+}
 /*.background {
     position: fixed;
     top: 0;
@@ -65,101 +71,110 @@ a {
      <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
       <h1 class ="header">Welcome <%= user.first_name %></h1>
   </div>
-
     <% if wallets.empty? %>
       <div class="card-dashboard">
         <p>This is pretty empty here, let's add your first kid</p>
       </div>
     <% else %>
       <% wallets.each do |wallet| %>
-      <div class="card-dashboard">
-      <!-- Header Tom -->
-        <div class="container-header">
-         <div>
-             <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar" %>
+        <div class="card-dashboard">
+        <!-- Header Tom -->
+          <div class="container-header d-flex justify-content-center">
+            <div>
+              <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar" %>
+            </div>
+            <div>
+              <h2><%= wallet.kid.first_name %>'s summary</h2>
+            </div>
           </div>
-          <h2><%= wallet.kid.first_name %>'s Wallet</h2>
-        </div>
+       <!-- End Header Tom -->
 
       <!--  notification div -->
       <% if wallet.payout_amount != 0 %>
-      <div class="payout-notification">
-
-        <div class="card-dashboard d-flex justify-content-between">
-          <div class="container-header">
-            <p><%= wallet.kid.username %> completed his exercise, it's paytime! Give <%= wallet.payout_amount %>€ to him/her. </p>
+        <div class="payout-notification">
+          <div class="card-dashboard d-flex justify-content-between">
+            <div class="container-header">
+              <h3><%= wallet.kid.username %> completed his exercise, it's paytime! Give <%= wallet.payout_amount %>€ to him/her. </h3>
+            </div>
+            <div>
+              <button class= "button-red button-confirm"> CONFIRM </button>
+            </div>
           </div>
-          <div>
-            <button class= "button-red button-confirm"> CONFIRM </button>
-          </div>
-
         </div>
-
-      </div>
       <% end %>
-
-
+      <!--  End of notification div -->
 
       <!-- Pocket Money div -->
           <div>
-             <h3>Pocket money summary</h3>
-             <p>Pocket money : <%= wallet.total_allowance %>$</p>
-             <p>Frequency : <%= wallet.payout_frequency %></p>
-             <p>Each : <%= wallet.payout_day %></p>
-             <% if policy(wallet).edit? %>
-               <div class="container-dashboard-button">
-                 <%= link_to "SEE #{wallet.kid.first_name.upcase} DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-red" %>
-               </div>
-             <% end %>
-             <% if policy(current_user).dashboard? %>
-               <div class="container-dashboard-button">
-                 <%= link_to "CHANGE #{wallet.kid.first_name.upcase} ALLOWANCE", edit_wallet_path(wallet.id), class: "button-white" %>
-               </div>
-            <% end %>
-              <% if policy(wallet.kid).destroy? %>
-                <div class="container-dashboard-button">
-                  <%= link_to "DELETE KID", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
-                </div>
-            <% end %>
-          </div>
-        <!-- Goals div -->
-          <div>
-            <% unless wallet.goals.empty? %>
-             <h3>Savings for goals</h3>
-               <% wallet.goals.each do |goal| %>
-                 <p>Saving for : <%= goal.name %></p>
-                 <p>Goal price : <%= goal.goal_price %>$</p>
-                 <p>Weekly savings : <%= goal.goal_allowance %>$</p>
-                 <p>Saved so far :<%= goal.goal_current_saving %>$</p>
-               <% end %>
-          </div>
+            <div class="card-dashboard d-flex align-middle justify-content-around border-top">
+              <div>
+                <h1 class="money"><%= wallet.total_allowance%><h1>
+              </div>
+              <div>
+                   <h2 class="my-auto"><%= wallet.payout_frequency %></h2>
+                   <% if policy(current_user).dashboard? %>
+                     <div class="my-auto">
+                       <%= link_to "EDIT", edit_wallet_path(wallet.id), class: "button-white" %>
+                     </div>
+                   <% end %>
+              </div>
+            </div>
+      <!-- End of Pocket Money div -->
+
+
+      <!--  Learning div -->
+
+      <% unless wallet.kid.user_courses.empty? %>
+        <% wallet.kid.user_courses.each do |user_course| %>
+          <% unless user_course.complete? %>
+            <div class="card-dashboard d-flex justify-content-around border-top">
+              <div>
+                 <h3><%= user_course.kid.first_name %> is currently enrolled in <%= user_course.course.name %> at level <%= user_course.last_level %></h3>
+              </div>
+              <div>
+                 <%= image_tag 'progress.png', style:"height: 150px; width: 150px;" %>
+              </div>
+            </div>
           <% end %>
-
-       <!--  Learning div -->
-
-       <% unless wallet.kid.user_courses.empty? %>
-       <% wallet.kid.user_courses.each do |user_course| %>
-          <div>
-             <h3>Progress summary</h3>
-             <p>Enrolled : <%= user_course.course.name %></p>
-             <p>Last Level : <%= user_course.last_level %></p>
-             <p>Last question : <%= user_course.last_question %></p>
-             <p>Last lecture : <%= user_course.last_lecture %></p>
-             <p>Course complete?: <%= user_course.complete %></p>
-          </div>
-
-       <% end %>
         <% end %>
+      <% end %>
+
+      <!--  End of Learning div -->
+
+      <!--  Goal div -->
+
+      <div class="card-dashboard d-flex justify-content-around border-top">
+        <div>
+          <%= image_tag 'progress.png', style:"height: 150px; width: 150px;" %>
+        </div>
+        <div>
+          <% unless wallet.goals.empty? %>
+            <h3><%= wallet.kid.first_name %> is saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency %> to buy a <%= wallet.goals.first.name %></h3>
+        </div>
+           <% end %>
+        </div>
+        <div class="card-dashboard d-flex justify-content-around border-bottom border-top">
+          <% if policy(wallet).edit? %>
+            <div class="container-dashboard-button">
+                <%= link_to "SEE DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-red" %>
+              </div>
+            <% end %>
+            <% if policy(wallet.kid).destroy? %>
+              <div class="container-dashboard-button">
+                <%= link_to "DELETE KID", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
+              </div>
+            <% end %>
+         </div>
+        </div>
       </div>
     <% end %>
   <% end %>
 </div>
-</div>
+
     <div class="container-dashboard-button">
       <%= link_to "ADD NEW KID", new_user_path, class: "button-white" %>
     </div>
-  </div>
-
+</div> <!-- container main closing -->
 
 
 <script>
