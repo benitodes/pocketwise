@@ -2,10 +2,9 @@
 
 <style>
 body {
-  background-color: #E34E53}
+  background-color: #E3E8EB}
 .card-dashboard {
   background-color: white;
-  border-radius: 5px;
   padding: 12px;
   margin-top: 12px;
   text-align: center; }
@@ -29,28 +28,43 @@ h1 {
   color: white;
 }
 h2 {
+  color: #282A2D;
   margin: auto;
   margin-left: 12px;
   font-size: 16px;
   font-weight: bold;}
 h3 {
+  color: #282A2D;
   margin: auto;
   font-size: 14px;
   font-weight: bold; }
 p {
+  color: #282A2D;
   margin: auto;
   font-size: 12px; }
 a {
+  color: #282A2D;
   margin: auto;
   font-size: 12px;
 }
 .money {
+  color: #282A2D;
   margin: auto;
   font-size: 100px;
   font-weight: bold;
   color: black;
 }
-/*.background {
+.chart-text {
+  color: #282A2D;
+  margin-top: 30px;
+  margin-left: 0px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.chart-button {
+  margin-top: 20px;
+}
+.background {
     position: fixed;
     top: 0;
     left: 0;
@@ -58,18 +72,20 @@ a {
     height: 120px;
     background-color: #E34E53;
     z-index: -1;
-}*/
+}
 </style>
 
 <!-- Html -->
 
 <div class="container-main">
-<!--   <div class="background">
-  </div> -->
+  <div class="background">
+  </div>
   <div class="container-header">
   <!-- Add this line if you need the menu -->
      <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
       <h1 class ="header">Welcome <%= user.first_name %></h1>
+  </div>
+  <div class="background">
   </div>
     <% if wallets.empty? %>
       <div class="card-dashboard">
@@ -111,9 +127,9 @@ a {
                 <h1 class="money"><%= wallet.total_allowance%><h1>
               </div>
               <div>
-                   <h2 class="my-auto"><%= wallet.payout_frequency %></h2>
+                   <h2 class="chart-text"><%= wallet.payout_frequency %></h2>
                    <% if policy(current_user).dashboard? %>
-                     <div class="my-auto">
+                     <div class="chart-button">
                        <%= link_to "EDIT", edit_wallet_path(wallet.id), class: "button-white" %>
                      </div>
                    <% end %>
@@ -129,7 +145,7 @@ a {
           <% unless user_course.complete? %>
             <div class="card-dashboard d-flex justify-content-around border-top">
               <div>
-                 <h3><%= user_course.kid.first_name %> is currently enrolled in <%= user_course.course.name %> at level <%= user_course.last_level %></h3>
+                 <h3 class="chart-text"><%= user_course.kid.first_name %> is currently enrolled in <%= user_course.course.name %> at level <%= user_course.last_level %></h3>
               </div>
               <div>
                  <%= image_tag 'progress.png', style:"height: 150px; width: 150px;" %>
@@ -144,16 +160,17 @@ a {
       <!--  Goal div -->
 
       <div class="card-dashboard d-flex justify-content-around border-top">
+        <% unless wallet.goals.empty? %>
         <div>
           <%= image_tag 'progress.png', style:"height: 150px; width: 150px;" %>
         </div>
         <div>
-          <% unless wallet.goals.empty? %>
-            <h3><%= wallet.kid.first_name %> is saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency %> to buy a <%= wallet.goals.first.name %></h3>
+
+            <h3 class="chart-text"><%= wallet.kid.first_name %> is saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency %> to buy a <%= wallet.goals.first.name %></h3>
         </div>
            <% end %>
         </div>
-        <div class="card-dashboard d-flex justify-content-around border-bottom border-top">
+        <div class="card-dashboard d-flex justify-content-around border-top">
           <% if policy(wallet).edit? %>
             <div class="container-dashboard-button">
                 <%= link_to "SEE DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-red" %>
