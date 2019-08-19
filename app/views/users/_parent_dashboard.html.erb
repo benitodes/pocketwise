@@ -89,51 +89,51 @@ a {
         <p>This is pretty empty here, let's add your first kid</p>
       </div>
     <% else %>
+
+    <div class="scrolling-wrapper">
       <% wallets.each do |wallet| %>
-        <div class="card-dashboard">
+        <div class="card">
+          <div class="card-dashboard">
         <!-- Header Tom -->
-          <div class="container-header">
-            <div>
-              <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-kid" %>
+            <div class="container-header">
+              <div>
+                <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-kid" %>
+              </div>
+              <div>
+                <h2><%= wallet.kid.first_name %>'s summary</h2>
+              </div>
             </div>
-            <div>
-              <h2><%= wallet.kid.first_name %>'s summary</h2>
-            </div>
-          </div>
        <!-- End Header Tom -->
 
       <!--  notification div -->
       <% if wallet.payout_amount != 0 %>
         <div class="payout-notification">
-          <div class="d-flex justify-content-between">
-            <div class="container-header">
-              <h3><%= wallet.kid.username %> completed his exercise, it's paytime! Give <%= wallet.payout_amount %>€ to him/her. </h3>
-            </div>
+          <h3><%= wallet.kid.username %> completed his exercise,</h3>
+          <h3> it's paytime! Give <%= wallet.payout_amount %>€ to him/her. </h3>
             <div>
               <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch %>
-
               <button class= "button-red button-confirm"> CONFIRM </button>
             </div>
-          </div>
         </div>
       <% end %>
       <!--  End of notification div -->
 
       <!-- Pocket Money div -->
           <div>
-            <div class="card-dashboard d-flex align-middle justify-content-around border-top">
+            <div class="card-dashboard">
               <div>
                 <h1 class="money"><%= wallet.total_allowance%> <%= wallet.payout_amount %><h1>
               </div>
               <div>
-                   <h2 class="chart-text"><%= wallet.payout_frequency %></h2>
-                   <% if policy(current_user).dashboard? %>
-                     <div class="chart-button">
-                       <%= link_to "EDIT", edit_wallet_path(wallet.id), class: "button-white" %>
-                     </div>
-                   <% end %>
+                <h2 class="chart-text"><%= wallet.payout_frequency %></h2>
+                <% if policy(current_user).dashboard? %>
+                  <div class="chart-button">
+                    <%= link_to "EDIT", edit_wallet_path(wallet.id), class: "button-white" %>
+                  </div>
+                <% end %>
               </div>
             </div>
+
       <!-- End of Pocket Money div -->
 
 
@@ -145,7 +145,7 @@ a {
            <div class="col">
               <h2>Learning progress</h2>
             </div>
-          <div class="card-dashboard d-flex align-middle justify-content-around border-top">
+          <div class="card-dashboard">
             <div class="col">
                <div class="chart" data-percent="<%= @done_percentage %>"></div>
             </div>
@@ -163,13 +163,14 @@ a {
           <h2>Saving progress</h2>
         </div>
         <% unless wallet.goals.empty? %>
-          <div class="card-dashboard d-flex justify-content-around border-top">
+          <div class="card-dashboard ">
 
           <div  class="col">
             <div class="chart" data-percent="<%= @goal_percentage %>"></div>
           </div>
           <div  class="col">
-            <h3 class="chart-text"><%= wallet.kid.first_name %> is saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency %> to buy a <%= wallet.goals.first.name %></h3>
+            <h3 class="chart-text"><%= wallet.kid.first_name %> is saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency %> </h3></br>
+            <h3>to buy a <%= wallet.goals.first.name %></h3>
           </div>
 
         <% end %>
@@ -189,7 +190,9 @@ a {
         </div>
       </div>
     <% end %>
+  </div>
   <% end %>
+</div>
 </div>
 
     <div class="container-dashboard-button">
