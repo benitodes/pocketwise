@@ -5,10 +5,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize @user
     @done_percentage = 0
+    @goal_percentage = 0
     if @user.parent?
       @wallets = @user.parent_wallets
       @wallets.each do |wallet|
-        learning_progress_percentage(wallet.kid_id)
+        @done_percentage = learning_progress_percentage(wallet.kid_id)
+        @goal_percentage = goal_progress_percentage(wallet.kid_id)
       end
     else
       @wallet = @user.kid_wallet
@@ -92,9 +94,12 @@ class UsersController < ApplicationController
 
   def goal_progress_percentage(kid_id)
     #find wallet with kid id
-    @wallet = Wallet.where(kid_id: kid_id)
-
-
-
+    @wallet = Wallet.where(kid_id: kid_id).first
+    @goal = Goal.where(wallet_id: @wallet).first
+    if @goal
+      # if @goal.goal_current_saving != 0
+        @goal_percentage = @goal.goal_current_saving.to_f / @goal.goal_price.to_f * 100
+      # end
+    end
   end
 end
