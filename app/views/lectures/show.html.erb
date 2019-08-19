@@ -35,6 +35,10 @@ body {
 .modal-content {
   height: 85vh;
 }
+.tansition {
+  -webkit-transition: background-image 0.2s ease-in-out;
+transition: background-image 0.2s ease-in-out;
+}
 
 img {
   max-width: 100%;
@@ -111,24 +115,37 @@ a {
   </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" style="background-color: #F8CE69" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h2>
-              Review complete
             </h2>
             <h5 class="modal-title" id="exampleModalLongTitle"></h5>
             </button>
           </div>
-          <div class="modal-body">
-            <img src="https://icon-library.net/images/check-circle-icon/check-circle-icon-4.jpg" alt="Tick" style="width:300px;height:300px;">
+          <div class="modal-body d-flex flex-column align-items-center justify-content-between">
+            <div>
+
+            <h2 class="text-center" style="font-size: 24px;"> Review complete! </h2>
+
+            </div>
+            <div style="height: 200px; width: 200px; transition-delay: 1s;
+transition-property: background-color;">
+
+              <%= image_tag "check.svg", alt: "alttext", class: "transition" %>
+
+            </div>
+            <div>
+              <%= link_to "Continue to quiz", level_question_path(@level, @question), class: 'btn button-white' %>
+            </div>
+<!--
+            <img src="/assets/images/coding.jpg" style=""> -->
             <div>
 
             </div>
           </div>
           <div class="modal-footer">
-            <%= link_to "Continue to quiz", level_question_path(@level, @question), class: 'btn button-white' %>
           </div>
         </div>
       </div>
