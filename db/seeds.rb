@@ -44,7 +44,7 @@ goal_list = [
 
 goal_list.each do |name, picture, goal_allowance, goal_price, goal_current_saving, complete, wallet_id|
   goal = Goal.new(name: name, goal_allowance: goal_allowance, goal_price: goal_price, goal_current_saving: goal_current_saving, complete: complete, wallet_id: wallet.id)
-  goal.remote_photo_url = picture
+  goal.remote_picture_url = picture
   goal.save
 end
 
