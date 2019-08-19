@@ -55,23 +55,37 @@ a {
 
 <div class="card-dashboard">
 
-  <!-- button displays start if there is no user course table yet (if kid hasn't started course, otherwise it shows resulme  -->
-<% if @course.user_courses.where(kid: current_user).first  %>
-  <%= link_to "RESUME", level_question_path(@level_current, @question_current), class: 'button-red' %>
-<% else  %>
-
-  <%= link_to "START", course_user_courses_path(@course), method: :post, class: 'button-red' %>
-
+ <!-- button displays start if there is no user course table yet (if kid hasn't started course, otherwise it shows resulme  -->
+<% if @user_course && @course.user_courses.where(kid: current_user).first.complete %>
+  <%= link_to "START OVER", level_question_path(@level_current, @question_current), class: 'button-red' %>
+  <% elsif @course.user_courses.where(kid: current_user).first %>
+    <%= link_to "RESUME", level_question_path(@level_current, @question_current), class: 'button-red' %>
+  <% else  %>
+    <%= link_to "ENROLL", course_user_courses_path(@course), method: :post, class: 'button-red' %>
 <% end  %>
 <br>
 currently at level <%= @level_current %>, question <%= @question_current %>
 <br>
 
 <h3>Levels:</h3>
-
-<% @levels.each do |level| %>
-<btn class="btn btn-primary"><%= level.name %></btn>
-<%= link_to "view", level_path(level), class: 'btn-ghost' %>
-<br>
+<% if @user_course %>
+  <% @levels.each do |level| %>
+    <!-- if user has completed the course already he can visit all levels all questions all lectures -->
+    <% if @user_course.complete %>
+      <%= link_to level.name, level_path(level), class: 'btn button-white' %>
+    <!-- if not then check if level has already been started by user, if not disable button -->
+    <% elsif level.number > @user_course.last_level %>
+      <%= link_to level.name, level_path(level), class: 'btn button-white disabled', style: "color: grey" %>
+    <% else %>
+    <!--   if yes, then enable button -->
+      <%= link_to level.name, level_path(level), class: 'btn button-white' %>
+    <% end %>
+  <% end %>
+<% else %>
+  <% @levels.each do |level| %>
+    <%= link_to level.name, level_path(level), class: 'btn button-white disabled', style: 'color: grey' %>
+  <% end %>
 <% end %>
+<br>
+
 </div>

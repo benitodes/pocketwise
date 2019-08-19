@@ -2,21 +2,22 @@
 
 <style>
 body {
-  background-color: #E34E53}
+  background-color: #7FC5BC}
 .card-dashboard {
   background-color: white;
-  border-radius: 5px;
   padding: 12px;
   margin-top: 12px;
-  text-align: center; }
+  text-align: center;
+  border-radius: 2px;
+   box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 .container-header {
   display: flex;
   border-bottom: :1px white; }
 .header {
   margin: auto;
   margin-left: 12px;
-  font-size: 20px;
-  font-weight: bold; }
+  font-size: 16px;
+  font-weight: lighter; }
 .container-dashboard-button {
   display: flex;
   padding: 6px;
@@ -29,20 +30,41 @@ h1 {
   color: white;
 }
 h2 {
+  color: #282A2D;
   margin: auto;
+  margin-top: 12px;
   margin-left: 12px;
-  font-size: 16px;
-  font-weight: bold;}
-h3 {
-  margin: auto;
   font-size: 14px;
   font-weight: bold; }
-p {
-  margin: auto;
-  font-size: 12px; }
-a {
+h3 {
+  color: #282A2D;
   margin: auto;
   font-size: 12px;
+  font-weight: lighter; }
+p {
+  color: #282A2D;
+  margin: auto;
+  font-size: 10px; }
+a {
+  color: #282A2D;
+  margin: auto;
+  font-size: 10px;
+}
+.money {
+  color: #E34E53;
+  margin: auto;
+  font-size: 92px;
+  font-weight: lighter;
+}
+.chart-text {
+  color: #999999;
+  margin-top: 30px;
+  margin-left: 0px;
+  font-size: 12px;
+  font-weight: lighter;
+}
+.chart-button {
+  margin-top: 20px;
 }
 /*.background {
     position: fixed;
@@ -65,77 +87,129 @@ a {
      <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
       <h1 class ="header">Welcome <%= user.first_name %></h1>
   </div>
-
     <% if wallets.empty? %>
       <div class="card-dashboard">
         <p>This is pretty empty here, let's add your first kid</p>
       </div>
     <% else %>
       <% wallets.each do |wallet| %>
-      <div class="card-dashboard">
-      <!-- Header Tom -->
-        <div class="container-header">
-         <div>
-             <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar" %>
+        <div class="card-dashboard">
+        <!-- Header Tom -->
+          <div class="container-header">
+            <div>
+              <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-kid" %>
+            </div>
+            <div>
+              <h2><%= wallet.kid.first_name %>'s summary</h2>
+            </div>
           </div>
-          <h2><%= wallet.kid.first_name %>'s Wallet</h2>
+       <!-- End Header Tom -->
+
+      <!--  notification div -->
+      <% if wallet.payout_amount != 0 %>
+        <div class="payout-notification">
+          <div class="d-flex justify-content-between">
+            <div class="container-header">
+              <h3><%= wallet.kid.username %> completed his exercise, it's paytime! Give <%= wallet.payout_amount %>€ to him/her. </h3>
+            </div>
+            <div>
+              <button class= "button-red button-confirm"> CONFIRM </button>
+            </div>
+          </div>
         </div>
+      <% end %>
+      <!--  End of notification div -->
+
       <!-- Pocket Money div -->
           <div>
-             <h3>Pocket money summary</h3>
-             <p>Pocket money : <%= wallet.total_allowance %>$</p>
-             <p>Frequency : <%= wallet.payout_frequency %></p>
-             <p>Each : <%= wallet.payout_day %></p>
-             <% if policy(wallet).edit? %>
-               <div class="container-dashboard-button">
-                 <%= link_to "SEE #{wallet.kid.first_name.upcase} DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-red" %>
-               </div>
-             <% end %>
-             <% if policy(current_user).dashboard? %>
-               <div class="container-dashboard-button">
-                 <%= link_to "CHANGE #{wallet.kid.first_name.upcase} ALLOWANCE", edit_wallet_path(wallet.id), class: "button-white" %>
-               </div>
-            <% end %>
-              <% if policy(wallet.kid).destroy? %>
-                <div class="container-dashboard-button">
-                  <%= link_to "DELETE KID", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
-                </div>
-            <% end %>
-          </div>
-        <!-- Goals div -->
-          <div>
-            <% unless wallet.goals.empty? %>
-             <h3>Savings for goals</h3>
-               <% wallet.goals.each do |goal| %>
-                 <p>Saving for : <%= goal.name %></p>
-                 <p>Goal price : <%= goal.goal_price %>$</p>
-                 <p>Weekly savings : <%= goal.goal_allowance %>$</p>
-                 <p>Saved so far :<%= goal.goal_current_saving %>$</p>
-               <% end %>
-          </div>
+            <div class="card-dashboard d-flex align-middle justify-content-around border-top">
+              <div>
+                <h1 class="money"><%= wallet.total_allowance%><h1>
+              </div>
+              <div>
+                   <h2 class="chart-text"><%= wallet.payout_frequency %></h2>
+                   <% if policy(current_user).dashboard? %>
+                     <div class="chart-button">
+                       <%= link_to "EDIT", edit_wallet_path(wallet.id), class: "button-white" %>
+                     </div>
+                   <% end %>
+              </div>
+            </div>
+      <!-- End of Pocket Money div -->
+
+
+      <!--  Learning div -->
+
+      <% unless wallet.kid.user_courses.empty? %>
+        <% wallet.kid.user_courses.each do |user_course| %>
+          <% unless user_course.complete? %>
+           <div class="col">
+              <h2>Learning progress</h2>
+            </div>
+          <div class="card-dashboard d-flex align-middle justify-content-around border-top">
+            <div class="col">
+              <%= image_tag 'progress.png', style:"height: 150px; width: 150px;" %>
+            </div>
+            <div id="chart">
+      <apexchart type=radialBar height=350 :options="chartOptions" :series="series" />
+    </div>
+            <div class="col">
+              <h3 class="chart-text"><%= user_course.kid.first_name %> is learning <%= user_course.course.name %></h3>
+            </div>
           <% end %>
-
-       <!--  Learning div -->
-
-       <% unless wallet.kid.user_courses.empty? %>
-       <% wallet.kid.user_courses.each do |user_course| %>
-          <div>
-             <h3>Progress summary</h3>
-             <p>Enrolled : <%= user_course.course.name %></p>
-             <p>Last Level : <%= user_course.last_level %></p>
-             <p>Last question : <%= user_course.last_question %></p>
-             <p>Last lecture : <%= user_course.last_lecture %></p>
-             <p>Last lecture : <%= user_course.complete %></p>
-          </div>
-
-       <% end %>
         <% end %>
+      <% end %>
+    </div>
+
+
+      <!--  End of Learning div -->
+
+      <!--  Goal div -->
+        <div class="col">
+          <h2>Saving progress</h2>
+        </div>
+        <% unless wallet.goals.empty? %>
+        <div class="card-dashboard d-flex justify-content-around border-top">
+
+        <div  class="col">
+          <%= image_tag 'progress.png', style:"height: 150px; width: 150px;" %>
+        </div>
+        <div  class="col">
+          <h3 class="chart-text"><%= wallet.kid.first_name %> is saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency %> to buy a <%= wallet.goals.first.name %></h3>
+        </div>
+           <% end %>
+        </div>
+        <div class="d-flex justify-content-around border-top">
+          <% if policy(wallet).edit? %>
+            <div class="container-dashboard-button">
+                <%= link_to "SEE DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-red" %>
+              </div>
+            <% end %>
+            <% if policy(wallet.kid).destroy? %>
+              <div class="container-dashboard-button">
+                <%= link_to "DELETE KID", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
+              </div>
+            <% end %>
+         </div>
+        </div>
       </div>
     <% end %>
   <% end %>
 </div>
-</div>
+
     <div class="container-dashboard-button">
       <%= link_to "ADD NEW KID", new_user_path, class: "button-white" %>
     </div>
-  </div>
+</div> <!-- container main closing -->
+
+
+<script>
+  const payoutNotification = document.querySelector(".payout-notification")
+  const confirmButton = document.querySelector(".button-confirm")
+  confirmButton.addEventListener("click", () => {
+    console.log('test');
+        payoutNotification.style.display = "none"
+      }
+  )
+</script>
+

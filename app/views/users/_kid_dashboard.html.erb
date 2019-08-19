@@ -62,7 +62,32 @@ a {
       <%= link_to categories_path do %>
         <h2>Learn</h2>
       <% end %>
+      <!-- display learning progess for courses that are not comoplete -->
+      <% unless @user_course.nil? %>
+        <br>
+        <div class="d-flex justify-content-around align-items-center">
+        <% unless @user_course.complete  %>
+
+          <div>
+            <p><%= @course.first.name %></p>
+            <p>Level: <%= @user_course.last_level %></p>
+            <p>Question: <%= @user_course.last_question %></p>
+          </div>
+
+          <div>
+            <% unless @user_course.complete %>
+              <%= link_to "RESUME", level_question_path(@user_course.last_level, @user_course.last_question), class: 'button-red' %>
+            <% end %>
+          </div>
+
+        <% end %>
+        </div>
+      <% end %>
     </div>
+
+
+
+
     <div class="card-dashboard">
       <%= link_to wallet_goals_path(wallet) do %>
       <h2>Goals</h2>
