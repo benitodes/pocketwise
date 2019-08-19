@@ -12,16 +12,16 @@ Category.destroy_all
 # add more user information
 
 user_list = [
-  ['Benoit', 'Destresse', 'benoit@destresse.fr', 'password', true],
-  ['Samba', 'OhGee', 'samba@dance.com', 'password', false],
-  ['Jana', 'X', 'jana@x.com', 'password', true]
+  ['Benoit', 'Destresse', 'benoit@destresse.fr', 'benito', 'password', true],
+  ['Samba', 'OhGee', 'samba@dance.com', 'Samb', 'password', false],
+  ['Jana', 'X', 'jana@x.com', 'Jan', 'password', true]
 ]
 
 # create new users from array
 # devise will automatically transform value of variable 'password' into encrypted password
 
-user_list.each do |first_name, last_name, email, password, parent|
-  User.create!(first_name: first_name, last_name: last_name, email: email, password: password, parent: parent)
+user_list.each do |first_name, last_name, email, username, password, parent|
+  User.create!(first_name: first_name, last_name: last_name, email: email, username: username, password: password, parent: parent)
 end
 
 puts "users have been created"
@@ -31,19 +31,21 @@ puts "users have been created"
 kid = User.where(parent: false).sample
 parent = User.where(parent: true).sample
 
-wallet = Wallet.create!(payout_amount: 50, payout_frequency: 'Weekly', total_allowance: 70, payout_day: 'Saturday', parent_id: parent.id, kid_id: kid.id)
+wallet = Wallet.create!(payout_amount: 50, payout_frequency: 'Weekly', total_allowance: 70, payout_day: 'Monday', parent_id: parent.id, kid_id: kid.id)
 
 puts "wallet has been created"
 
 # goals
 goal_list = [
-  ['bike', 'https://contents.mediadecathlon.com/p1239714/k$c3dfcfe3c9d9c01ad7b0a04c50ab1b5d/riverside-120-hybrid-cycle.jpg?&f=800x800',20, 100, 60, false, 1],
-  ['transformers', 'https://d9nvuahg4xykp.cloudfront.net/7780383482862443400/8509331651037790392.jpg', 10, 50, 30, false, 1],
-  ['light saber', 'https://images-na.ssl-images-amazon.com/images/I/41YsZiuMvrL._SX425_.jpg', 5, 25, 25, false, 1]
+  ['Bike', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200274/pocketwise/bike_sowtrd.jpg',5, 150, 60, false, 1],
+  ['Buggy', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200276/pocketwise/buggy_uxjqye.png', 7, 50, 0, false, 1],
+  ['Sneakers', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200274/pocketwise/stansmith_p5ndhu.jpg', 5, 99, 99, true, 1]
 ]
 
 goal_list.each do |name, picture, goal_allowance, goal_price, goal_current_saving, complete, wallet_id|
-  Goal.create!(name: name, picture: picture, goal_allowance: goal_allowance, goal_price: goal_price, goal_current_saving: goal_current_saving, complete: complete, wallet_id: wallet.id)
+  goal = Goal.new(name: name, goal_allowance: goal_allowance, goal_price: goal_price, goal_current_saving: goal_current_saving, complete: complete, wallet_id: wallet.id)
+  goal.remote_photo_url = picture
+  goal.save
 end
 
 puts "goals have been created"
@@ -80,7 +82,7 @@ course_list = [
     'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190564/pocketwise/css_bqgbli.png', Category.first.id],
 
 
-  ['Introduction to JavaScript', 'JavaScript is among the most powerful and flexible programming languages of the web. It powers the dynamic behavior on most websites, including this one.',
+  ['Learn JavaScript', 'JavaScript is among the most powerful and flexible programming languages of the web. It powers the dynamic behavior on most websites, including this one.',
     'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190565/pocketwise/javascript_uzsda5.png', Category.first.id],
 
 
