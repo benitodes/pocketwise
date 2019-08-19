@@ -7,7 +7,9 @@ class UsersController < ApplicationController
     @done_percentage = 0
     if @user.parent?
       @wallets = @user.parent_wallets
-      progress_percentage(@wallets.first.kid_id)
+      if @wallets.first
+        progress_percentage(@wallets.first.kid_id)
+      end
     else
       @wallet = @user.kid_wallet
       @goals = Goal.where(wallet_id: @wallet)
