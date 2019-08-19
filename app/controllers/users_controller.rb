@@ -8,9 +8,11 @@ class UsersController < ApplicationController
     @goal_percentage = 0
     if @user.parent?
       @wallets = @user.parent_wallets
-      @wallets.each do |wallet|
-        @done_percentage = learning_progress_percentage(wallet.kid_id)
-        @goal_percentage = goal_progress_percentage(wallet.kid_id)
+      unless @wallets.first.nil?
+        @wallets.each do |wallet|
+          @done_percentage = learning_progress_percentage(wallet.kid_id)
+          @goal_percentage = goal_progress_percentage(wallet.kid_id)
+        end
       end
     else
       @wallet = @user.kid_wallet

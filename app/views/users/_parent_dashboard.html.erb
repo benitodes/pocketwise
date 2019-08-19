@@ -110,6 +110,7 @@ a {
               <h3><%= wallet.kid.username %> completed his exercise, it's paytime! Give <%= wallet.payout_amount %>€ to him/her. </h3>
             </div>
             <div>
+              <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0}), method: :patch %>
               <button class= "button-red button-confirm"> CONFIRM </button>
             </div>
           </div>
@@ -164,7 +165,7 @@ a {
           <div class="card-dashboard d-flex justify-content-around border-top">
 
           <div  class="col">
-            <div class="chart" data-percent="<%= @goal_percentage %>"><%= @goal_percentage %></div>
+            <div class="chart" data-percent="<%= @goal_percentage %>"></div>
           </div>
           <div  class="col">
             <h3 class="chart-text"><%= wallet.kid.first_name %> is saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency %> to buy a <%= wallet.goals.first.name %></h3>
@@ -558,14 +559,13 @@ return EasyPieChart;
 </script>
 
  <script>
-    var element = document.querySelector('.chart');
-    new EasyPieChart(element, {
-        scaleLength: 0,
-        barColor: '#E34E53',
-        lineWidth: 8,
-        size: 110,
-
-    });
+    var charts = document.querySelectorAll('.chart');
+    charts.forEach((chart) => {
+      new EasyPieChart(chart, {
+          scaleLength: 0,
+          barColor: '#ef1e25',
+          lineWidth: 8,
+          size: 110,
+      });
+    })
 </script>
-
-
