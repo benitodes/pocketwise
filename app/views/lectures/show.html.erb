@@ -1,51 +1,145 @@
-<h3>lectures show page</h3>
-<br>
+<!-- inline css -->
 
-<h3><%= @lecture.title %></h3>
+<style>
+body {
+  background-color: #F8CE69}
+.container-lecture {
+  height: 100vh;
+  display: flex;
+  align-items: space-between;
+  flex-direction: column;
+  }
+.card-lecture {
+  background-color: white;
+  padding-top: 12px;
+  padding-bottom: 32px;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-top: 12px;
+  text-align: center;
+  border-radius: 2px;
+   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between
+  }
+.container-header {
+  display: flex;
+  border-bottom: :1px white; }
+.header {
+  margin: auto;
+  margin-left: 12px;
+  font-size: 16px;
+  font-weight: lighter; }
+.modal-content {
+  height: 85vh;
+}
 
-<br>
+img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+   }
+section {
+  background-color: #E34E53;
+  background-size: 30% 100%;}
+h2 {
+  color: #282A2D;
+  margin: auto;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left }
+h3 {
+  color: #282A2D;
+  margin: auto;
+  font-size: 12px;
+  font-weight: lighter; }
+p {
+  color: #282A2D;
+  margin: auto;
+  font-size: 12px;
+  text-align: left;
+  margin-top: 12px;
+  }
+a {
+  color: #282A2D;
+  margin: auto;
+  font-size: 10px;
+}
+</style>
 
-<p><%= @lecture.description %></p>
+<div class="container-lecture">
+<!--     progress bar -->
 
-<% if @next_lecture %>
-<%= link_to "Next", level_lecture_path(@level, @next_lecture), class: 'btn-primary' %>
-<% else %>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-    Next
-  </button>
+        <div class="progress">
+            <div class="bar shadow circuit" style="width: <%= @lecture_progress_percentage %>%; transition-duration: 2s; margin-left: 0;"></div>
+        </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
+
+  <div class="card-lecture">
+
+
+
+
+ <!--  content -->
+    <div>
+      <div class="">
+        <h2><%= @lecture.title %></h2>
+      </div>
+
+      <br>
+      <div>
+        <img src="<%= @lecture.picture %>" alt="">
+      </div>
+
+      <p><%= @lecture.description %></p>
+    </div>
+
+
+  <!--   button -->
+    <div>
+      <% if @next_lecture %>
+      <%= link_to "Next", level_lecture_path(@level, @next_lecture), class: 'button-white' %>
+      <% else %>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn button-white" data-toggle="modal" data-target="#exampleModalCenter">
+        Next
+      </button>
+    </div>
+  </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
             <h2>
               Review complete
             </h2>
-          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <img src="https://icon-library.net/images/check-circle-icon/check-circle-icon-4.jpg" alt="Tick" style="width:300px;height:300px;">
-          <div>
-
+            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+            </button>
           </div>
-        </div>
-        <div class="modal-footer">
-          <%= link_to "Continue to quiz", level_question_path(@level, @question), class: 'btn btn-primary' %>
+          <div class="modal-body">
+            <img src="https://icon-library.net/images/check-circle-icon/check-circle-icon-4.jpg" alt="Tick" style="width:300px;height:300px;">
+            <div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= link_to "Continue to quiz", level_question_path(@level, @question), class: 'btn button-white' %>
+          </div>
         </div>
       </div>
     </div>
+    <% end  %>
+
+
   </div>
-<% end  %>
 
 
-
-
-
+</div>
 
 
 
