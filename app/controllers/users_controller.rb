@@ -5,10 +5,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize @user
     @done_percentage = 0
+    @goal_percentage = 0
     if @user.parent?
       @wallets = @user.parent_wallets
-      if @wallets.first
-        progress_percentage(@wallets.first.kid_id)
+      unless @wallets.first.nil?
+        @wallets.each do |wallet|
+          @done_percentage = learning_progress_percentage(wallet.kid_id)
+          @goal_percentage = goal_progress_percentage(wallet.kid_id)
+        end
       end
     else
       @wallet = @user.kid_wallet
@@ -16,7 +20,8 @@ class UsersController < ApplicationController
       @user_course = UserCourse.where(kid: current_user).first
       unless @user_course.nil?
         @course = Course.where(id: @user_course.course_id)
-        progress_percentage(current_user)
+        learning_progress_percentage(current_user)
+        goal_progress_percentage(current_user)
         # check if course is complete. if level nr > number of levels in current course then complete
         if @user_course.last_level > Level.where(course_id: @course).length
           @user_course.complete = true
@@ -60,7 +65,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :username, :avatar, :gender, :email, :password, :age, :parent)
   end
 
-  def progress_percentage(kid_id)
+  def learning_progress_percentage(kid_id)
     @user_course = UserCourse.where(kid: kid_id).first
       unless @user_course.nil?
         @course = Course.where(id: @user_course.course_id)
@@ -88,5 +93,16 @@ class UsersController < ApplicationController
         # calculate percentage done
         @done_percentage = @total_questions_completed.to_f / @total_questions_per_course.to_f * 100
       end
+  end
+
+  def goal_progress_percentage(kid_id)
+    #find wallet with kid id
+    @wallet = Wallet.where(kid_id: kid_id).first
+    @goal = Goal.where(wallet_id: @wallet).first
+    if @goal
+      # if @goal.goal_current_saving != 0
+        @goal_percentage = @goal.goal_current_saving.to_f / @goal.goal_price.to_f * 100
+      # end
+    end
   end
 end

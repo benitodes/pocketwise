@@ -103,6 +103,7 @@ a {
             <br>
             already saved: <%= goal.goal_current_saving %> €
             <br>
+              <div class="chart" data-percent="<%= @goal_percentage %>"><%= @goal_percentage %></div>
             <img src="<%= goal.picture %>" alt="" style="width: 30vh; height: 20vh;">
             <br>
         <% end %>
@@ -462,12 +463,13 @@ return EasyPieChart;
 </script>
 
  <script>
-    var element = document.querySelector('.chart');
-    new EasyPieChart(element, {
-        scaleLength: 0,
-        barColor: '#ef1e25',
-        lineWidth: 8,
-        size: 110,
-
-    });
+    var charts = document.querySelectorAll('.chart');
+    charts.forEach((chart) => {
+      new EasyPieChart(chart, {
+          scaleLength: 0,
+          barColor: '#ef1e25',
+          lineWidth: 8,
+          size: 110,
+      });
+    })
 </script>
