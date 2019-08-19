@@ -1,20 +1,40 @@
+<!-- inline css -->
+
+<style>
+body {
+  background-color: #D4A2E3;
+  color: white; }
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px; }
+p {
+  font-size: 20px
+  padding: 20px; }
+a {
+  font-size: 16px;
+  color: white; }
+</style>
+
 <div class="container">
   <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-6">
       <h1>Edit your goal</h1>
         <%= simple_form_for @goal do |f| %>
-        <%= f.input :name %>
-        <%= f.input :goal_allowance %>
-        <%= f.input :goal_price %>
-        <%= f.input :picture %>
-        <%= f.submit "Submit", class: "btn btn-primary" %>
-        <% end %>
-        <%= link_to "Delete goal", goal_path(@goal), method: :delete, class: "btn btn-danger" %>
-        <%= link_to "Back to goals", wallet_goals_path(@goal.wallet), class: "btn btn-danger" %>
+        <%= cl_image_tag @goal.picture, height: 250, width: 300, crop: :fill %></br>
+        <%= f.input :picture, label: 'Edit picture', class: "button_edit" %>
+        <%= f.input :name, label: 'Goal name', error: 'Goal name is mandatory, please specify one', placeholder: 'New bike' %>
+        <%= f.input :goal_price, label: 'Goal amount', error: 'Goal amount is mandatory, please specify one', placeholder: '60' %>
+        <%= f.input :goal_allowance, label: 'Weekly saving', error: 'Weekly saving is mandatory, please specify one', placeholder: '15'  %>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 my-2 d-flex justify-content-around">
+              <%= f.submit "Save", class: "button-red" %>
+              <% end %>
+              <%= link_to "Back to goals", wallet_goals_path(@goal.wallet), class: "button-white" %>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 </div>
-
-
-
-
