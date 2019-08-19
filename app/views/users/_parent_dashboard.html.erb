@@ -110,6 +110,7 @@ a {
               <h3><%= wallet.kid.username %> completed his exercise, it's paytime! Give <%= wallet.payout_amount %>€ to him/her. </h3>
             </div>
             <div>
+              <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0}), method: :patch %>
               <button class= "button-red button-confirm"> CONFIRM </button>
             </div>
           </div>
