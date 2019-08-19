@@ -77,10 +77,10 @@ a {
           <div>
             <% unless @user_course.complete %>
               <%= link_to "RESUME", level_question_path(@user_course.last_level, @user_course.last_question), class: 'button-red' %>
-              <%=  %>
               <br>
-              <%= @total_questions_per_course %>
-              <div class="chart" data-percent="73"></div>
+              <br>
+<!--               this is the circle chart -->
+              <div class="chart" data-percent="<%= @done_percentage %>"></div>
             <% end %>
           </div>
 
@@ -464,6 +464,10 @@ return EasyPieChart;
  <script>
     var element = document.querySelector('.chart');
     new EasyPieChart(element, {
-        // your options goes here
+        scaleLength: 0,
+        barColor: '#ef1e25',
+        lineWidth: 8,
+        size: 110,
+
     });
 </script>

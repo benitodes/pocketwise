@@ -33,6 +33,8 @@ class UsersController < ApplicationController
         end
         # add last_question number from user course table - 1
         @total_questions_completed += @user_course.last_question - 1
+        # calculate percentage done
+        @done_percentage = @total_questions_completed.to_f / @total_questions_per_course.to_f * 100
 
         # check if course is complete. if level nr > number of levels in current course then complete
         if @user_course.last_level > Level.where(course_id: @course).length
