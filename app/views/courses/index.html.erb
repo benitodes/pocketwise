@@ -35,14 +35,17 @@ h1 {
       <% @courses.each do |course| %>
       <div class="card-learning">
         <div>
-          photo
+          <img src="<%= course.picture %>">
         </div>
-        <div class="d-flex justify-content-between p-3">
-          <div>
+        <div>
              <h2><%= course.name %></h2>
-          </div>
+        </div>
+        <div>
+            <p><%= course.description %></p>
+        </div>
+        <div>
              <%= link_to "LEARN", course_levels_path(course), class: 'button-white' %>
-          </div>
+        </div>
       </div>
       <br>
       <% end %>
