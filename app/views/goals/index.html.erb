@@ -1,18 +1,4 @@
 
-
-<h1>Your goals</h1>
-<#%= link_to 'Add new goal', new_wallet_goal_path, class: "btn btn-primary"%>
-<#% @goals.each do |goal| %>
-  <a>Total current saving for goal: <#%= goal.goal_current_saving %></a></br>
-  <a>Target: <#%= goal.goal_price %></a></br>
-  <a>Complete: <#%= goal.complete %></a></br>
-  <a><#%= goal.name %></a></br>
-  <#%= cl_image_tag goal.picture, height: 250, width: 300, crop: :fill %>
-  <#% unless goal.complete? %>
-    <a><#%= link_to 'edit', edit_goal_path(goal.id), class: "btn btn-success"%></a></br>
-  <#% end %>
-<#% end %>
-
 <!-- inline css -->
 
 <style>
