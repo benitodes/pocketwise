@@ -3,7 +3,7 @@
   font-family: 'Helvetica Neue', sans-serif;
 }
 
-$primary-color: #282A2E;
+$primary-color: #7FC5BC;
 $secondary-color: white;
 
 body {
@@ -18,7 +18,7 @@ h3 {
 }
 
 a {
-  color: $primary-color;
+  color: #56b3a7;
 }
 
 .quiz-container {
@@ -33,14 +33,13 @@ a {
 
 .radio-tile-group {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   flex-direction: column;
   //set dimensions for invisible container
   .input-container {
     position: relative;
     height:  5rem;
-    width:  20rem;
+    width:  18rem;
     margin: 0.5rem;
 
     //make actual radio input invisible

@@ -10,6 +10,8 @@ class QuestionsController < ApplicationController
     #update your current question
     @user_course.last_question = @question.number
     @user_course.save
+    questions_in_level = Question.where(level_id: @level).length
+    @question_progress_percentage = @question.number.to_f / questions_in_level.to_f * 100
   end
 
   def increase_level
