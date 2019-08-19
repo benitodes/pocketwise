@@ -3,12 +3,6 @@
 <style>
 body {
   background-color: #F8CE69;}
-.card-dashboard {
-  background-color: white;
-  border-radius: 5px;
-  padding: 12px;
-  margin-top: 12px;
-  text-align: center; }
 .container-header {
   display: flex;
   border-bottom: :1px white; }
@@ -26,25 +20,17 @@ section {
   background-size: 30% 100%;
 }
 h1 {
-  color: white;
-}
+  color: white; }
 h2 {
   margin: auto;
   margin-left: 12px;
   font-size: 16px;
   font-weight: bold;}
-h3 {
-  margin: auto;
-  font-size: 14px;
-  font-weight: bold; }
-p {
-  margin: auto;
-  font-size: 12px; }
-a {
-  margin: auto;
-  font-size: 12px;
-}
 </style>
+
+<!-- end of inline css -->
+
+
 
 <div class="container-main">
    <div class="container-header">
@@ -53,13 +39,24 @@ a {
       <h1 class ="header">Categories</h1>
    </div>
 
-<div class="card-dashboard">
-      <% @categories.each do |category| %>
-        <btn class="btn btn-primary"><%= category.name %></btn>
-        <%= link_to "view", category_courses_path(category), class: 'btn-ghost' %>
-        <br>
-        <% end %>
 
-</div>
+      <% @categories.each do |category| %>
+      <div class="card-learning">
+        <div>
+          <%= cl_image_tag category.photo, width: 200, height: 150, crop: :fill %>
+        </div>
+        <div class="d-flex justify-content-between p-3">
+          <div>
+            <h2><%= category.name %></h2>
+          </div>
+          <div>
+            <%= link_to "LEARN", category_courses_path(category), class: 'button-red' %>
+          </div>
+          <br>
+        </div>
+      </div>
+
+      <% end %>
+
 </div>
 

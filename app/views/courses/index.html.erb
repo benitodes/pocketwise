@@ -3,12 +3,6 @@
 <style>
 body {
   background-color: #F8CE69;}
-.card-dashboard {
-  background-color: white;
-  border-radius: 5px;
-  padding: 12px;
-  margin-top: 12px;
-  text-align: center; }
 .container-header {
   display: flex;
   border-bottom: :1px white; }
@@ -26,25 +20,10 @@ section {
   background-size: 30% 100%;
 }
 h1 {
-  color: white;
-}
-h2 {
-  margin: auto;
-  margin-left: 12px;
-  font-size: 16px;
-  font-weight: bold;}
-h3 {
-  margin: auto;
-  font-size: 14px;
-  font-weight: bold; }
-p {
-  margin: auto;
-  font-size: 12px; }
-a {
-  margin: auto;
-  font-size: 12px;
-}
+  color: white; }
 </style>
+
+<!-- end of inline css -->
 
 <div class="container-main">
    <div class="container-header">
@@ -53,11 +32,21 @@ a {
       <h1 class ="header">Courses</h1>
    </div>
 
-<div class="card-dashboard">
-
-<% @courses.each do |course| %>
-<btn class="btn btn-primary"><%= course.name %></btn>
-<%= link_to "View", course_levels_path(course), class: 'btn-ghost' %>
-<br>
-<% end %>
-</div>
+      <% @courses.each do |course| %>
+      <div class="card-learning">
+        <div>
+          <img src="<%= course.picture %>">
+        </div>
+        <div>
+             <h2><%= course.name %></h2>
+        </div>
+        <div>
+            <p><%= course.description %></p>
+        </div>
+        <div>
+             <%= link_to "LEARN", course_levels_path(course), class: 'button-white' %>
+        </div>
+      </div>
+      <br>
+      <% end %>
+  </div>
