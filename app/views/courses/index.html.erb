@@ -33,17 +33,17 @@ h1 {
    </div>
 
       <% @courses.each do |course| %>
-      <div class="card-learning">
-        <div>
-          <img src="<%= course.picture %>">
+      <div class="card-learning d-flex flex-column">
+        <div class="p-2">
+          <%= cl_image_tag course.picture, width: 350, height: 350, crop: :fill %>
         </div>
-        <div>
+         <div class="p-2">
              <h2><%= course.name %></h2>
         </div>
-        <div>
+       <div class="p-2">
             <p><%= course.description %></p>
         </div>
-        <div>
+         <div class="mb-4">
              <%= link_to "LEARN", course_levels_path(course), class: 'button-white' %>
         </div>
       </div>

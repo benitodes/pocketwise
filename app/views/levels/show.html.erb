@@ -19,15 +19,12 @@ body {
   font-weight: bold; }
 .container-dashboard-button {
   display: flex;
-  padding: 6px;
-}
+  padding: 6px; }
 section {
   background-color: #E34E53;
-  background-size: 30% 100%;
-}
+  background-size: 30% 100%; }
 h1 {
-  color: white;
-}
+  color: white; }
 h2 {
   margin: auto;
   margin-left: 12px;
@@ -47,31 +44,30 @@ a {
 </style>
 
 <div class="container-main">
-   <div class="container-header">
+  <div class="container-header">
   <!-- Add this line if you need the menu -->
-     <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
-      <h1 class ="header">COURSE: <%= @course.name %></h1>
-   </div>
+    <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
+    <h1 class ="header"><%= @course.name %></h1>
+  </div>
+  <div class="card-learning d-flex flex-column">
+    <div class="p-2">
+       <%= cl_image_tag @course.picture, width: 350, height: 350, crop: :fill %>
+    </div>
+      Level <%= @level.number %>
+    <div class="p-2">
+      <%= @level.name %>
+    </div>
+    <div class="p-2">
+    <%= link_to "Lecture", level_lecture_path(@level, @level.lectures.first), class: 'btn button-white' %>
+    <!-- user should only be able to practice once lectures complete (or level or course complete) -->
+    <% if @lectures_complete  %>
+      <%= link_to "Practice", level_question_path(@level, @level.questions.first), class: "btn button-white" %>
+    <% else %>
+      <a href="#" class="btn button-white disabled" style="color: grey"  role="button" aria-disabled="true">Practice</a>
+    <% end %>
+  </div>
 
-<div class="card-dashboard">
-<br>
-
-Level <%= @level.number %>
-<br>
-<%= @level.name %>
-<br>
-
-
-
-
-
-<%= link_to "Lecture", level_lecture_path(@level, @level.lectures.first), class: 'btn button-white' %>
-<!-- user should only be able to practice once lectures complete (or level or course complete) -->
-<% if @lectures_complete  %>
-  <%= link_to "Practice", level_question_path(@level, @level.questions.first), class: "btn button-white" %>
-<% else %>
-  <a href="#" class="btn button-white disabled" style="color: grey"  role="button" aria-disabled="true">Practice</a>
-<% end %>
+</div>
 
 
 
