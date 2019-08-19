@@ -110,7 +110,7 @@ a {
               <h3><%= wallet.kid.username %> completed his exercise, it's paytime! Give <%= wallet.payout_amount %>€ to him/her. </h3>
             </div>
             <div>
-              <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0}), method: :patch %>
+              <%= link_to "confirm", wallet_path(wallet, :wallet => { total_allowance: 80, payout_amount: 40 }), method: :patch %>
               <button class= "button-red button-confirm"> CONFIRM </button>
             </div>
           </div>
@@ -122,7 +122,7 @@ a {
           <div>
             <div class="card-dashboard d-flex align-middle justify-content-around border-top">
               <div>
-                <h1 class="money"><%= wallet.total_allowance%><h1>
+                <h1 class="money"><%= wallet.total_allowance%> <%= wallet.payout_amount %><h1>
               </div>
               <div>
                    <h2 class="chart-text"><%= wallet.payout_frequency %></h2>

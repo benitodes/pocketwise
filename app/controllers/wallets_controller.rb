@@ -15,6 +15,6 @@ class WalletsController < ApplicationController
   end
 
   def wallet_params
-    params.require(:wallet).permit(:total_allowance, :payout_frequency, :payout_day)
+    params.require(:wallet).permit(:total_allowance, :payout_frequency, :payout_day, :payout_amount)
   end
 end
