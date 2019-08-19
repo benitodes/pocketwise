@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       @user_course = UserCourse.where(kid: current_user).first
       unless @user_course.nil?
         @course = Course.where(id: @user_course.course_id)
-        # find data to display progress in circle
+        # find total amount of questions in course for circle
         @levels = Level.where(course_id: @course)
         @total_questions_per_course = 0
         @levels.each do |level|
@@ -22,6 +22,18 @@ class UsersController < ApplicationController
           # add up to total
           @total_questions_per_course += level.number_of_questions
         end
+        # find total amount of questions answered so far by user
+        # find last completed level in course
+        # for completed level calculate amount of questions and add them up
+        @completed_levels = CompletedLevel.where(user_course_id: @user_course)
+        @total_questions_completed = 0
+        @completed_levels.each do |completed_level|
+          @number_questions_in_level = Question.where(level_id: completed_level.level_id).length
+          @total_questions_completed += @number_questions_in_level
+        end
+        # add last_question number from user course table - 1
+        @total_questions_completed += @user_course.last_question - 1
+
         # check if course is complete. if level nr > number of levels in current course then complete
         if @user_course.last_level > Level.where(course_id: @course).length
           @user_course.complete = true

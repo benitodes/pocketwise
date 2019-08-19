@@ -65,9 +65,6 @@ a {
       <!-- display learning progess for courses that are not comoplete -->
       <% unless @user_course.nil? %>
         <br>
-        <%=  %>
-        <div class="chart" data-percent="73"></div>
-        <br>
         <div class="d-flex justify-content-around align-items-center">
         <% unless @user_course.complete  %>
 
@@ -80,6 +77,10 @@ a {
           <div>
             <% unless @user_course.complete %>
               <%= link_to "RESUME", level_question_path(@user_course.last_level, @user_course.last_question), class: 'button-red' %>
+              <%=  %>
+              <br>
+              <%= @total_questions_per_course %>
+              <div class="chart" data-percent="73"></div>
             <% end %>
           </div>
 
