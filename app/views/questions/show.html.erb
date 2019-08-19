@@ -24,6 +24,9 @@
       flex-direction: column;
       justify-content: space-between
     }
+    .img-container {
+      text-align: center;
+    }
     h2 {
       color: #56b3a7;
       margin: auto;
@@ -32,6 +35,18 @@
       font-weight: bold;
       text-align: left;
        }
+    h5 {
+      color: white;
+    }
+    img {
+      max-width: 140%;
+      max-height: 100%;
+       }
+    .modal-body {
+      background-color: #0084C3;
+   /*   height: 100vh;*/
+
+    }
 
 
             </style>
@@ -107,11 +122,23 @@
 
 
                               <div class="carousel-item active">
-                                <h5>Nice work! You released your weekly allowance. Ask mom for it on Saturday</h5>
+                                <div class="img-container">
 
-                                <a class="carousel-control-next btn btn-primary" href="#carouselExampleControls" role="button" data-slide="next" style="position:relative !important; width: 100%" >
-                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                  <span class="sr-only">Next</span>
+                                <img src="https://ksr-ugc.imgix.net/assets/014/504/580/63621c9e6636012a06d602fe6141ddaa_original.gif?ixlib=rb-2.1.0&w=680&fit=max&v=1479106363&auto=format&gif-q=50&q=92&s=b771cc255bce0ede8d728b9be60a1a2a" alt="">
+
+                                </div>
+                                <div>
+
+                                  <h5>Nice work! You released your weekly allowance. Ask mom for it on Saturday</h5>
+
+                                </div>
+                                <div style="margin-top: 24px;">
+                                 <%= link_to "CONTINUE", level_increase_level_path(@level), class: "btn button-white", style: "position:relative !important"%>
+
+                                </div>
+                                <!-- <a class="carousel-control-next btn btn-primary" href="#carouselExampleControls" role="button" data-slide="next" style="position:relative !important; width: 100%" > -->
+                               <!--    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span> -->
                                 </a>
                               </div>
 
@@ -121,7 +148,6 @@
                                 <h5>Nice work! You released your weekly allowance. Ask mom for it on Saturday</h5>
 
 
-                                <%= link_to "Continue", level_increase_level_path(@level), class: "carousel-control-next btn btn-primary screenwidth", style: "position:relative !important"%>
                               </div>
                             </div>
                           </div>
