@@ -43,15 +43,15 @@ h2 {
       <% @categories.each do |category| %>
       <div class="card-learning">
         <div>
-          <%= cl_image_tag category.photo, width: 200, height: 150, crop: :fill %>
+          <%= cl_image_tag category.photo, width: 345, height: 150, crop: :fill %>
         </div>
         <div class="d-flex justify-content-between p-3">
-          <div>
+          <!-- <div> -->
             <h2><%= category.name %></h2>
-          </div>
-          <div>
+          <!-- </div> -->
+          <!-- <div> -->
             <%= link_to "LEARN", category_courses_path(category), class: 'button-red' %>
-          </div>
+          <!-- </div> -->
           <br>
         </div>
       </div>
