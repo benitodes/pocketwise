@@ -44,6 +44,8 @@ a {
   margin: auto;
   font-size: 12px;
 }
+
+
 </style>
 
 <div class="container-main">
@@ -52,7 +54,6 @@ a {
      <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
       <h1 class ="header">Welcome <%= user.first_name %></h1>
    </div>
-
 
    <div class="card-dashboard">
     <h2>Pocket Money</h2>
@@ -92,25 +93,47 @@ a {
 
 
 
-    <div class="card-dashboard">
-      <%= link_to wallet_goals_path(wallet) do %>
-      <h2>Goals</h2>
-      <% end %>
-      <% unless @goals.nil? %>
-        <% @goals.each do |goal| %>
-        <br>
-            <%= goal.name %>, <%= goal.goal_price %> €
-            <br>
-            already saved: <%= goal.goal_current_saving %> €
-            <br>
-              <div class="chart" data-percent="<%= @goal_percentage %>"><%= @goal_percentage %></div>
-            <img src="<%= goal.picture %>" alt="" style="width: 30vh; height: 20vh;">
-            <br>
+
+   <h2>Goals</h2>
+  <div class="scrolling-wrapper">
+        <% unless @goals.nil? %>
+                    <% @goals.each do |goal| %>
+                    <div class="card card-goal">
+                      <div class="">
+                        <%= cl_image_tag goal.picture, height: 250, width: 314, crop: :fill %>
+                      </div>
+                      <div class="p-2">
+                        <h2><%= goal.name %></h2>
+                      </div>
+                      <% if goal.complete? %>
+                      <div class="p-2">
+                        <p>Good Job!<p>
+                        <p>Target reached already congratulation</p>
+                        <p>You saved a total of <%= goal.goal_current_saving %></p>
+                        <div class="mb-4">
+                       </div>
+                      </div>
+                      <% else %>
+                       <div class="p-2">
+                         <p>You are saving <%= goal.goal_allowance %>$ weekly.</p>
+                         <p>Right now you have saved <%= goal.goal_current_saving %>$</p>
+                         <p>Your target is <%= goal.goal_price %>$</p>
+                       </div>
+                       <div class="mb-4">
+                        <%= link_to 'EDIT', edit_goal_path(goal.id), class: "button-white edit-button-goal"%>
+                       </div>
+                      <% end %>
+                      <div class="chart" data-percent="<%= @goal_percentage %>"><%= @goal_percentage %>%</div>
+
+                    </div>
+                    <% end %>
         <% end %>
-      <% end  %>
-    </div>
-    </div>
+</div>
+
+  <div class="container-dashboard-button">
+      <%= link_to 'ADD NEW GOAL', new_wallet_goal_path(wallet.id), class: "button-red"%>
   </div>
+
 </div>
 
 
