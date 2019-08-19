@@ -48,13 +48,16 @@ end
 
 puts "goals have been created"
 
-category_list = ['coding', 'german', 'maths', 'physics']
+category_list = [['Coding', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1565084616/dhw6czrgdgcqhxi9ubzf.jpg'],
+['German', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1565084616/dhw6czrgdgcqhxi9ubzf.jpg'],
+['Maths', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1565084616/dhw6czrgdgcqhxi9ubzf.jpg'],
+['Physics', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1565084616/dhw6czrgdgcqhxi9ubzf.jpg']]
 
 # if bang after create rails will throw error, raises exception
 
 
-category_list.each do |name|
-  Category.create!(name: name)
+category_list.each do |name, photo|
+  Category.create!(name: name, photo: photo)
 end
 
 puts "categories have been created"
