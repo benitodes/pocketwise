@@ -20,8 +20,11 @@ class GoalsController < ApplicationController
     @goal = Goal.new(goal_params)
     @goal.wallet = @wallet
     authorize @goal
-    @goal.save
-    redirect_to wallet_goals_path(@wallet)
+    if @goal.save
+      redirect_to wallet_goals_path(@wallet)
+    else
+      render 'new'
+    end
   end
 
   def edit
