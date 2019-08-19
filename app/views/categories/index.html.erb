@@ -35,7 +35,7 @@ h2 {
 <div class="container-main">
    <div class="container-header">
   <!-- Add this line if you need the menu -->
-     <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
+     <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
       <h1 class ="header">Categories</h1>
    </div>
 
