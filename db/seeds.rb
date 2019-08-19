@@ -48,16 +48,18 @@ end
 
 puts "goals have been created"
 
-category_list = [['Coding', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1565084616/dhw6czrgdgcqhxi9ubzf.jpg'],
-['German', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1565084616/dhw6czrgdgcqhxi9ubzf.jpg'],
-['Maths', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1565084616/dhw6czrgdgcqhxi9ubzf.jpg'],
-['Physics', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1565084616/dhw6czrgdgcqhxi9ubzf.jpg']]
+category_list = [['Coding', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566187944/pocketwise/coding_sedg65.jpg'],
+['German', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566187943/pocketwise/german_hf9hmo.jpg'],
+['Maths', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566187957/pocketwise/maths_l5dvah.jpg'],
+['Physics', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566187950/pocketwise/physics_owvav8.jpg']]
 
 # if bang after create rails will throw error, raises exception
 
 
 category_list.each do |name, photo|
-  Category.create!(name: name, photo: photo)
+  cat = Category.new(name: name)
+  cat.remote_photo_url = photo
+  cat.save
 end
 
 puts "categories have been created"
@@ -70,29 +72,29 @@ course_list = [
 
   ['Learn HTML', 'HTML is the foundation of all web pages. Without HTML, you wouldn’t be able to organize text or add images or videos to your web pages.
     HTML is the beginning of everything you need to know to create engaging web pages!',
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1280px-HTML5_logo_and_wordmark.svg.png', Category.first.id],
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190565/pocketwise/html_a4rzu2.png', Category.first.id],
 
 
   ['Learn CSS', 'Without CSS, every web page would be drab plain text and images that flowed straight down the page.
     With CSS, you can add color and background images and change the layout of your page — your web pages can feel like works of art!',
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1024px-CSS3_logo_and_wordmark.svg.png', Category.first.id],
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190564/pocketwise/css_bqgbli.png', Category.first.id],
 
 
   ['Introduction to JavaScript', 'JavaScript is among the most powerful and flexible programming languages of the web. It powers the dynamic behavior on most websites, including this one.',
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1280px-HTML5_logo_and_wordmark.svg.png', Category.first.id],
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190565/pocketwise/javascript_uzsda5.png', Category.first.id],
 
 
   ['Learn Python', 'Python is a general-purpose, versatile and popular programming language. It’s great as a first language because it is concise and easy to read,
     and it is also a good language to have in any programmer’s stack as it can be used for everything from web development to software development and data science applications.',
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/220px-Python-logo-notext.svg.png', Category.first.id],
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190566/pocketwise/python_xrsk1e.png', Category.first.id],
 
 
   ['Learn SQL', 'We live in a data-driven world: people search through data to find insights to inform strategy, marketing, operations, and a plethora of other categories.',
-    'https://banner2.kisspng.com/20180330/zle/kisspng-microsoft-azure-sql-database-microsoft-sql-server-database-5abeaece642720.1956423515224460304102.jpg', Category.first.id],
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190565/pocketwise/mysql_cr8vyb.png', Category.first.id],
 
   ['Learn Java', 'Java is among the most popular programming languages out there, mainly because of how versatile and compatible it is.
     Java can be used for a large number of things, including software development, mobile applications, and large systems development.',
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1280px-HTML5_logo_and_wordmark.svg.png', Category.first.id]
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190565/pocketwise/java_ktdnkq.png', Category.first.id]
 
 ]
 
