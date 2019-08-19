@@ -24,4 +24,31 @@
   font-size: 12px;
 }
 
+// Cards for the goals index
+
+.card-goal {
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-top: 12px;
+  text-align: center; }
+
+.card-goal {
+  img {
+    position: relative;
+    vertical-align: middle;
+    border-style: none;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+    border-radius: 2px;
+  }
+}
+.card-goal h2 {
+  font-size: 16px;
+}
+.card-goal p {
+  font-size: 12px; }
+
+
 

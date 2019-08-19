@@ -12,3 +12,17 @@
 
 .container-main {
   margin-top: 20px; }
+
+
+// containers for the header and menu
+
+.container-header {
+  display: flex;
+  border-bottom: 1px white; }
+.header {
+  margin: auto;
+  margin-left: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white; }
+
