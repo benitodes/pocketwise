@@ -12,6 +12,16 @@ class UsersController < ApplicationController
       @user_course = UserCourse.where(kid: current_user).first
       unless @user_course.nil?
         @course = Course.where(id: @user_course.course_id)
+        # find data to display progress in circle
+        @levels = Level.where(course_id: @course)
+        @total_questions_per_course = 0
+        @levels.each do |level|
+          level.number_of_questions = Question.where(level_id: level).length
+          # save in db
+          level.save
+          # add up to total
+          @total_questions_per_course += level.number_of_questions
+        end
         # check if course is complete. if level nr > number of levels in current course then complete
         if @user_course.last_level > Level.where(course_id: @course).length
           @user_course.complete = true
@@ -19,6 +29,8 @@ class UsersController < ApplicationController
         end
       end
     end
+
+
   #   if @user.parent?
   #     @wallets.each do |wallet|
   #       @kid = wallet.kid
