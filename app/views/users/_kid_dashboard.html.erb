@@ -103,6 +103,7 @@ a {
             <br>
             already saved: <%= goal.goal_current_saving %> €
             <br>
+              <div class="chart" data-percent="<%= @goal_percentage %>"><%= @goal_percentage %></div>
             <img src="<%= goal.picture %>" alt="" style="width: 30vh; height: 20vh;">
             <br>
         <% end %>

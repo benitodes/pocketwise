@@ -19,6 +19,7 @@ class UsersController < ApplicationController
       unless @user_course.nil?
         @course = Course.where(id: @user_course.course_id)
         learning_progress_percentage(current_user)
+        goal_progress_percentage(current_user)
         # check if course is complete. if level nr > number of levels in current course then complete
         if @user_course.last_level > Level.where(course_id: @course).length
           @user_course.complete = true
