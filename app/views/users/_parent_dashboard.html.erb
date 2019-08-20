@@ -173,7 +173,7 @@ a {
                  </div>
               </div>
 
-            <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 12px">
+            <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
               <div>
                 <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0">Learning progress</h2>
                 <h3 class="chart-text">Course - <%= user_course.course.name %></h3>
@@ -203,20 +203,15 @@ a {
                  </div>
           </div>
 
-          <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 12px">
+          <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
               <div>
                 <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0">Saving progress</h2>
-                <h3 class="chart-text"><%= wallet.kid.first_name %> is saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency %></h3>
+                <h3 class="chart-text">Saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency.downcase %></h3>
                 <p>  <h3>to buy a <%= wallet.goals.first.name %></h3></p>
               </div>
-            <div style="margin-top: 8px;" class="links">
+            </div>
 
-
-
-
-
-        <% end %>
-        </div>
+          <div class="card-dashboard d-flex justify-content-between text-left">
         <div class="d-flex justify-content-around border-top">
           <% if policy(wallet).edit? %>
             <div class="container-dashboard-button">
@@ -227,7 +222,13 @@ a {
               <div class="container-dashboard-button">
                 <%= link_to "DELETE KID", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
               </div>
-            <% end %>
+        </div>
+          </div>
+
+
+        <% end %>
+
+        <% end %>
          </div>
         </div>
       </div>
