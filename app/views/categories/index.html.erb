@@ -3,60 +3,57 @@
 <style>
 body {
   background-color: #F8CE69;}
-.container-header {
-  display: flex;
-  border-bottom: :1px white; }
-.header {
-  margin: auto;
-  margin-left: 12px;
-  font-size: 20px;
-  font-weight: bold; }
-.container-dashboard-button {
-  display: flex;
-  padding: 6px;
-}
-section {
-  background-color: #E34E53;
-  background-size: 30% 100%;
-}
 h1 {
   color: white; }
 h2 {
+  color : black;
   margin: auto;
-  margin-left: 12px;
-  font-size: 16px;
-  font-weight: bold;}
+  font-size: 12px;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 12px; }
 </style>
 
 <!-- end of inline css -->
 
-
-
 <div class="container-main">
    <div class="container-header">
   <!-- Add this line if you need the menu -->
-     <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
-      <h1 class ="header">Categories</h1>
+     <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
+      <h1 class ="header">Pick a course</h1>
    </div>
 
 
       <% @categories.each do |category| %>
-      <div class="card-learning">
-        <div>
-          <%= cl_image_tag category.photo, width: 345, height: 150, crop: :fill %>
-        </div>
-        <div class="d-flex justify-content-between p-3">
-          <!-- <div> -->
-            <h2><%= category.name %></h2>
-          <!-- </div> -->
-          <!-- <div> -->
-            <%= link_to "LEARN", category_courses_path(category), class: 'button-red' %>
-          <!-- </div> -->
-          <br>
-        </div>
-      </div>
+          <h2><%= category.name %></h2>
+           <div class="scrolling-wrapper">
+            <% category.courses.each do |course| %>
 
-      <% end %>
+                        <div class="card-learning">
+                                <div class="row">
+
+                                      <%= cl_image_tag course.picture, width: 100, height: 100, crop: :fill %>
+
+
+                                      <h2><%= course.name %></h2>
+
+                                </div>
+                           <div class="row mb-0 pt-2 border-top d-flex justify-content-between">
+                                <div>
+                                  <p>ENROLLED</p>
+                                </div>
+                                <div>
+                                  <%= link_to course_levels_path(course) do %>
+                                    <i class="fas fa-arrow-right"></i>
+                                   <% end %>
+                                </div>
+                           </div>
+
+                        </div>
+
+            <% end %>
+           </div>
+       <% end %>
 
 </div>
 

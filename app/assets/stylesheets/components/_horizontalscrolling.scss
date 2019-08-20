@@ -1,0 +1,21 @@
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  margin-top: -24px;
+}
+
+.card {
+  display: inline-block;
+  background-color: white;
+  border-radius: 10px;
+  padding: 13px;
+  margin-top: 0px;
+  text-align: center; }
+
+.scrolling-wrapper {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

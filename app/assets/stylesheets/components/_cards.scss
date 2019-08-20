@@ -1,9 +1,49 @@
-.card-learning {
+// Cards for the level
+
+.card-course {
+  display: inline-block;
   background-color: white;
-  border-radius: 2px;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  margin-top: 12px;
-  text-align: center; }
+  margin-top: 30px;
+  text-align: center;
+  max-width: 100% }
+
+.card-course {
+  img {
+    position: relative;
+    padding: 12px;
+    vertical-align: middle;
+    border-style: none;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+    border-radius: 10px;
+  }
+}
+.card-course h2 {
+  font-size: 12px;
+}
+.card-course p {
+  font-size: 12px;
+  color: lightgray;
+}
+
+.card-course a {
+  font-size: 12px;
+  color: black;
+}
+
+// Cards for the course index
+
+.card-learning {
+  display: inline-block;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-top: 30px;
+  text-align: center;
+  max-width: 80% }
 
 .card-learning {
   img {
@@ -14,14 +54,50 @@
     width: 100%;
     object-fit: cover;
     position: relative;
-    border-radius: 2px;
+    border-radius: 10px;
   }
 }
 .card-learning h2 {
-  font-size: 16px;
+  font-size: 12px;
 }
 .card-learning p {
   font-size: 12px;
+  color: lightgray;
 }
+
+.card-learning a {
+  font-size: 12px;
+  color: black;
+}
+// Cards for the goals index
+
+.card-goal {
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-top: 12px;
+  text-align: center; }
+
+.card-goal {
+  img {
+    position: relative;
+    vertical-align: middle;
+    border-style: none;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+    border-radius: 2px;
+  }
+}
+.card-goal h2 {
+  font-size: 16px;
+}
+.card-goal p {
+  font-size: 12px; }
+.edit-button-goal {
+  position: absolute;
+  right: 34px;
+  top: 242px; }
+
 
 

@@ -46,10 +46,10 @@ a {
 <div class="container-main">
   <div class="container-header">
   <!-- Add this line if you need the menu -->
-    <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
+    <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
     <h1 class ="header"><%= @course.name %></h1>
   </div>
-  <div class="card-learning d-flex flex-column">
+  <div class="card-course d-flex flex-column">
     <div class="p-2">
        <%= cl_image_tag @course.picture, width: 350, height: 350, crop: :fill %>
     </div>
