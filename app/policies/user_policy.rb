@@ -18,6 +18,10 @@ class UserPolicy < ApplicationPolicy
     user.parent
   end
 
+  def update?
+    record == user
+  end
+
   def destroy?
     user.is_parent_of?(record)
   end

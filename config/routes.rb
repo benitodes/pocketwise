@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   post "create_user", to: "users#create", as: "create_user"
+  patch "update_user", to: "users#update", as: "update_user"
   delete "destroy_user/:id", to: "users#destroy", as: "destroy_user"
 
   # wallet new and create happens in user controller

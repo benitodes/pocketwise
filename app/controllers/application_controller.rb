@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   #after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
+  def after_sign_in_path_for(resource)
+    dashboard_user_path(resource)
+  end
+
   private
 
   def configure_permitted_parameters
@@ -21,6 +25,7 @@ class ApplicationController < ActionController::Base
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
+
 
   # def user_not_authorized
   #   flash[:alert] = "You are not authorized to perform this action."
