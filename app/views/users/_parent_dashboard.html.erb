@@ -63,27 +63,19 @@ a {
 .chart-button {
   margin-top: 20px;
 }
-/*.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 120px;
-    background-color: #E34E53;
-    z-index: -1;
-}*/
 </style>
 
 <!-- Html -->
 
 <div class="container-main">
-<!--   <div class="background">
-  </div> -->
-  <div class="container-header">
+<div class="container-header">
   <!-- Add this line if you need the menu -->
-     <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
+    <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
       <h1 class ="header">Welcome <%= user.first_name %></h1>
-  </div>
+   </div>
+
+
+
     <% if wallets.empty? %>
       <div class="card-dashboard">
         <p>This is pretty empty here, let's add your first kid</p>
