@@ -52,8 +52,7 @@ puts "goals have been created"
 
 category_list = [['Coding', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566187944/pocketwise/coding_sedg65.jpg'],
 ['German', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566187943/pocketwise/german_hf9hmo.jpg'],
-['Maths', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566187957/pocketwise/maths_l5dvah.jpg'],
-['Physics', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566187950/pocketwise/physics_owvav8.jpg']]
+['Maths', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566187957/pocketwise/maths_l5dvah.jpg']]
 
 # if bang after create rails will throw error, raises exception
 
@@ -74,29 +73,41 @@ course_list = [
 
   ['Learn HTML', 'HTML is the foundation of all web pages. Without HTML, you wouldn’t be able to organize text or add images or videos to your web pages.
     HTML is the beginning of everything you need to know to create engaging web pages!',
-    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190565/pocketwise/html_a4rzu2.png', Category.first.id],
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288541/pocketwise/html_wxbe79.png', 1],
 
 
   ['Learn CSS', 'Without CSS, every web page would be drab plain text and images that flowed straight down the page.
     With CSS, you can add color and background images and change the layout of your page — your web pages can feel like works of art!',
-    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190564/pocketwise/css_bqgbli.png', Category.first.id],
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288541/pocketwise/css_ilhps5.png', 1],
 
 
   ['Learn JavaScript', 'JavaScript is among the most powerful and flexible programming languages of the web. It powers the dynamic behavior on most websites, including this one.',
-    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190565/pocketwise/javascript_uzsda5.png', Category.first.id],
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288542/pocketwise/js_z9ovwc.png', 1],
 
 
   ['Learn Python', 'Python is a general-purpose, versatile and popular programming language. It’s great as a first language because it is concise and easy to read,
     and it is also a good language to have in any programmer’s stack as it can be used for everything from web development to software development and data science applications.',
-    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190566/pocketwise/python_xrsk1e.png', Category.first.id],
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288542/pocketwise/python_svfh60.png', 1],
 
 
-  ['Learn SQL', 'We live in a data-driven world: people search through data to find insights to inform strategy, marketing, operations, and a plethora of other categories.',
-    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190565/pocketwise/mysql_cr8vyb.png', Category.first.id],
+  ['German Intermediate', 'HTML is the foundation of all web pages. Without HTML, you wouldn’t be able to organize text or add images or videos to your web pages.
+    HTML is the beginning of everything you need to know to create engaging web pages!',
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288543/pocketwise/german_level_1_uk6w3t.png', 2],
 
-  ['Learn Java', 'Java is among the most popular programming languages out there, mainly because of how versatile and compatible it is.
-    Java can be used for a large number of things, including software development, mobile applications, and large systems development.',
-    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566190565/pocketwise/java_ktdnkq.png', Category.first.id]
+
+  ['German Basics', 'Without CSS, every web page would be drab plain text and images that flowed straight down the page.
+    With CSS, you can add color and background images and change the layout of your page — your web pages can feel like works of art!',
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288546/pocketwise/german_level_2_vdwny6.png', 2],
+
+
+  ['Maths Basics', 'HTML is the foundation of all web pages. Without HTML, you wouldn’t be able to organize text or add images or videos to your web pages.
+    HTML is the beginning of everything you need to know to create engaging web pages!',
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288543/pocketwise/maths_level_1_zjm6bv.png', 3],
+
+
+  ['Maths Intermediate', 'Without CSS, every web page would be drab plain text and images that flowed straight down the page.
+    With CSS, you can add color and background images and change the layout of your page — your web pages can feel like works of art!',
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288544/pocketwise/Maths_level_2_o5fzne.png', 3],
 
 ]
 
