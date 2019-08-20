@@ -2,16 +2,9 @@
 
 <style>
 body {
-  background-color: #F8CE69;}
+  background-color: #E3E8EB;}
 h1 {
   color: white; }
-h2 {
-  color : black;
-  margin: auto;
-  font-size: 12px;
-  font-weight: bold;
-  text-align: left;
-  margin-top: 12px; }
 </style>
 
 <!-- end of inline css -->
@@ -25,24 +18,26 @@ h2 {
 
 
       <% @categories.each do |category| %>
-          <h2><%= category.name %></h2>
+          <h2 class="title-categories"><%= category.name %></h2>
            <div class="scrolling-wrapper">
             <% category.courses.each do |course| %>
-
-                        <div class="card-learning">
+              <% usercourses = UserCourse.where(course_id: course) %>
+                        <div class="card-courses">
                                 <div class="row">
-
                                       <%= cl_image_tag course.picture, width: 100, height: 100, crop: :fill %>
-
-
-                                      <h2><%= course.name %></h2>
-
+                                      <h3><%= course.name %></h3>
                                 </div>
-                           <div class="row mb-0 pt-2 border-top d-flex justify-content-between">
-                                <div>
-                                  <p>ENROLLED</p>
+                           <div class="row mb-0 pt-2 border-top d-flex space-between">
+                                <div class="col">
+                                  <% usercourses.each do |usercourse| %>
+                                    <% unless @usercourse.nil? %>
+                                      <% unless @usercourse.complete %>
+                                      <p>ENROLLED</p>
+                                    <% end %>
+                                  <% end %>
+                                  <% end %>
                                 </div>
-                                <div>
+                                <div class="col">
                                   <%= link_to course_levels_path(course) do %>
                                     <i class="fas fa-arrow-right"></i>
                                    <% end %>

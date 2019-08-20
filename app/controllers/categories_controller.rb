@@ -19,7 +19,11 @@ class CategoriesController < ApplicationController
         course.user_courses.where(kid: current_user).first.last_lecture = 1
       end
     end
+
+      end
+
+
+
     # to do : if user course is there then enroll @message
-  end
 
 end
