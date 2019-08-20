@@ -21,6 +21,15 @@ body {
   display: flex;
   padding: 6px;
 }
+.chart {
+  position: relative;
+}
+.chart-image {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
 section {
   background-color: #E34E53;
   background-size: 30% 100%;
@@ -43,6 +52,11 @@ p {
 a {
   margin: auto;
   font-size: 12px;
+}
+img {
+  height: 160px;
+  width: 160px;
+  border-radius: 50%;
 }
 
 
@@ -69,11 +83,6 @@ a {
         <div class="d-flex justify-content-around align-items-center">
         <% unless @user_course.complete  %>
 
-          <div>
-            <p><%= @course.first.name %></p>
-            <p>Level: <%= @user_course.last_level %></p>
-            <p>Question: <%= @user_course.last_question %></p>
-          </div>
 
           <div>
             <% unless @user_course.complete %>
@@ -81,8 +90,17 @@ a {
               <br>
               <br>
 <!--               this is the circle chart -->
-              <div class="chart" data-percent="<%= @done_percentage %>"></div>
+              <div class="chart" data-percent="<%= @done_percentage %>">
+                 <div class="chart-image" style="">
+                    <img src="https://images.unsplash.com/photo-1559715541-5daf8a0296d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1192&q=80" alt="">
+                 </div>
+              </div>
             <% end %>
+          </div>
+          <div>
+            <p><%= @course.first.name %></p>
+            <p>Level: <%= @user_course.last_level %></p>
+            <p>Question: <%= @user_course.last_question %></p>
           </div>
 
         <% end %>
@@ -492,7 +510,7 @@ return EasyPieChart;
           scaleLength: 0,
           barColor: '#ef1e25',
           lineWidth: 8,
-          size: 110,
+          size: 180,
       });
     })
 </script>
