@@ -21,10 +21,6 @@ body {
 .container-dashboard-button {
   display: flex;
   padding: 6px;}
-  /**********************************************************/
-.chart {
-  display: inline-block;
-}
 section {
   background-color: #E34E53;
   background-size: 30% 100%;}
@@ -107,8 +103,8 @@ a {
           <h3><%= wallet.kid.username %> completed his exercise,</h3>
           <h3> it's paytime! Give <%= wallet.payout_amount %>€ to him/her. </h3>
             <div>
-              <%= link_to "CONFIRM", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch, class: "button-red button-confirm" %>
-     <!--          <button class= "button-red button-confirm"> CONFIRM </button> -->
+              <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch %>
+              <button class= "button-red button-confirm"> CONFIRM </button>
             </div>
         </div>
       <% end %>
@@ -162,20 +158,7 @@ a {
           <div class="card-dashboard ">
 
           <div  class="col">
-
-<!--    <div class="progress">
-            <div class="bar shadow circuit" style="width: <%= @lecture_progress_percentage %>%; transition-duration: 2s; margin-left: 0"></div>
-        </div>
-
- -->
-
-            <div class="chart" data-percent="<%= @goal_percentage %>">
-              <div class="chart-image">
-                THIS IS A TEST
-              </div>
-
-
-            </div>
+            <div class="chart" data-percent="<%= @goal_percentage %>"></div>
           </div>
           <div  class="col">
             <h3 class="chart-text"><%= wallet.kid.first_name %> is saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency %> </h3></br>

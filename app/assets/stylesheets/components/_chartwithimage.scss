@@ -1,1 +1,15 @@
-_chartwithimage.scss
+// this is for the small image (learning) on the dashboard
+
+.chart-image {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+    img {
+      height: 80px;
+      width: 80px;
+      border-radius: 50%;
+      display: block;
+      object-fit: cover;
+    }

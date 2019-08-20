@@ -5,7 +5,7 @@ body {
   background-color: #88CF8F;}
 .card-dashboard {
   background-color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 12px;
   margin-top: 12px;
   text-align: center; }
@@ -20,16 +20,21 @@ body {
 .container-dashboard-button {
   display: flex;
   padding: 6px;
+  padding: 12px;
+}
+.learning-container {
+  display: flex;
+}
+.learning-stats {
+  margin-left: 32px;
 }
 .chart {
   position: relative;
 }
-.chart-image {
-  display: inline-block;
-  position: absolute;
-  top: 10px;
-  left: 10px;
+.row {
+  margin-bottom: 0px;
 }
+
 section {
   background-color: #E34E53;
   background-size: 30% 100%;
@@ -41,22 +46,20 @@ h2 {
   margin: auto;
   margin-left: 12px;
   font-size: 16px;
-  font-weight: bold;}
+  font-weight: bold;
+  margin-bottom: 12px}
 h3 {
   margin: auto;
+  margin-left: 0;
   font-size: 14px;
   font-weight: bold; }
 p {
   margin: auto;
-  font-size: 12px; }
+  font-size: 14px;
+  text-align: left }
 a {
   margin: auto;
   font-size: 12px;
-}
-img {
-  height: 160px;
-  width: 160px;
-  border-radius: 50%;
 }
 
 
@@ -74,34 +77,43 @@ img {
     <p><%= @wallet.payout_amount %></p>
    </div>
     <div class="card-dashboard">
-      <%= link_to categories_path do %>
-        <h2>Learn</h2>
-      <% end %>
       <!-- display learning progess for courses that are not comoplete -->
       <% unless @user_course.nil? %>
-        <br>
-        <div class="d-flex justify-content-around align-items-center">
+
+        <div class="learning-container">
         <% unless @user_course.complete  %>
 
 
           <div>
             <% unless @user_course.complete %>
-              <%= link_to "RESUME", level_question_path(@user_course.last_level, @user_course.last_question), class: 'button-red' %>
-              <br>
-              <br>
 <!--               this is the circle chart -->
               <div class="chart" data-percent="<%= @done_percentage %>">
                  <div class="chart-image" style="">
-                    <img src="https://images.unsplash.com/photo-1559715541-5daf8a0296d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1192&q=80" alt="">
+                    <img src="https://www.codecademy.com/webpack/b448a28e23c2912785c2ef6d9e37d4d5.svg" alt="">
                  </div>
               </div>
             <% end %>
           </div>
+          <div class="d-flex flex-column learning-stats">
+            <div>
+              <p><strong><%= @course.first.name %></strong></p>
+              <p>Level <%= @user_course.last_level %>, Question <%= @user_course.last_question %></p>
+            </div>
           <div>
-            <p><%= @course.first.name %></p>
-            <p>Level: <%= @user_course.last_level %></p>
-            <p>Question: <%= @user_course.last_question %></p>
+            <div style="margin-top: 8px;" class="border-top">
+              <div class="text-left">
+                <%= link_to "RESUME >", level_question_path(@user_course.last_level, @user_course.last_question) %>
+              </div>
+              <div class="text-left">
+                <%= link_to "FULL CATALOGUE >", categories_path %>
+              </div>
+            </div>
           </div>
+          </div>
+
+ <!--          if no enrolled courses -->
+        <% else %>
+
 
         <% end %>
         </div>
@@ -109,10 +121,7 @@ img {
     </div>
 
 
-
-
-
-   <h2>Goals</h2>
+<!-- GOALS -->
   <div class="scrolling-wrapper">
         <% unless @goals.nil? %>
                     <% @goals.each do |goal| %>
@@ -510,7 +519,7 @@ return EasyPieChart;
           scaleLength: 0,
           barColor: '#ef1e25',
           lineWidth: 8,
-          size: 180,
+          size: 100,
       });
     })
 </script>
