@@ -2,13 +2,13 @@
 
 <style>
 body {
-  background-color: #7FC5BC}
+  background-color: #E3E8EB}
 .card-dashboard {
   background-color: white;
   padding: 12px;
   margin-top: 12px;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 10px;
    box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 .container-header {
   display: flex;
@@ -21,43 +21,53 @@ body {
 .container-dashboard-button {
   display: flex;
   padding: 6px;}
+.payout-notification-parent {
+  background-color: white;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 12px;
+}
+.icon img {
+  width: 16px;
+  height: 16px;
+}
 section {
   background-color: #E34E53;
   background-size: 30% 100%;}
 h1 {
   color: white; }
 h2 {
-  color: #282A2D;
+  color: #505050;
   margin: auto;
   margin-top: 12px;
   margin-left: 12px;
   font-size: 14px;
   font-weight: bold; }
 h3 {
-  color: #282A2D;
+  color: #505050;
   margin: auto;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: lighter; }
 p {
-  color: #282A2D;
+  color: #505050;
   margin: auto;
-  font-size: 10px; }
+  font-size: 14px; }
 a {
-  color: #282A2D;
+  color: #505050;
   margin: auto;
-  font-size: 10px;
+  font-size: 14px;
 }
 .money {
-  color: #E34E53;
+  color: #505050;
   margin: auto;
   font-size: 92px;
   font-weight: lighter;
 }
-.chart-text {
-  color: #999999;
-  margin-top: 30px;
+.dashboard-chart-text {
+  color: #505050;
+  margin-top: 12px;
   margin-left: 0px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: lighter;
 }
 .chart-button {
@@ -82,7 +92,7 @@ a {
 
     <div class="scrolling-wrapper">
       <% wallets.each do |wallet| %>
-        <div class="card">
+
           <div class="card-dashboard">
         <!-- Header Tom -->
             <div class="container-header">
@@ -97,31 +107,43 @@ a {
 
       <!--  notification div -->
       <% if wallet.payout_amount != 0 %>
-        <div class="payout-notification">
-          <h3><%= wallet.kid.username %> completed his exercise,</h3>
-          <h3> it's paytime! Give <%= wallet.payout_amount %>€ to him/her. </h3>
-            <div>
-              <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch %>
-              <button class= "button-red button-confirm"> CONFIRM </button>
-            </div>
+        <div class="payout-notification text-left d-flex justify-content-between">
+          <div>
+            <h3><%= wallet.kid.username %> completed his exercise.</h3>
+            <h3> It's paytime! </h3>
+          </div>
+          <div>
+            <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch %>
+          </div>
         </div>
       <% end %>
       <!--  End of notification div -->
 
       <!-- Pocket Money div -->
           <div>
-            <div class="card-dashboard">
+            <div class="card-dashboard payout-notification-parent">
               <div>
-                <h1 class="money"><%= wallet.total_allowance%> <%= wallet.payout_amount %><h1>
+                <h2 class="dashboard-chart-text">Upcoming payout: </h2>
+                <h1 class="money"><%= wallet.payout_amount %>$<h1>
+           <!--      <p>Allowance <%= wallet.total_allowance%> <%= wallet.payout_frequency %> </p> -->
               </div>
-              <div>
-                <h2 class="chart-text"><%= wallet.payout_frequency %></h2>
+              <div class="d-flex justify-content-between align-items-baseline" style="margin-top: 0">
+                <div></div>
+                <div>
+                  <h2 class="dashboard-chart-text">Allowance - <%= wallet.total_allowance%>$ <%= wallet.payout_frequency %></h2>
+                </div>
+                <div>
                 <% if policy(current_user).dashboard? %>
-                  <div class="chart-button">
-                    <%= link_to "EDIT", edit_wallet_path(wallet.id), class: "button-white" %>
-                  </div>
+                   <div class="icon">
+                          <%= link_to edit_wallet_path(wallet.id) do %>
+                             <%= image_tag "edit.jpg" %>
+                          <% end %>
+                    </div>
                 <% end %>
-              </div>
+                </div>
+
+                </div>
+
             </div>
 
       <!-- End of Pocket Money div -->
@@ -132,20 +154,36 @@ a {
       <% unless wallet.kid.user_courses.empty? %>
         <% wallet.kid.user_courses.each do |user_course| %>
           <% unless user_course.complete? %>
-           <div class="col">
-              <h2>Learning progress</h2>
+             <div class="col">
+              </div>
+            <div class="card-dashboard">
+              <div class="d-flex justify-content-start">
+
+            <!-- chart here -->
+                <div class="chart" data-percent="<%= @done_percentage %>">
+                 <div class="chart-image" style="">
+                    <img src="https://www.codecademy.com/webpack/b448a28e23c2912785c2ef6d9e37d4d5.svg" alt="">
+                 </div>
+              </div>
+
+            <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 12px">
+              <div>
+                <h2 style="margin-bottom: 12px; margin-left: 0px; margin-top: 0">Learning progress</h2>
+                <h3 class="chart-text">Course - <%= user_course.course.name %></h3>
+                <p>Level <%= user_course.last_level %>, Question <%= user_course.last_question %></p>
+              </div>
+            <div style="margin-top: 8px;" class="links">
+              <div class="text-left">
+                <%= link_to "SEE ALL COURSES >", categories_path %>
+              </div>
             </div>
-          <div class="card-dashboard">
-            <div class="col">
-               <div class="chart" data-percent="<%= @done_percentage %>"></div>
-            </div>
-            <div class="col">
-              <h3 class="chart-text"><%= user_course.kid.first_name %> is learning <%= user_course.course.name %></h3>
+
             </div>
           <% end %>
         <% end %>
     <% end %>
     </div>
+  </div>
       <!--  End of Learning div -->
 
       <!--  Goal div -->
@@ -180,7 +218,7 @@ a {
         </div>
       </div>
     <% end %>
-  </div>
+
   <% end %>
 </div>
 </div>
@@ -557,9 +595,10 @@ return EasyPieChart;
     charts.forEach((chart) => {
       new EasyPieChart(chart, {
           scaleLength: 0,
-          barColor: '#ef1e25',
+          barColor: '#F8CE69',
+          trackColor: '#E3E8EB',
           lineWidth: 8,
-          size: 110,
+          size: 140,
       });
     })
 </script>
