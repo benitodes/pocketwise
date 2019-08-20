@@ -105,18 +105,24 @@ a {
                 <%= link_to "RESUME >", level_question_path(@user_course.last_level, @user_course.last_question) %>
               </div>
               <div class="text-left">
-                <%= link_to "FULL CATALOGUE >", categories_path %>
+                <%= link_to "BROWSE CATALOGUE >", categories_path %>
               </div>
             </div>
           </div>
           </div>
-
- <!--          if no enrolled courses -->
-        <% else %>
-
-
         <% end %>
         </div>
+      <% else %>
+ <!--          if no enrolled courses -->
+       <div class="d-flex align-items-center">
+        <div>
+          <img src="https://cdn.codecademy.com/assets/components/cards/path-card/5cacbe7b3709024753e7c3ff.svg" alt="">
+        </div>
+        <div class="text-left" style="margin-left: 24px;">
+                  <%= link_to "BROWSE FULL CATALOGUE >", categories_path %>
+        </div>
+       </div>
+
       <% end %>
     </div>
 
