@@ -40,7 +40,7 @@ class GoalsController < ApplicationController
   def destroy
     authorize @goal
     @goal.destroy
-    redirect_to wallet_goals_path(@goal.wallet)
+    redirect_to dashboard_user_path(current_user)
   end
 
   private
