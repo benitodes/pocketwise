@@ -28,11 +28,13 @@ body {
 .learning-stats {
   margin-left: 32px;
 }
-.chart {
-  position: relative;
-}
 .row {
   margin-bottom: 0px;
+}
+.icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
 }
 
 section {
@@ -100,7 +102,7 @@ a {
               <p>Level <%= @user_course.last_level %>, Question <%= @user_course.last_question %></p>
             </div>
           <div>
-            <div style="margin-top: 8px;" class="border-top">
+            <div style="margin-top: 8px;" class="border-top links">
               <div class="text-left">
                 <%= link_to "RESUME >", level_question_path(@user_course.last_level, @user_course.last_question) %>
               </div>
@@ -119,7 +121,8 @@ a {
           <img src="https://cdn.codecademy.com/assets/components/cards/path-card/5cacbe7b3709024753e7c3ff.svg" alt="">
         </div>
         <div class="text-left" style="margin-left: 24px;">
-                  <%= link_to "BROWSE FULL CATALOGUE >", categories_path %>
+          <p>Learn something new! </p>
+                  <%= link_to "BROWSE ALL COURSES >", categories_path %>
         </div>
        </div>
 
@@ -133,10 +136,14 @@ a {
                     <% @goals.each do |goal| %>
                     <div class="card card-goal">
                       <div class="">
-                        <%= cl_image_tag goal.picture, height: 250, width: 314, crop: :fill %>
-                      </div>
-                      <div class="p-2">
-                        <h2><%= goal.name %></h2>
+                        <div class="p-2 d-flex">
+                          <h2><%= goal.name %></h2>
+                          <div class="icon">
+                          <%= link_to edit_goal_path(goal.id) do %>
+                             <%= image_tag "edit.svg" %>
+                          <% end %>
+                          </div>
+                        </div>
                       </div>
                       <% if goal.complete? %>
                       <div class="p-2">
@@ -151,14 +158,17 @@ a {
                          <p>You are saving <%= goal.goal_allowance %>$ weekly.</p>
                          <p>Right now you have saved <%= goal.goal_current_saving %>$</p>
                          <p>Your target is <%= goal.goal_price %>$</p>
-                       </div>
                        <div class="mb-4">
-                        <%= link_to 'EDIT', edit_goal_path(goal.id), class: "button-white edit-button-goal"%>
                        </div>
-                      <% end %>
-                      <div class="chart" data-percent="<%= @goal_percentage %>"><%= @goal_percentage %>%</div>
+                       </div>
+                      <div class="chart" data-percent="<%= @goal_percentage %>">
+                        <div class="chart-image">
+                            <img src="<%= goal.picture %>" alt="">
+                        </div>
+                      </div>
 
                     </div>
+                      <% end %>
                     <% end %>
         <% end %>
 </div>
