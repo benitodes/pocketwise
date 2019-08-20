@@ -5,13 +5,18 @@ body {
   background-color: #88CF8F;}
 .card-dashboard {
   background-color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 12px;
   margin-top: 12px;
   text-align: center; }
 .container-header {
   display: flex;
   border-bottom: :1px white; }
+.card-goal {
+  border-radius: 10px;
+  width: 60%;
+  height: 250px;
+}
 .header {
   margin: auto;
   margin-left: 12px;
@@ -20,7 +25,23 @@ body {
 .container-dashboard-button {
   display: flex;
   padding: 6px;
+  padding: 12px;
 }
+.learning-container {
+  display: flex;
+}
+.learning-stats {
+  margin-left: 32px;
+}
+.row {
+  margin-bottom: 0px;
+}
+.icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
 section {
   background-color: #E34E53;
   background-size: 30% 100%;
@@ -32,14 +53,17 @@ h2 {
   margin: auto;
   margin-left: 12px;
   font-size: 16px;
-  font-weight: bold;}
+  font-weight: bold;
+  margin-bottom: 12px}
 h3 {
   margin: auto;
+  margin-left: 0;
   font-size: 14px;
   font-weight: bold; }
 p {
   margin: auto;
-  font-size: 12px; }
+  font-size: 14px;
+  text-align: left }
 a {
   margin: auto;
   font-size: 12px;
@@ -60,72 +84,98 @@ a {
     <p><%= @wallet.payout_amount %></p>
    </div>
     <div class="card-dashboard">
-      <%= link_to categories_path do %>
-        <h2>Learn</h2>
-      <% end %>
       <!-- display learning progess for courses that are not comoplete -->
       <% unless @user_course.nil? %>
-        <br>
-        <div class="d-flex justify-content-around align-items-center">
+
+        <div class="learning-container">
         <% unless @user_course.complete  %>
 
-          <div>
-            <p><%= @course.first.name %></p>
-            <p>Level: <%= @user_course.last_level %></p>
-            <p>Question: <%= @user_course.last_question %></p>
-          </div>
 
           <div>
             <% unless @user_course.complete %>
-              <%= link_to "RESUME", level_question_path(@user_course.last_level, @user_course.last_question), class: 'button-red' %>
-              <br>
-              <br>
 <!--               this is the circle chart -->
-              <div class="chart" data-percent="<%= @done_percentage %>"></div>
+              <div class="chart" data-percent="<%= @done_percentage %>">
+                 <div class="chart-image" style="">
+                    <img src="https://www.codecademy.com/webpack/b448a28e23c2912785c2ef6d9e37d4d5.svg" alt="">
+                 </div>
+              </div>
             <% end %>
           </div>
-
+          <div class="d-flex flex-column learning-stats">
+            <div>
+              <p><strong><%= @course.first.name %></strong></p>
+              <p>Level <%= @user_course.last_level %>, Question <%= @user_course.last_question %></p>
+            </div>
+          <div>
+            <div style="margin-top: 8px;" class="border-top links">
+              <div class="text-left">
+                <%= link_to "RESUME >", level_question_path(@user_course.last_level, @user_course.last_question) %>
+              </div>
+              <div class="text-left">
+                <%= link_to "BROWSE ALL COURSES >", categories_path %>
+              </div>
+            </div>
+          </div>
+          </div>
         <% end %>
         </div>
+      <% else %>
+ <!--          if no enrolled courses -->
+       <div class="d-flex align-items-center">
+        <div>
+          <img src="https://cdn.codecademy.com/assets/components/cards/path-card/5cacbe7b3709024753e7c3ff.svg" alt="">
+        </div>
+        <div class="text-left" style="margin-left: 24px;">
+          <p>Learn something new! </p>
+                  <%= link_to "BROWSE ALL COURSES >", categories_path %>
+        </div>
+       </div>
+
       <% end %>
     </div>
 
 
-
-
-
-   <h2>Goals</h2>
+<!-- GOALS -->
   <div class="scrolling-wrapper">
         <% unless @goals.nil? %>
                     <% @goals.each do |goal| %>
                     <div class="card card-goal">
                       <div class="">
-                        <%= cl_image_tag goal.picture, height: 250, width: 314, crop: :fill %>
+                        <div class="p-2 d-flex justify-content-between align-items-center" style="margin-bottom: 16px;">
+                          <div>
+                            <h2 style="margin-bottom: 0; margin-left: 0"><%= goal.name %> - <%= goal.goal_price %>$ </h2>
+                          </div>
+                          <div class="icon">
+                          <%= link_to edit_goal_path(goal.id) do %>
+                             <%= image_tag "edit.jpeg" %>
+                          <% end %>
+                          </div>
+                        </div>
                       </div>
-                      <div class="p-2">
-                        <h2><%= goal.name %></h2>
+                      <div class="chart" data-percent="<%= @goal_percentage %>">
+                        <div class="chart-image">
+                            <img src="<%= goal.picture %>" alt="">
+                        </div>
                       </div>
                       <% if goal.complete? %>
                       <div class="p-2">
                         <p>Good Job!<p>
-                        <p>Target reached already congratulation</p>
+                        <p>You already reached your target. Congratulations!</p>
                         <p>You saved a total of <%= goal.goal_current_saving %></p>
                         <div class="mb-4">
                        </div>
                       </div>
                       <% else %>
-                       <div class="p-2">
-                         <p>You are saving <%= goal.goal_allowance %>$ weekly.</p>
-                         <p>Right now you have saved <%= goal.goal_current_saving %>$</p>
-                         <p>Your target is <%= goal.goal_price %>$</p>
-                       </div>
+                       <div class="p-2" style="margin-top: 16px;">
+                         <p>Weekly saving - <%= goal.goal_allowance %>$</p>
+                         <p>Already saved - <%= goal.goal_current_saving %>$</p>
+                    <!--      <p>Your target is <%= goal.goal_price %>$</p> -->
                        <div class="mb-4">
-                        <%= link_to 'EDIT', edit_goal_path(goal.id), class: "button-white edit-button-goal"%>
                        </div>
-                      <% end %>
-                      <div class="chart" data-percent="<%= @goal_percentage %>"><%= @goal_percentage %>%</div>
+                       </div>
 
                     </div>
+                      <% end %>
                     <% end %>
         <% end %>
 </div>
@@ -492,7 +542,7 @@ return EasyPieChart;
           scaleLength: 0,
           barColor: '#ef1e25',
           lineWidth: 8,
-          size: 110,
+          size: 100,
       });
     })
 </script>

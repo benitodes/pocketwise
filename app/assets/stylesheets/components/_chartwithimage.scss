@@ -1,0 +1,20 @@
+// this is for the small image (learning) on the dashboard
+.chart {
+  position: relative;
+}
+.chart-image {
+  display: inline-block;
+  position: absolute;
+  transform: translate(10px, 10px);
+
+  img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    display: block;
+    object-fit: cover;
+  }
+}
+.icon img {
+  vertical-align: unset;
+}
