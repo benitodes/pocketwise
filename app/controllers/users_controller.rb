@@ -49,6 +49,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = current_user
+    authorize current_user
+  end
+
+  def update
+    @user = current_user
+    authorize current_user
+    if @user.update(user_params)
+      redirect_to dashboard_user_path(@user)
+    else
+      render "devise/registrations/edit"
+    end
+  end
+
   def destroy
     @user = User.find(params[:id])
     authorize @user
@@ -63,7 +78,11 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :username, :avatar, :gender, :email, :password, :age, :parent)
+    # user params have been updated to use a custom update method into the user controller. Without overriding, the form was aking for a new password. We fix that but now we don't need the current password to update. Fix that!
+    user_params = params.require(:user).permit(:first_name, :last_name, :username, :avatar, :gender, :email, :password, :password_confirmation, :age, :parent)
+    user_params.delete(:password) unless user_params[:password].present?
+    user_params.delete(:password_confirmation) unless user_params[:password_confirmation].present?
+    user_params
   end
 
   def learning_progress_percentage(kid_id)
