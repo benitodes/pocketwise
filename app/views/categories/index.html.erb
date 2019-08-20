@@ -2,12 +2,14 @@
 
 <style>
 body {
-  background-color: #E3E8EB;}
-h1 {
-  color: white; }
+  background-color: #E3E8EB;
+}
+.header {
+  color: #505050;
+}
 </style>
 
-<!-- end of inline css -->
+<!-- end inline css -->
 
 <div class="container-main">
    <div class="container-header">
@@ -21,7 +23,6 @@ h1 {
           <h2 class="title-categories"><%= category.name %></h2>
            <div class="scrolling-wrapper">
             <% category.courses.each do |course| %>
-              <% usercourses = UserCourse.where(course_id: course) %>
                         <div class="card-courses">
                                 <div class="row">
                                       <%= cl_image_tag course.picture, width: 100, height: 100, crop: :fill %>
@@ -29,13 +30,18 @@ h1 {
                                 </div>
                            <div class="row mb-0 pt-2 border-top d-flex space-between">
                                 <div class="col">
-                                  <% usercourses.each do |usercourse| %>
-                                    <% unless @usercourse.nil? %>
-                                      <% unless @usercourse.complete %>
-                                      <p>ENROLLED</p>
+                                  <% usercourses = UserCourse.where(kid_id: current_user, course_id: course) %>
+                                    <% if usercourses.empty? %>
+                                       <p>NOT ENROLLED</p>
+                                    <% else %>
+                                       <% usercourses.each do |usercourse| %>
+                                         <% if usercourse && usercourse.complete == true %>
+                                           <p>COMPLETE</p>
+                                         <% else usercourse && usercourse.complete == false %>
+                                           <p>ENROLLED</p>
+                                         <% end %>
+                                       <% end %>
                                     <% end %>
-                                  <% end %>
-                                  <% end %>
                                 </div>
                                 <div class="col">
                                   <%= link_to course_levels_path(course) do %>
@@ -43,12 +49,9 @@ h1 {
                                    <% end %>
                                 </div>
                            </div>
-
                         </div>
-
             <% end %>
            </div>
-       <% end %>
-
+      <% end %>
 </div>
 
