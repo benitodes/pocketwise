@@ -2,23 +2,37 @@
 
 <style>
 body {
-  background-color: #88CF8F;}
+  background-color: #E3E8EB;
+  }
+.container-main-dashboard {
+  background: #F8CE69;
+}
 .card-dashboard {
   background-color: white;
   border-radius: 10px;
+  padding: 20px;
+  margin-top: 12px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+.pocket-card-dashboard {
+  background-color: #F8CE69 ;
+  border-radius: 10px;
   padding: 12px;
   margin-top: 12px;
-  text-align: center; }
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
 .container-header {
   display: flex;
   border-bottom: :1px white; }
 .card-goal {
   border-radius: 10px;
   width: 60%;
-  height: 250px;
-  margin-top: 34px;
+  height: 300px;
+  border: 0px;
+  margin-right: 12px;
 }
 .header {
+  color: #505050;
   margin: auto;
   margin-left: 12px;
   font-size: 20px;
@@ -55,35 +69,50 @@ h2 {
   margin-left: 12px;
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 12px}
+  margin-bottom: 12px;
+  color: #505050}
 h3 {
   margin: auto;
   margin-left: 0;
   font-size: 14px;
-  font-weight: bold; }
+  font-weight: bold;
+  color: #505050;}
+h5 {
+  font-size: 48px;
+  color: black;
+}
 p {
   margin: auto;
   font-size: 14px;
-  text-align: left }
+  text-align: left;
+  color: #505050 }
 a {
   margin: auto;
   font-size: 12px;
+  color: #505050;
 }
 
 
 </style>
 
-<div class="container-main">
+<div class="container-main-dashboard">
    <div class="container-header">
   <!-- Add this line if you need the menu -->
-     <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
+     <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
       <h1 class ="header">Welcome <%= user.first_name %></h1>
    </div>
 
-   <div class="card-dashboard">
-    <h2>Pocket Money</h2>
-    <p><%= @wallet.payout_amount %></p>
+   <div class="pocket-card-dashboard d-flex justify-content-center align-items-center">
+    <div>
+      <h2 style="margin-bottom: 0px;"></h2>
+    </div>
+    <div>
+      <h5> <%= @wallet.payout_amount %>$</h5>
+      <p>In your pocket</p>
+    </div>
    </div>
+
+
     <div class="card-dashboard">
       <!-- display learning progess for courses that are not comoplete -->
       <% unless @user_course.nil? %>
@@ -102,20 +131,24 @@ a {
               </div>
             <% end %>
           </div>
-          <div class="d-flex flex-column learning-stats">
+
+            <div class="d-flex flex-column justify-content-between learning-stats">
+              <div>
+                <div>
+                  <p><strong><%= @course.first.name %></strong></p>
+                  <p>Level <%= @user_course.last_level %>, Question <%= @user_course.last_question %></p>
+                  <div class="text-left">
+                    <%= link_to "RESUME >", level_question_path(@user_course.last_level, @user_course.last_question) %>
+                  </div>
+                </div>
+              </div>
             <div>
-              <p><strong><%= @course.first.name %></strong></p>
-              <p>Level <%= @user_course.last_level %>, Question <%= @user_course.last_question %></p>
-            </div>
-          <div>
-            <div style="margin-top: 8px;" class="border-top links">
+            <div style="margin-top: 8px;" class="links">
               <div class="text-left">
-                <%= link_to "RESUME >", level_question_path(@user_course.last_level, @user_course.last_question) %>
-              </div>
-              <div class="text-left">
-                <%= link_to "BROWSE ALL COURSES >", categories_path %>
+                <%= link_to "SEE ALL COURSES >", categories_path %>
               </div>
             </div>
+
           </div>
           </div>
         <% end %>
@@ -137,7 +170,8 @@ a {
 
 
 <!-- GOALS -->
-  <div class="scrolling-wrapper">
+  <!-- Goals -->
+  <div class="dashboard-scrolling-wrapper">
         <% unless @goals.nil? %>
                     <% @goals.each do |goal| %>
                     <div class="card card-goal">
@@ -159,17 +193,15 @@ a {
                         </div>
                       </div>
                       <% if goal.complete? %>
-                      <div class="p-2">
-                        <p>Good Job!<p>
-                        <p>You already reached your target. Congratulations!</p>
-                        <p>You saved a total of <%= goal.goal_current_saving %></p>
-                        <div class="mb-4">
-                       </div>
+                      <div class="p-2" style="margin-bottom: 16px;">
+                        <p>Great job!<p>
+                        <p>You saved <%= goal.goal_current_saving %> for your <%= goal.name %></p>
+
                       </div>
                       <% else %>
                        <div class="p-2" style="margin-top: 16px;">
-                         <p>Weekly saving - <%= goal.goal_allowance %>$</p>
-                         <p>Already saved - <%= goal.goal_current_saving %>$</p>
+                         <p><%= goal.goal_allowance %>$ - WEEKLY SAVING</p>
+                         <p><%= goal.goal_current_saving %>$ - SAVED SO FAR</p>
                     <!--      <p>Your target is <%= goal.goal_price %>$</p> -->
                        <div class="mb-4">
                        </div>
@@ -180,11 +212,14 @@ a {
                     <% end %>
         <% end %>
 </div>
+<div>
+    <div class="icon p2 mb-4" style="width: 10px; height: 10px;">
+        <%= link_to new_wallet_goal_path(wallet.id) do %>
+            <%= image_tag "plus-icon.png" %>
+        <% end %>
+    </div>
 
-  <div class="container-dashboard-button">
-      <%= link_to 'ADD NEW GOAL', new_wallet_goal_path(wallet.id), class: "button-red"%>
-  </div>
-
+</div>
 </div>
 
 
@@ -541,9 +576,10 @@ return EasyPieChart;
     charts.forEach((chart) => {
       new EasyPieChart(chart, {
           scaleLength: 0,
-          barColor: '#ef1e25',
+          barColor: '#F8CE69',
+          trackColor: '#E3E8EB',
           lineWidth: 8,
-          size: 100,
+          size: 140,
       });
     })
 </script>
