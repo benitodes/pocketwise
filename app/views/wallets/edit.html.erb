@@ -22,15 +22,14 @@ a {
 
   <div class="container-header">
   <!-- Add this line if you need the menu -->
-     <label for="offcanvas" class="toggler"><span class="avatar"></span></label>
-      <h1 class ="header">Modify Allowance</h1>
+     <!-- <label for="offcanvas" class="toggler"><span class="avatar"></span></label> -->
+      <h1 class ="header">Set Pocket Money</h1>
   </div>
 
       <%= simple_form_for @wallet do |f| %>
-      <%= f.input :total_allowance %>
-      <%= f.input :payout_frequency %>
-      <%= f.input :payout_day %>
-      <%= f.button 'submit', 'MODIFY', class: "button-red"%>
+      <%= f.input :total_allowance, label: "Allowance" %>
+      <%= f.input :payout_frequency, label: "Frequency", collection: [ "Weekly", "Biweekly", "Monthly"] %>
+      <%= f.input :payout_day, collection: [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %>
+      <%= f.button 'submit', 'SAVE', class: "button-red"%>
       <% end %>
-
 </div>
