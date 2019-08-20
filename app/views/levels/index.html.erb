@@ -54,48 +54,58 @@ a {
    </div>
 
 
-    <!-- button displays start if there is no user course table yet (if kid hasn't started course, otherwise it shows resulme  -->
-    <div class="card-learning d-flex flex-column">
-    <% if @user_course && @course.user_courses.where(kid: current_user).first.complete %>
-
-      <div class="p-2">
-        <%= link_to "START OVER", level_question_path(@level_current, @question_current), class: 'button-red' %>
+<div class="card-course d-flex flex-column">
+   <div class="row">
+      <div class="col-6">
+        <%= cl_image_tag @course.picture, width: 150, height: 150, crop: :fill %>
       </div>
-        <% elsif @course.user_courses.where(kid: current_user).first %>
-      <div class="p-2">
-          <%= link_to "RESUME", level_question_path(@level_current, @question_current), class: 'button-red' %>
-      </div>
-      <% else  %>
-      <div class="p-2">
-        <%= link_to "ENROLL", course_user_courses_path(@course), method: :post, class: 'button-red' %>
-      </div>
-    <% end  %>
-    <div class="p-2">
-      <p>currently at level <%= @level_current %>, question <%= @question_current %></p>
+        <div class="col mt-5">
+           <!-- button displays start if there is no user course table yet (if kid hasn't started course, otherwise it shows resulme  -->
+            <% if @user_course && @course.user_courses.where(kid: current_user).first.complete %>
+                <div class="p-2">
+                  <%= link_to "START OVER", level_question_path(@level_current, @question_current), class: 'button-red' %>
+                </div>
+                  <% elsif @course.user_courses.where(kid: current_user).first %>
+                <div class="p-2">
+                    <%= link_to "RESUME", level_question_path(@level_current, @question_current), class: 'button-red' %>
+                </div>
+                <% else  %>
+                <div class="p-2">
+                  <%= link_to "ENROLL", course_user_courses_path(@course), method: :post, class: 'button-red' %>
+                </div>
+            <% end  %>
+                <div class="p-2">
+                  <p>currently at level <%= @level_current %>, question <%= @question_current %></p>
+                </div>
+         </div>
     </div>
-</div>
+
+
+
+
+
 
   <div class="p-2">
     <h3>Levels:</h3>
   </div>
 
- <div class="card-learning d-flex flex-column">
+
     <% if @user_course %>
       <% @levels.each do |level| %>
         <!-- if user has completed the course already he can visit all levels all questions all lectures -->
         <% if @user_course.complete %>
-          <div class="p-2">
-            <%= link_to level.name, level_path(level), class: 'btn button-white' %>
+          <div class="p-1 border-top">
+            <%= link_to level.name, level_path(level) %>
           </div>
         <!-- if not then check if level has already been started by user, if not disable button -->
         <% elsif level.number > @user_course.last_level %>
-          <div class="p-2">
-            <%= link_to level.name, level_path(level), class: 'btn button-white disabled', style: "color: grey" %>
+          <div class="p-1 border-top">
+            <%= link_to level.name, level_path(level), style: "color: grey" %>
           </div>
         <% else %>
           <!--   if yes, then enable button -->
-          <div class="p-2">
-            <%= link_to level.name, level_path(level), class: 'btn button-white' %>
+          <div class="p-1 border-top">
+            <%= link_to level.name, level_path(level) %>
           </div>
         <% end %>
       <% end %>
@@ -108,4 +118,5 @@ a {
         </div>
       <% end %>
     <% end %>
+</div>
 </div>
