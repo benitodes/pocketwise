@@ -14,6 +14,24 @@ p {
 a {
   font-size: 16px;
   color: white; }
+.form-control-file, .form-control-range {
+  display: none;
+  width: 100%;
+}
+picture {
+  position: relative;
+}
+.edit-picture-container label{
+  background: #FFFFFF;
+  padding: 15px;
+  border-radius: 50%;
+  color: black;
+  font-size: 18px;
+  position: absolute;
+  bottom: 107px;
+  left: 121px;
+}
+
 </style>
 
 <div class="container">
@@ -21,8 +39,10 @@ a {
     <div class="col-md-6">
       <h1>Edit your goal</h1>
         <%= simple_form_for @goal do |f| %>
-        <%= cl_image_tag @goal.picture, height: 250, width: 300, crop: :fill %></br>
-        <%= f.input :picture, label: 'Edit picture', class: "button_edit" %>
+        <picture class="edit-picture-container">
+          <%= cl_image_tag @goal.picture, height: 250, width: 300, crop: :fill %></br>
+            <%= f.input :picture, label: 'Edit' %>
+        </picture>
         <%= f.input :name, label: 'Goal name', error: 'Goal name is mandatory, please specify one', placeholder: 'New bike' %>
         <%= f.input :goal_price, label: 'Goal amount', error: 'Goal amount is mandatory, please specify one', placeholder: '60' %>
         <%= f.input :goal_allowance, label: 'Weekly saving', error: 'Weekly saving is mandatory, please specify one', placeholder: '15'  %>
