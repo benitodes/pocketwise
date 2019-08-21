@@ -12,17 +12,19 @@ Category.destroy_all
 # add more user information
 
 user_list = [
-  ['Benoit', 'Destresse', 'benoit@destresse.fr', 'benito', 'password', true],
-  ['Sarah', 'OhGee', 'sarah@gmail.com', 'Sarh', 'password', true],
-  ['Samba', 'OhGee', 'samba@dance.com', 'Samb', 'password', false],
-  ['Mia', 'OhGee', 'mia@dance.com', 'Mi', 'password', false],
+  ['Benoit', 'Destresse', 'benoit@destresse.fr', 'benito', 'password', true, 'https://scontent.fjog1-1.fna.fbcdn.net/v/t1.15752-9/69646702_2356153734603291_6480077095190921216_n.jpg?_nc_cat=109&_nc_oc=AQldJBq9YrAuQJ7WC6aUv2nVzqbbC7wsLGSFFdyRmJnTUq6dUve0c84qWN6mX83cjio&_nc_ht=scontent.fjog1-1.fna&oh=c36635eb32c17bafeb6b98269271368f&oe=5DDD8D5D'],
+  ['Sarah', 'OhGee', 'sarah@gmail.com', 'Sarh', 'password', true, 'https://scontent.fjog1-1.fna.fbcdn.net/v/t1.15752-9/69646702_2356153734603291_6480077095190921216_n.jpg?_nc_cat=109&_nc_oc=AQldJBq9YrAuQJ7WC6aUv2nVzqbbC7wsLGSFFdyRmJnTUq6dUve0c84qWN6mX83cjio&_nc_ht=scontent.fjog1-1.fna&oh=c36635eb32c17bafeb6b98269271368f&oe=5DDD8D5D'],
+  ['Samba', 'OhGee', 'samba@dance.com', 'Samb', 'password', false, 'https://scontent.fjog1-1.fna.fbcdn.net/v/t1.15752-9/69646702_2356153734603291_6480077095190921216_n.jpg?_nc_cat=109&_nc_oc=AQldJBq9YrAuQJ7WC6aUv2nVzqbbC7wsLGSFFdyRmJnTUq6dUve0c84qWN6mX83cjio&_nc_ht=scontent.fjog1-1.fna&oh=c36635eb32c17bafeb6b98269271368f&oe=5DDD8D5D'],
+  ['Mia', 'OhGee', 'mia@dance.com', 'Mi', 'password', false, 'https://scontent.fjog1-1.fna.fbcdn.net/v/t1.15752-9/69646702_2356153734603291_6480077095190921216_n.jpg?_nc_cat=109&_nc_oc=AQldJBq9YrAuQJ7WC6aUv2nVzqbbC7wsLGSFFdyRmJnTUq6dUve0c84qWN6mX83cjio&_nc_ht=scontent.fjog1-1.fna&oh=c36635eb32c17bafeb6b98269271368f&oe=5DDD8D5D'],
 ]
 
 # create new users from array
 # devise will automatically transform value of variable 'password' into encrypted password
 
-user_list.each do |first_name, last_name, email, username, password, parent|
-  User.create!(first_name: first_name, last_name: last_name, email: email, username: username, password: password, parent: parent)
+user_list.each do |first_name, last_name, email, username, password, parent, avatar|
+  user = User.create!(first_name: first_name, last_name: last_name, email: email, username: username, password: password, parent: parent)
+  user.remote_avatar_url = avatar
+  user.save
 end
 
 puts "users have been created"
