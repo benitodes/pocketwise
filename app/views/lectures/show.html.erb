@@ -77,7 +77,7 @@ a {
 <!--     progress bar -->
 
         <div class="progress">
-            <div class="bar shadow circuit" style="width: <%= @lecture_progress_percentage %>%; transition-duration: 2s; margin-left: 0">
+            <div class="bar shadow clouds" style="width: <%= @lecture_progress_percentage %>%; transition-duration: 2s; margin-left: 0">
             </div>
         </div>
 
@@ -105,7 +105,7 @@ a {
   <!--   button -->
     <div>
       <% if @next_lecture %>
-      <%= link_to "NEXT", level_lecture_path(@level, @next_lecture), class: 'button-white' %>
+      <%= link_to "NEXT", level_lecture_path(@level, @next_lecture), class: 'button-yellow' %>
       <% else %>
       <!-- Button trigger modal -->
       <button type="button" class="btn button-white" data-toggle="modal" data-target="#exampleModalCenter">
