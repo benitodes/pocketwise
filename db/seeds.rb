@@ -165,7 +165,7 @@ puts "lectures have been created"
 # create questions
 
 question_list = [
-  ['What is HTML use for?', 'CSS is for the style so HTML is for [...]? :)', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 1, Level.first.id],
+  ['What is HTML used for?', 'CSS is for the style so HTML is for [...]? :)', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 1, Level.first.id],
   ['How many headings are available in HTML?', '3*2 = ? ;)', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 2, Level.first.id],
   ['Is it possible to display content outside of the body tag?', 'think', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 3, Level.first.id],
   ['Why do we need tables in HTML?', 'think', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 1, Level.second.id],
