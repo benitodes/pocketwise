@@ -160,7 +160,7 @@ a {
             <div class="d-flex justify-content-start">
 
                   <!-- chart here -->
-                <div class="chart" data-percent="<%= @done_percentage %>">
+                <div class="chart" data-percent="<%= @done_percentage_hash[user_course.kid.kid_wallet]%>">
                   <div class="chart-image" style="">
                     <img src="https://www.codecademy.com/webpack/b448a28e23c2912785c2ef6d9e37d4d5.svg" alt="">
                   </div>
@@ -189,7 +189,7 @@ a {
       <% unless wallet.goals.empty? %>
         <div class="card-dashboard d-flex text-left">
 
-          <div class="chart" data-percent="<%= @goal_percentage %>">
+          <div class="chart" data-percent="<%= @goal_percentage_hash[wallet]%>">
            <div class="chart-image" style="">
             <img src="<%= wallet.goals.first.picture %>" alt="">
           </div>
