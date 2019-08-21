@@ -4,16 +4,18 @@
 body {
   background-color: #D4A2E3;
   color: white; }
-h1 {
-  font-size: 40px;
-  font-weight: bold;
-  margin-bottom: 20px; }
+h2 {
+  text-align: center;
+}
 p {
   font-size: 20px
   padding: 20px; }
 a {
   font-size: 16px;
   color: white; }
+.simple_form {
+  text-align: left;
+}
 </style>
 
 <!-- Html -->
@@ -30,14 +32,17 @@ a {
                 autofocus: true,
                 input_html: { autocomplete: "email" } %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "RESET PASSWORD INSTRUCTIONS", class: "button-red" %>
-  </div>
-<% end %>
-
-<div class="sharedlinks">
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 my-2 d-flex justify-content-around">
+      <div class="form-actions">
+        <%= f.button :submit, "RESET", class: "button-red" %>
+      </div>
     <%= render "devise/shared/links" %>
-</div>
+<% end %>
+      </div>
+      <%= link_to "BACK", root_path, class: "button-white" %>
+    </div>
+  </div>
 
 </div>
