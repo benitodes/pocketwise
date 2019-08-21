@@ -30,8 +30,8 @@ a {
         <%= f.input :last_name %>
         <%= f.input :username %>
         <%= f.input :avatar %>
-        <%= f.input :gender %>
-        <%= f.input :age %>
+        <%= f.input :gender, collection: [ "Male", "Female" ] %>
+        <%= f.input :age, collection: [ "9", "10", "11", "12", "13", "14" ] %>
 
         <div class="container">
           <div class="row">

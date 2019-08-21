@@ -2,7 +2,7 @@
 
 <style>
 body {
-  background-color: #F8CE69 }
+  background-color: #E3E8EB }
 .container-lecture {
   height: 100vh;
   display: flex;
@@ -16,7 +16,7 @@ body {
   padding-left: 12px;
   padding-right: 12px;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 10px;
    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   height: 85vh;
   display: flex;
@@ -78,13 +78,6 @@ a {
 
         <div class="progress">
             <div class="bar shadow circuit" style="width: <%= @lecture_progress_percentage %>%; transition-duration: 2s; margin-left: 0">
-
-                <div>
-                  TEST
-
-                </div>
-
-
             </div>
         </div>
 
@@ -112,7 +105,7 @@ a {
   <!--   button -->
     <div>
       <% if @next_lecture %>
-      <%= link_to "Next", level_lecture_path(@level, @next_lecture), class: 'button-white' %>
+      <%= link_to "NEXT", level_lecture_path(@level, @next_lecture), class: 'button-white' %>
       <% else %>
       <!-- Button trigger modal -->
       <button type="button" class="btn button-white" data-toggle="modal" data-target="#exampleModalCenter">
@@ -144,7 +137,7 @@ transition-property: background-color;">
 
             </div>
             <div>
-              <%= link_to "Continue to quiz", level_question_path(@level, @question), class: 'btn button-white' %>
+              <%= link_to "Continue to quiz", level_question_path(@level, 1), class: 'btn button-white' %>
             </div>
 <!--
             <img src="/assets/images/coding.jpg" style=""> -->

@@ -176,64 +176,50 @@ a {
   <!-- Goals -->
 <!--   <div class="goals-container d-flex"> -->
   <div class="dashboard-scrolling-wrapper">
-        <% unless @goals.nil? %>
-                    <% @goals.each do |goal| %>
-                    <div class="card card-goal">
-                      <div class="">
-                        <div class="p-2 d-flex justify-content-between align-items-center" style="margin-bottom: 16px;">
-                          <div>
-                            <h2 style="margin-bottom: 0; margin-left: 0"><%= goal.name %> - <%= goal.goal_price %>$ </h2>
-                          </div>
-                          <div class="icon">
-                          <%= link_to edit_goal_path(goal.id) do %>
-                             <%= image_tag "edit.jpg" %>
-                          <% end %>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="chart" data-percent="<%= @goal_percentage[goal] %>">
-                        <div class="chart-image">
-                            <img src="<%= goal.picture %>" alt="">
-                        </div>
-                      </div>
-                      <% if goal.complete? %>
-                      <div class="p-2" style="margin-bottom: 16px;">
-                        <p>Great job!<p>
-                        <p>You saved <%= goal.goal_current_saving %> for your <%= goal.name %></p>
-
-                      </div>
-                      <% else %>
-                       <div class="p-2" style="margin-top: 16px;">
-                         <p><%= goal.goal_allowance %>$ - WEEKLY SAVING</p>
-                         <p><%= goal.goal_current_saving %>$ - SAVED SO FAR</p>
-                    <!--      <p>Your target is <%= goal.goal_price %>$</p> -->
-                       <div class="mb-4">
-                       </div>
-                       </div>
-
-                    </div>
+    <% unless @goals.nil? %>
+      <% @goals.each do |goal| %>
+        <div class="card card-goal">
+          <div class="">
+              <div class="p-2 d-flex justify-content-between align-items-center" style="margin-bottom: 16px;">
+                  <div>
+                    <h2 style="margin-bottom: 0; margin-left: 0"><%= goal.name %> - <%= goal.goal_price %>$ </h2>
+                  </div>
+                    <div class="icon">
+                      <%= link_to edit_goal_path(goal.id) do %>
+                        <%= image_tag "edit.jpg" %>
                       <% end %>
-                    <% end %>
-
-                    <div class="card card-goal shadow-none position-relative" style="background-color: #E3E8EB">
-                        <div class="icon-plus position-absolute" style="top: 40%; left: 40%;">
-                            <%= link_to new_wallet_goal_path(wallet.id) do %>
-                        <%= image_tag "plus-icon.png" %>
-                    <% end %>
-  </div>
-
-
                     </div>
+                  </div>
+              </div>
+              <div class="chart" data-percent="<%= @goal_percentage[goal] %>">
+                <div class="chart-image">
+                   <img src="<%= goal.picture %>" alt="">
+                </div>
+              </div>
 
+                <% if goal.complete? %>
+                  <div class="p-2" style="margin-bottom: 16px;">
+                    <p>Great job!<p>
+                    <p>You saved <%= goal.goal_current_saving %> for your <%= goal.name %></p>
+                  </div>
+                <% else %>
+                  <div class="p-2" style="margin-top: 16px;">
+                     <p><%= goal.goal_allowance %>$ - WEEKLY SAVING</p>
+                     <p><%= goal.goal_current_saving %>$ - SAVED SO FAR</p>
+                  </div>
+                <% end %>
+                </div>
+         <% end %>
 
-
-        <% end %>
-  </div>
-<!-- </div> -->
-<!--         **** -->
-</div>
-</div>
-
+        <div class="card card-goal shadow-none position-relative" style="background-color: #E3E8EB">
+          <div class="icon-plus position-absolute" style="top: 40%; left: 40%;">
+            <%= link_to new_wallet_goal_path(wallet.id) do %>
+              <%= image_tag "plus-icon.png" %>
+            <% end %>
+          </div>
+        </div>
+      ß<% end %>
+    </div>
 
 <script>
 (function (root, factory) {
