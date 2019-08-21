@@ -207,9 +207,15 @@ a {
                     <p>You saved <%= goal.goal_current_saving %> for your <%= goal.name %></p>
                   </div>
                 <% else %>
-                  <div class="p-2" style="margin-top: 16px;">
-                     <p>WEEKLY SAVING - <%= goal.goal_allowance %>$ </p>
-                     <p>SAVED ALREADY -<%= goal.goal_current_saving %>$ </p>
+                  <div class="p-2 d-flex justify-content-between border-top" style="margin-top: 16px;">
+                    <div class="border-right" style="width: 50%">
+                     <h2 class="text-center" style="margin-left: 0px"><%= goal.goal_current_saving %>$ </h2>
+                     <p class="text-center">SAVED</p>
+                    </div>
+                    <div style="width: 50%">
+                      <h2 class="text-center" style="margin-left: 0px"><%= goal.goal_allowance %>$ </h2>
+                     <p class="text-center">WEEKLY</p>
+                    </div>
                   </div>
                 <% end %>
                 </div>
