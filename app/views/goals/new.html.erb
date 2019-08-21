@@ -16,6 +16,9 @@ a {
 .simple_form {
   text-align: left;
 }
+.form-control-file {
+  display: none;
+}
 </style>
 
 
@@ -28,7 +31,7 @@ a {
           <%= f.input :name %>
           <%= f.input :goal_allowance %>
           <%= f.input :goal_price %>
-          <%= f.input :picture %>
+          <%= f.input :picture, label: "Add a picture" %>
    <div class="container">
      <div class="row">
        <div class="col-md-6 my-2 d-flex justify-content-around">

@@ -21,7 +21,7 @@ class GoalsController < ApplicationController
     @goal.wallet = @wallet
     authorize @goal
     if @goal.save
-      redirect_to wallet_goals_path(@wallet)
+      redirect_to dashboard_user_path(current_user)
     else
       render 'new'
     end
