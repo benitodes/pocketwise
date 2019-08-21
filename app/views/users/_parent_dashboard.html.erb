@@ -30,7 +30,7 @@ body {
   padding: 6px;}
 .payout-notification-parent {
   background-color: white;
-  padding: 12px;
+  padding: 20px;
   border-radius: 10px;
   margin-top: 12px;
 }
@@ -67,7 +67,7 @@ a {
 .money {
   color: #505050;
   margin: auto;
-  font-size: 92px;
+  font-size: 50px;
   font-weight: lighter;
 }
 .dashboard-chart-text {
@@ -100,16 +100,7 @@ a {
   <div class="scrolling-wrapper">
     <% wallets.each do |wallet| %>
 
-
       <!-- Header Tom -->
-      <div class="container-header">
-        <div>
-          <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-kid" %>
-        </div>
-        <div>
-          <h2><%= wallet.kid.first_name %>'s summary</h2>
-        </div>
-      </div>
       <!-- End Header Tom -->
 
       <!--  notification div -->
@@ -129,15 +120,23 @@ a {
       <!-- Pocket Money div -->
       <div>
         <div class="card-dashboard payout-notification-parent">
+            <div>
+              <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-kid-dashboard" %>
+            </div>
+            <h2><%= wallet.kid.username %>'s upcoming payout:</h2>
           <div>
-            <h2 class="dashboard-chart-text">Upcoming payout: </h2>
+
+           <!--  <h2 class="dashboard-chart-text">Upcoming payout: </h2> -->
+          <div class="container-header">
+
             <h1 class="money"><%= wallet.payout_amount %>$<h1>
+          </div>
              <!--      <p>Allowance <%= wallet.total_allowance%> <%= wallet.payout_frequency %> </p> -->
            </div>
            <div class="d-flex justify-content-between align-items-baseline" style="margin-top: 0">
             <div></div>
             <div>
-              <h2 class="dashboard-chart-text">Allowance - <%= wallet.total_allowance%>$ <%= wallet.payout_frequency %></h2>
+              <h2 class="dashboard-chart-text" style="margin-left: 16px;"> <%= wallet.total_allowance%>$ <%= wallet.payout_frequency.downcase %></h2>
             </div>
             <div>
               <% if policy(current_user).dashboard? %>
@@ -148,70 +147,62 @@ a {
               </div>
               <% end %>
             </div>
-
           </div>
-
         </div>
 
         <!-- End of Pocket Money div -->
-
-
         <!--  Learning div -->
 
         <% unless wallet.kid.user_courses.empty? %>
         <% wallet.kid.user_courses.each do |user_course| %>
         <% unless user_course.complete? %>
-        <div class="col">
-        </div>
-        <div class="card-dashboard">
-          <div class="d-flex justify-content-start">
+          <div class="card-dashboard">
+            <div class="d-flex justify-content-start">
 
-            <!-- chart here -->
-            <div class="chart" data-percent="<%= @done_percentage %>">
-             <div class="chart-image" style="">
-              <img src="https://www.codecademy.com/webpack/b448a28e23c2912785c2ef6d9e37d4d5.svg" alt="">
-            </div>
-          </div>
+                  <!-- chart here -->
+                <div class="chart" data-percent="<%= @done_percentage_hash[user_course.kid.kid_wallet]%>">
+                  <div class="chart-image" style="">
+                    <img src="https://www.codecademy.com/webpack/b448a28e23c2912785c2ef6d9e37d4d5.svg" alt="">
+                  </div>
+                </div>
 
-          <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
-            <div>
-              <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0">Learning progress</h2>
-              <h3 class="chart-text">Course - <%= user_course.course.name %></h3>
-              <p>Level <%= user_course.last_level %>, Question <%= user_course.last_question %></p>
+                <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
+                  <div>
+                    <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0">Learning</h2>
+                    <h3 class="chart-text"><%= user_course.course.name %></h3>
+                    <p>Level <%= user_course.last_level %></p>
+                  </div>
+                  <div style="margin-top: 8px;" class="links">
+            <!--         <div class="text-left">
+                      <#%= link_to "SEE ALL COURSES >", categories_path %>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
             </div>
-            <div style="margin-top: 8px;" class="links">
-      <!--         <div class="text-left">
-                <#%= link_to "SEE ALL COURSES >", categories_path %>
-              </div> -->
-            </div>
-
-          </div>
           <% end %>
           <% end %>
           <% end %>
-        </div>
-      </div>
       <!--  End of Learning div -->
 
       <!--  Goal div -->
       <% unless wallet.goals.empty? %>
-      <div class="card-dashboard d-flex justify-content-between text-left">
+        <div class="card-dashboard d-flex text-left">
 
-        <div class="chart" data-percent="<%= @goal_percentage %>">
-         <div class="chart-image" style="">
-          <img src="<%= wallet.goals.first.picture %>" alt="">
+          <div class="chart" data-percent="<%= @goal_percentage_hash[wallet]%>">
+           <div class="chart-image" style="">
+            <img src="<%= wallet.goals.first.picture %>" alt="">
+          </div>
         </div>
-      </div>
-
-      <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
-        <div>
-          <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0">Saving progress</h2>
-          <h3 class="chart-text">Saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency.downcase %></h3>
-          <p>  <h3>to buy a <%= wallet.goals.first.name %></h3></p>
+          <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
+            <div>
+              <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0">Goals</h2>
+              <h3 class="chart-text">Saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency.downcase %></h3>
+              <p>  <h3>for a new <%= wallet.goals.first.name.downcase %></h3></p>
+            </div>
+          </div>
         </div>
-      </div>
-
-
+      <% end %>
 
     <div class="card-dashboard d-flex justify-content-between text-left">
       <div class="d-flex justify-content-around border-top">
@@ -227,17 +218,13 @@ a {
       </div>
     </div>
 
+  </div>
     <% end %>
-    <% end %>
+  <% end %>
   </div>
 </div>
-<% end %>
 
 <% end %>
-</div>
-</div>
-
-</div> <!-- container main closing -->
 
 <div class="container-dashboard-button">
   <%= link_to "ADD NEW KID", new_user_path, class: "button-white" %>

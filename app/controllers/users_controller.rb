@@ -8,10 +8,12 @@ class UsersController < ApplicationController
     @goal_percentage = 0
     if @user.parent?
       @wallets = @user.parent_wallets
+      @done_percentage_hash = Hash.new
+      @goal_percentage_hash = Hash.new
       unless @wallets.first.nil?
         @wallets.each do |wallet|
-          @done_percentage = learning_progress_percentage(wallet.kid_id)
-          @goal_percentage = goal_progress_percentage(wallet.kid_id)
+          @done_percentage_hash[wallet] = learning_progress_percentage(wallet.kid_id)
+          @goal_percentage_hash[wallet] = goal_progress_percentage(wallet.kid_id)
         end
       end
     else
@@ -21,7 +23,7 @@ class UsersController < ApplicationController
       unless @user_course.nil?
         @course = Course.where(id: @user_course.course_id)
         learning_progress_percentage(current_user)
-        goal_progress_percentage(current_user)
+        my_goal_progress_percentage(current_user)
         # check if course is complete. if level nr > number of levels in current course then complete
         if @user_course.last_level > Level.where(course_id: @course).length
           @user_course.complete = true
@@ -29,7 +31,6 @@ class UsersController < ApplicationController
         end
       end
     end
-
   end
 
   def new
@@ -115,14 +116,28 @@ class UsersController < ApplicationController
       end
   end
 
+  # method for parents
   def goal_progress_percentage(kid_id)
-    #find wallet with kid id
+    # find wallet with kid id
     @wallet = Wallet.where(kid_id: kid_id).first
     @goal = Goal.where(wallet_id: @wallet).first
     if @goal
       # if @goal.goal_current_saving != 0
-        @goal_percentage = @goal.goal_current_saving.to_f / @goal.goal_price.to_f * 100
+       @goal_percentage = @goal.goal_current_saving.to_f / @goal.goal_price.to_f * 100
       # end
+    end
+  end
+
+  # method for kids
+  def my_goal_progress_percentage(kid_id)
+    @wallet = Wallet.where(kid_id: kid_id).first
+    @goals = Goal.where(wallet_id: @wallet)
+    @goal_percentage = Hash.new
+    if @goals
+      @goals.each do |goal|
+       @goal_percentage[goal] = goal.goal_current_saving.to_f / goal.goal_price.to_f * 100
+      end
+      # en
     end
   end
 end
