@@ -55,8 +55,10 @@ body {
   height: 16px;
   border-radius: 50%; }
 .icon-plus img {
-  width: 160px;
-  height: 160px
+  width: 50px;
+  height: 50px;
+  display: block;
+  margin: 0 auto;
 }
 section {
   background-color: #E34E53;
@@ -213,8 +215,8 @@ a {
                       <% end %>
                     <% end %>
 
-                    <div class="card card-goal shadow-none" style="background-color: #E3E8EB">
-                        <div class="icon-plus p2 mb-4" style="width: 10px; height: 10px;">
+                    <div class="card card-goal shadow-none position-relative" style="background-color: #E3E8EB">
+                        <div class="icon-plus position-absolute" style="top: 40%; left: 40%;">
                             <%= link_to new_wallet_goal_path(wallet.id) do %>
                         <%= image_tag "plus-icon.png" %>
                     <% end %>
