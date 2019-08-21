@@ -54,6 +54,10 @@ body {
   width: 16px;
   height: 16px;
   border-radius: 50%; }
+.icon img {
+  margin-bottom: 4px;
+  margin-left: 7px;
+}
 .icon-plus img {
   width: 50px;
   height: 50px;
@@ -204,8 +208,8 @@ a {
                   </div>
                 <% else %>
                   <div class="p-2" style="margin-top: 16px;">
-                     <p><%= goal.goal_allowance %>$ - WEEKLY SAVING</p>
-                     <p><%= goal.goal_current_saving %>$ - SAVED SO FAR</p>
+                     <p>WEEKLY SAVING - <%= goal.goal_allowance %>$ </p>
+                     <p>SAVED ALREADY -<%= goal.goal_current_saving %>$ </p>
                   </div>
                 <% end %>
                 </div>
