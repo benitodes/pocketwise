@@ -96,19 +96,19 @@ course_list = [
     'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288542/pocketwise/python_svfh60.png', 1],
 
 
-  ['German Intermediate', 'HTML is the foundation of all web pages. Without HTML, you wouldn’t be able to organize text or add images or videos to your web pages.
+  ['German Basics', 'HTML is the foundation of all web pages. Without HTML, you wouldn’t be able to organize text or add images or videos to your web pages.
     HTML is the beginning of everything you need to know to create engaging web pages!',
-    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288543/pocketwise/german_level_1_uk6w3t.png', 2],
+    'https://assets.ahgz.de/media/news/article_l/127683/brezeln-weltweit-beliebter-snack.jpg', 2],
 
 
-  ['German Basics', 'Without CSS, every web page would be drab plain text and images that flowed straight down the page.
+  ['German Intermediate', 'Without CSS, every web page would be drab plain text and images that flowed straight down the page.
     With CSS, you can add color and background images and change the layout of your page — your web pages can feel like works of art!',
-    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288546/pocketwise/german_level_2_vdwny6.png', 2],
+    'https://targetcareers.co.uk/sites/targetcareers.co.uk/files/public/styles/header_1500x550/public/field/image/football.jpg?itok=O1dRVOeD', 2],
 
 
   ['Maths Basics', 'HTML is the foundation of all web pages. Without HTML, you wouldn’t be able to organize text or add images or videos to your web pages.
     HTML is the beginning of everything you need to know to create engaging web pages!',
-    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288543/pocketwise/maths_level_1_zjm6bv.png', 3],
+    'http://www.provoke-online.com/images/lifestyle/lifestyle/einstein.jpg', 3],
 
 
   ['Maths Intermediate', 'Without CSS, every web page would be drab plain text and images that flowed straight down the page.
