@@ -4,9 +4,7 @@
 body {
   background-color: #E3E8EB;
   }
-.container-main-dashboard {
-  background: #F8CE69;
-}
+
 .card-dashboard {
   background-color: white;
   border-radius: 10px;
@@ -30,6 +28,7 @@ body {
   height: 300px;
   border: 0px;
   margin-right: 12px;
+  vertical-align: top;
 }
 .header {
   color: #505050;
@@ -97,7 +96,7 @@ a {
 
 </style>
 
-<div class="container-main-dashboard">
+<div class="container-main">
    <div class="container-header">
   <!-- Add this line if you need the menu -->
      <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
@@ -213,12 +212,20 @@ a {
                     </div>
                       <% end %>
                     <% end %>
-        <% end %>
-  <div class="icon-plus p2 mb-4" style="width: 10px; height: 10px;">
-        <%= link_to new_wallet_goal_path(wallet.id) do %>
-            <%= image_tag "plus-icon.png" %>
-              <% end %>
+
+                    <div class="card card-goal shadow-none" style="background-color: #E3E8EB">
+                        <div class="icon-plus p2 mb-4" style="width: 10px; height: 10px;">
+                            <%= link_to new_wallet_goal_path(wallet.id) do %>
+                        <%= image_tag "plus-icon.png" %>
+                    <% end %>
   </div>
+
+
+                    </div>
+
+
+
+        <% end %>
   </div>
 <!-- </div> -->
 <!--         **** -->
