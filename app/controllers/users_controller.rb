@@ -31,6 +31,7 @@ class UsersController < ApplicationController
         end
       end
     end
+
   end
 
   def new
