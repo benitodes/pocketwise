@@ -3,29 +3,11 @@
 <style>
 body {
   background-color: #F8CE69;}
-.container-header {
-  display: flex;
-  border-bottom: :1px white; }
-.header {
-  margin: auto;
-  margin-left: 12px;
-  font-size: 20px;
-  font-weight: bold; }
-.container-dashboard-button {
-  display: flex;
-  padding: 6px;
-}
-section {
-  background-color: #E34E53;
-  background-size: 30% 100%;
-}
-h1 {
-  color: white; }
 </style>
 
 <!-- end of inline css -->
 
-<div class="container-main">
+<div class="container">
    <div class="container-header">
   <!-- Add this line if you need the menu -->
      <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
