@@ -54,6 +54,10 @@ body {
   width: 16px;
   height: 16px;
   border-radius: 50%; }
+.icon img {
+  margin-bottom: 4px;
+  margin-left: 7px;
+}
 .icon-plus img {
   width: 50px;
   height: 50px;
@@ -203,9 +207,15 @@ a {
                     <p>You saved <%= goal.goal_current_saving %> for your <%= goal.name %></p>
                   </div>
                 <% else %>
-                  <div class="p-2" style="margin-top: 16px;">
-                     <p><%= goal.goal_allowance %>$ - WEEKLY SAVING</p>
-                     <p><%= goal.goal_current_saving %>$ - SAVED SO FAR</p>
+                  <div class="p-2 d-flex justify-content-between border-top" style="margin-top: 16px;">
+                    <div class="border-right" style="width: 50%">
+                     <h2 class="text-center" style="margin-left: 0px"><%= goal.goal_current_saving %>$ </h2>
+                     <p class="text-center">SAVED</p>
+                    </div>
+                    <div style="width: 50%">
+                      <h2 class="text-center" style="margin-left: 0px"><%= goal.goal_allowance %>$ </h2>
+                     <p class="text-center">WEEKLY</p>
+                    </div>
                   </div>
                 <% end %>
                 </div>
