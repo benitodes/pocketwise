@@ -13,8 +13,9 @@ Category.destroy_all
 
 user_list = [
   ['Benoit', 'Destresse', 'benoit@destresse.fr', 'benito', 'password', true],
+  ['Sarah', 'OhGee', 'sarah@gmail.com', 'Sarh', 'password', true],
   ['Samba', 'OhGee', 'samba@dance.com', 'Samb', 'password', false],
-  ['Jana', 'X', 'jana@x.com', 'Jan', 'password', true]
+  ['Mia', 'OhGee', 'mia@dance.com', 'Mi', 'password', false],
 ]
 
 # create new users from array
@@ -28,22 +29,26 @@ puts "users have been created"
 
 # create wallet
 # byebug
-kid = User.where(parent: false).sample
-parent = User.where(parent: true).sample
 
-wallet = Wallet.create!(payout_amount: 50, payout_frequency: 'Weekly', total_allowance: 70, payout_day: 'Monday', parent_id: parent.id, kid_id: kid.id)
+benoit = User.where(first_name: "Benoit")
+sarah = User.where(first_name: "Sarah")
+samba = User.where(first_name: "Samba")
+mia = User.where(first_name: "Mia")
+
+samba_wallet = Wallet.create!(payout_amount: 0, payout_frequency: 'Weekly', total_allowance: 30, payout_day: 'Friday', parent_id: 2, kid_id: 3)
+mia_wallet = Wallet.create!(payout_amount: 0, payout_frequency: 'Weekly', total_allowance: 20, payout_day: 'Friday', parent_id: 2, kid_id: 4)
 
 puts "wallet has been created"
 
 # goals
 goal_list = [
-  ['Bike', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200274/pocketwise/bike_sowtrd.jpg',5, 150, 60, false, 1],
-  ['Buggy', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200276/pocketwise/buggy_uxjqye.png', 7, 50, 0, false, 1],
-  ['Sneakers', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200274/pocketwise/stansmith_p5ndhu.jpg', 5, 99, 99, true, 1]
+  ['Boxing Gloves', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566356338/pocketwise/neonbrand-WwrQnL0Gi1c-unsplash_dbmtes.jpg', 15, 18, 0, false, 1],
+  ['Buggy', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200276/pocketwise/buggy_uxjqye.png', 10, 50, 0, false, 1],
+  ['Stan Smith', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200274/pocketwise/stansmith_p5ndhu.jpg', 10, 69, 0, false, 2]
 ]
 
 goal_list.each do |name, picture, goal_allowance, goal_price, goal_current_saving, complete, wallet_id|
-  goal = Goal.new(name: name, goal_allowance: goal_allowance, goal_price: goal_price, goal_current_saving: goal_current_saving, complete: complete, wallet_id: wallet.id)
+  goal = Goal.new(name: name, goal_allowance: goal_allowance, goal_price: goal_price, goal_current_saving: goal_current_saving, complete: complete, wallet_id: wallet_id)
   goal.remote_picture_url = picture
   goal.save
 end
@@ -55,7 +60,6 @@ category_list = [['Coding', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v
 ['Maths', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566187957/pocketwise/maths_l5dvah.jpg']]
 
 # if bang after create rails will throw error, raises exception
-
 
 category_list.each do |name, photo|
   cat = Category.new(name: name)
@@ -111,6 +115,7 @@ course_list = [
 
 ]
 
+
 # create new courses from array
 
 course_list.each do |name, description, picture, category_id|
@@ -118,8 +123,6 @@ course_list.each do |name, description, picture, category_id|
 end
 
 puts "courses have been created"
-
-
 
 
 # create levels
@@ -161,7 +164,7 @@ puts "lectures have been created"
 
 question_list = [
   ['What is HTML use for?', 'CSS is for the style so HTML is for [...]? :)', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 1, Level.first.id],
-  ['How many headings do we know?', '3*2 = ? ;)', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 2, Level.first.id],
+  ['How many headings are available in HTML?', '3*2 = ? ;)', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 2, Level.first.id],
   ['Is it possible to display content outside of the body tag?', 'think', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 3, Level.first.id],
   ['Why do we need tables in HTML?', 'think', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 1, Level.second.id],
   ['Which element do we use to create a table?', 'To create a body on your page, you will use : <body></body> right?','https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 2, Level.second.id],
@@ -180,18 +183,18 @@ puts "questions have been created"
 # create answers
 
 answer_list = [
-  ['HTML provides structure to the content appearing on a website, such as images, text, or videos.', true, Question.find_by(id: 1).id],
+  ['HTML provides structure to the content appearing on a website (images, text, videos)', true, Question.find_by(id: 1).id],
   ['HTML provides style to the content of our webpage', false, Question.find_by(id: 1).id],
-  ['HTML is a language which allow the client (my computer + my browser) and a server to communicate', false, Question.find_by(id: 1).id],
+  ['HTML allow the client (my computer + my browser) and a server to communicate', false, Question.find_by(id: 1).id],
   ['2', false, Question.find_by(id: 2).id],
   ['6', true, Question.find_by(id: 2).id],
   ['4', false, Question.find_by(id: 2).id],
   ['It depends', false, Question.find_by(id: 3).id],
   ['Yes', false, Question.find_by(id: 3).id],
   ['No', true, Question.find_by(id: 3).id],
-  ['To collect informationS from our user.', false, Question.find_by(id: 4).id],
-  ['To present tabular data to users.', true, Question.find_by(id: 4).id],
-  ['For fun.', false, Question.find_by(id: 4).id],
+  ['To collect informationS from our user', false, Question.find_by(id: 4).id],
+  ['To present tabular data to users', true, Question.find_by(id: 4).id],
+  ['For fun', false, Question.find_by(id: 4).id],
   ['<table></table>', true, Question.find_by(id: 5).id],
   ['<body></body>', false, Question.find_by(id: 5).id],
   ['<form></form>', false, Question.find_by(id: 5).id],
@@ -201,12 +204,12 @@ answer_list = [
   ['HTML <form> element is responsible for collecting information to send somewhere else', true, Question.find_by(id: 7).id],
   ['HTML <form> element is responsible for handling the content of our web page', false, Question.find_by(id: 7).id],
   ['HTML <form> element allow us to present tabular data to users', false, Question.find_by(id: 7).id],
-  ['a Method', true, Question.find_by(id: 8).id],
-  ['a Background image', false, Question.find_by(id: 8).id],
-  ['a stackoverflow account', false, Question.find_by(id: 8).id],
+  ['A method', true, Question.find_by(id: 8).id],
+  ['A Background image', false, Question.find_by(id: 8).id],
+  ['A stackoverflow account', false, Question.find_by(id: 8).id],
   ['A submit button', true, Question.find_by(id: 9).id],
-  ['an input', false, Question.find_by(id: 9).id],
-  ['an uploader', false, Question.find_by(id: 9).id]
+  ['An input', false, Question.find_by(id: 9).id],
+  ['An uploader', false, Question.find_by(id: 9).id]
 ]
 
 answer_list.each do |answer_content, correct, question_id|
@@ -219,8 +222,8 @@ puts "answers have been created"
 # create user_courses
 
 user_course_list = [
-  [Course.first.id, User.second.id, 2, 2, 3, false],
-  [Course.first.id, User.second.id, 1, 3, 3, true]
+  [Course.first.id, User.third.id, 1, 1, 1, false],
+  [Course.first.id, User.fourth.id, 1, 1, 1, false]
 ]
 
 
