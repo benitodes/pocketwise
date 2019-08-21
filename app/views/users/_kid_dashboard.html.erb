@@ -54,9 +54,11 @@ body {
 .icon {
   width: 16px;
   height: 16px;
-  border-radius: 50%;
+  border-radius: 50%; }
+.icon-plus img {
+  width: 160px;
+  height: 160px
 }
-
 section {
   background-color: #E34E53;
   background-size: 30% 100%;
@@ -132,6 +134,7 @@ a {
             <% end %>
           </div>
 
+
             <div class="d-flex flex-column justify-content-between learning-stats">
               <div>
                 <div>
@@ -148,7 +151,6 @@ a {
                 <%= link_to "SEE ALL COURSES >", categories_path %>
               </div>
             </div>
-
           </div>
           </div>
         <% end %>
@@ -171,6 +173,7 @@ a {
 
 <!-- GOALS -->
   <!-- Goals -->
+<!--   <div class="goals-container d-flex"> -->
   <div class="dashboard-scrolling-wrapper">
         <% unless @goals.nil? %>
                     <% @goals.each do |goal| %>
@@ -211,14 +214,14 @@ a {
                       <% end %>
                     <% end %>
         <% end %>
-</div>
-<div>
-    <div class="icon p2 mb-4" style="width: 10px; height: 10px;">
+  <div class="icon-plus p2 mb-4" style="width: 10px; height: 10px;">
         <%= link_to new_wallet_goal_path(wallet.id) do %>
             <%= image_tag "plus-icon.png" %>
-        <% end %>
-    </div>
-
+              <% end %>
+  </div>
+  </div>
+<!-- </div> -->
+<!--         **** -->
 </div>
 </div>
 
