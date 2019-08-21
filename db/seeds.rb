@@ -219,8 +219,7 @@ puts "answers have been created"
 # create user_courses
 
 user_course_list = [
-  [Course.first.id, User.second.id, 2, 2, 3, false],
-  [Course.first.id, User.second.id, 1, 3, 3, true]
+  [Course.first.id, User.second.id, 1, 2, 3, false]
 ]
 
 

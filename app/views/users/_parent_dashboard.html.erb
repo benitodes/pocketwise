@@ -85,164 +85,148 @@ a {
 <!-- Html -->
 
 <div class="container-main">
-<div class="container-header">
-  <!-- Add this line if you need the menu -->
+  <div class="container-header">
+    <!-- Add this line if you need the menu -->
     <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
-      <h1 class ="header">Welcome <%= user.first_name %></h1>
-   </div>
+    <h1 class ="header">Welcome <%= user.first_name %></h1>
+  </div>
 
-    <% if wallets.empty? %>
-      <div class="main-card-dashboard">
-        <p>This is pretty empty here, let's add your first kid</p>
-      </div>
-    <% else %>
+  <% if wallets.empty? %>
+  <div class="main-card-dashboard">
+    <p>This is pretty empty here, let's add your first kid</p>
+  </div>
+  <% else %>
 
-    <div class="scrolling-wrapper">
-      <% wallets.each do |wallet| %>
+  <div class="scrolling-wrapper">
+    <% wallets.each do |wallet| %>
 
-          <div class="main-card-dashboard">
-        <!-- Header Tom -->
-            <div class="container-header">
-              <div>
-                <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-kid" %>
-              </div>
-              <div>
-                <h2><%= wallet.kid.first_name %>'s summary</h2>
-              </div>
-            </div>
-       <!-- End Header Tom -->
+      <!-- Header Tom -->
+      <!-- End Header Tom -->
 
       <!--  notification div -->
       <% if wallet.payout_amount != 0 %>
-        <div class="payout-notification text-left d-flex justify-content-between">
-          <div>
-            <h3><%= wallet.kid.username %> completed his exercise.</h3>
-            <h3> It's paytime! </h3>
-          </div>
-          <div>
-            <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch %>
-          </div>
+      <div class="payout-notification text-left d-flex justify-content-between">
+        <div>
+          <h3><%= wallet.kid.username %> completed his exercise.</h3>
+          <h3> It's paytime! </h3>
         </div>
+        <div>
+          <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch %>
+        </div>
+      </div>
       <% end %>
       <!--  End of notification div -->
 
       <!-- Pocket Money div -->
+      <div>
+        <div class="card-dashboard payout-notification-parent">
           <div>
-            <div class="card-dashboard payout-notification-parent">
-              <div>
-                <h2 class="dashboard-chart-text">Upcoming payout: </h2>
-                <h1 class="money"><%= wallet.payout_amount %>$<h1>
-           <!--      <p>Allowance <%= wallet.total_allowance%> <%= wallet.payout_frequency %> </p> -->
-              </div>
-              <div class="d-flex justify-content-between align-items-baseline" style="margin-top: 0">
-                <div></div>
-                <div>
-                  <h2 class="dashboard-chart-text">Allowance - <%= wallet.total_allowance%>$ <%= wallet.payout_frequency %></h2>
-                </div>
-                <div>
-                <% if policy(current_user).dashboard? %>
-                   <div class="icon">
-                          <%= link_to edit_wallet_path(wallet.id) do %>
-                             <%= image_tag "edit.jpg" %>
-                          <% end %>
-                    </div>
+            <h2 class="dashboard-chart-text">Upcoming payout: </h2>
+          <div class="container-header">
+            <div>
+              <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-kid" %>
+            </div>
+
+            <h1 class="money"><%= wallet.payout_amount %>$<h1>
+          </div>
+             <!--      <p>Allowance <%= wallet.total_allowance%> <%= wallet.payout_frequency %> </p> -->
+           </div>
+           <div class="d-flex justify-content-between align-items-baseline" style="margin-top: 0">
+            <div></div>
+            <div>
+              <h2 class="dashboard-chart-text">Allowance - <%= wallet.total_allowance%>$ <%= wallet.payout_frequency %></h2>
+            </div>
+            <div>
+              <% if policy(current_user).dashboard? %>
+              <div class="icon">
+                <%= link_to edit_wallet_path(wallet.id) do %>
+                <%= image_tag "edit.jpg" %>
                 <% end %>
-                </div>
-
-                </div>
-
+              </div>
+              <% end %>
             </div>
+          </div>
+        </div>
 
-      <!-- End of Pocket Money div -->
+        <!-- End of Pocket Money div -->
+        <!--  Learning div -->
 
-
-      <!--  Learning div -->
-
-      <% unless wallet.kid.user_courses.empty? %>
+        <% unless wallet.kid.user_courses.empty? %>
         <% wallet.kid.user_courses.each do |user_course| %>
-          <% unless user_course.complete? %>
-             <div class="col">
-              </div>
-            <div class="card-dashboard">
-              <div class="d-flex justify-content-start">
+        <% unless user_course.complete? %>
+          <div class="card-dashboard">
+            <div class="d-flex justify-content-start">
 
-            <!-- chart here -->
-              <div class="chart" data-percent="<%= @done_percentage %>">
-                 <div class="chart-image" style="">
+                  <!-- chart here -->
+                <div class="chart" data-percent="<%= @done_percentage %>">
+                  <div class="chart-image" style="">
                     <img src="https://www.codecademy.com/webpack/b448a28e23c2912785c2ef6d9e37d4d5.svg" alt="">
-                 </div>
-              </div>
+                  </div>
+                </div>
 
-            <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
-              <div>
-                <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0">Learning progress</h2>
-                <h3 class="chart-text">Course - <%= user_course.course.name %></h3>
-                <p>Level <%= user_course.last_level %>, Question <%= user_course.last_question %></p>
+                <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
+                  <div>
+                    <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0">Learning progress</h2>
+                    <h3 class="chart-text">Course - <%= user_course.course.name %></h3>
+                    <p>Level <%= user_course.last_level %>, Question <%= user_course.last_question %></p>
+                  </div>
+                  <div style="margin-top: 8px;" class="links">
+            <!--         <div class="text-left">
+                      <#%= link_to "SEE ALL COURSES >", categories_path %>
+                    </div> -->
+                  </div>
+                </div>
               </div>
-            <div style="margin-top: 8px;" class="links">
-      <!--         <div class="text-left">
-                <#%= link_to "SEE ALL COURSES >", categories_path %>
-              </div> -->
-            </div>
-
             </div>
           <% end %>
-        <% end %>
-    <% end %>
-    </div>
-  </div>
+          <% end %>
+          <% end %>
       <!--  End of Learning div -->
 
       <!--  Goal div -->
-        <% unless wallet.goals.empty? %>
-          <div class="card-dashboard d-flex justify-content-between text-left">
+      <% unless wallet.goals.empty? %>
+        <div class="card-dashboard d-flex justify-content-between text-left">
 
           <div class="chart" data-percent="<%= @goal_percentage %>">
-                 <div class="chart-image" style="">
-                    <img src="<%= wallet.goals.first.picture %>" alt="">
-                 </div>
+           <div class="chart-image" style="">
+            <img src="<%= wallet.goals.first.picture %>" alt="">
           </div>
-
-          <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
-              <div>
-                <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0">Saving progress</h2>
-                <h3 class="chart-text">Saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency.downcase %></h3>
-                <p>  <h3>to buy a <%= wallet.goals.first.name %></h3></p>
-              </div>
-            </div>
-
-          <div class="card-dashboard d-flex justify-content-between text-left">
-        <div class="d-flex justify-content-around border-top">
-          <% if policy(wallet).edit? %>
-            <div class="container-dashboard-button">
-                <%= link_to "SEE DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-white" %>
-              </div>
-            <% end %>
-            <% if policy(wallet.kid).destroy? %>
-              <div class="container-dashboard-button">
-                <%= link_to "DELETE KID", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
-              </div>
         </div>
+          <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
+            <div>
+              <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0">Saving progress</h2>
+              <h3 class="chart-text">Saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency.downcase %></h3>
+              <p>  <h3>to buy a <%= wallet.goals.first.name %></h3></p>
+            </div>
           </div>
+        </div>
+      <% end %>
 
-
+    <div class="card-dashboard d-flex justify-content-between text-left">
+      <div class="d-flex justify-content-around border-top">
+        <% if policy(wallet).edit? %>
+        <div class="container-dashboard-button">
+          <%= link_to "SEE DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-white" %>
+        </div>
         <% end %>
-
-        <% end %>
-         </div>
+        <% if policy(wallet.kid).destroy? %>
+        <div class="container-dashboard-button">
+          <%= link_to "DELETE KID", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
         </div>
       </div>
-    <% end %>
-
-  <% end %>
-</div>
-</div>
-
-    <div class="container-dashboard-button">
-      <%= link_to "ADD NEW KID", new_user_path, class: "button-white" %>
     </div>
-</div> <!-- container main closing -->
 
+  </div>
+    <% end %>
+  <% end %>
+  </div>
+</div>
+
+<% end %>
+
+<div class="container-dashboard-button">
+  <%= link_to "ADD NEW KID", new_user_path, class: "button-white" %>
+</div>
 
 <!-- payout notification code from here  -->
 <script>
@@ -250,16 +234,16 @@ a {
   const confirmButton = document.querySelector(".button-confirm")
   confirmButton.addEventListener("click", () => {
     console.log('test');
-        payoutNotification.style.display = "none"
-      }
+    payoutNotification.style.display = "none"
+  }
   )
 </script>
 
 
 <!-- progress circle code from here  -->
 <script>
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
+  (function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
     define([], function () {
       return (root['EasyPieChart'] = factory());
@@ -279,7 +263,7 @@ a {
  * @param {DOMElement} el      DOM element to host the canvas (root of the plugin)
  * @param {object}     options options object of the plugin
  */
-var CanvasRenderer = function(el, options) {
+ var CanvasRenderer = function(el, options) {
   var cachedBackground;
   var canvas = document.createElement('canvas');
 
@@ -324,7 +308,7 @@ var CanvasRenderer = function(el, options) {
    * @param {number} lineWidth Width of the line in px
    * @param {number} percent   Percentage to draw (float between -1 and 1)
    */
-  var drawCircle = function(color, lineWidth, percent) {
+   var drawCircle = function(color, lineWidth, percent) {
     percent = Math.min(Math.max(-1, percent || 0), 1);
     var isNegative = percent <= 0 ? true : false;
 
@@ -340,7 +324,7 @@ var CanvasRenderer = function(el, options) {
   /**
    * Draw the scale of the chart
    */
-  var drawScale = function() {
+   var drawScale = function() {
     var offset;
     var length;
 
@@ -366,41 +350,41 @@ var CanvasRenderer = function(el, options) {
    * Request animation frame wrapper with polyfill
    * @return {function} Request animation frame method or timeout fallback
    */
-  var reqAnimationFrame = (function() {
+   var reqAnimationFrame = (function() {
     return  window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        function(callback) {
-          window.setTimeout(callback, 1000 / 60);
-        };
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    function(callback) {
+      window.setTimeout(callback, 1000 / 60);
+    };
   }());
 
   /**
    * Draw the background of the plugin including the scale and the track
    */
-  var drawBackground = function() {
+   var drawBackground = function() {
     if(options.scaleColor) drawScale();
     if(options.trackColor) drawCircle(options.trackColor, options.trackWidth || options.lineWidth, 1);
   };
 
   /**
     * Canvas accessor
-   */
-  this.getCanvas = function() {
-    return canvas;
-  };
+    */
+    this.getCanvas = function() {
+      return canvas;
+    };
 
   /**
     * Canvas 2D context 'ctx' accessor
-   */
-  this.getCtx = function() {
-    return ctx;
-  };
+    */
+    this.getCtx = function() {
+      return ctx;
+    };
 
   /**
    * Clear the complete canvas
    */
-  this.clear = function() {
+   this.clear = function() {
     ctx.clearRect(options.size / -2, options.size / -2, options.size, options.size);
   };
 
@@ -408,7 +392,7 @@ var CanvasRenderer = function(el, options) {
    * Draw the complete chart
    * @param {number} percent Percent shown by the chart between -100 and 100
    */
-  this.draw = function(percent) {
+   this.draw = function(percent) {
     // do we need to render a background
     if (!!options.scaleColor || !!options.trackColor) {
       // getImageData and putImageData are supported
@@ -446,7 +430,7 @@ var CanvasRenderer = function(el, options) {
    * @param {number} from Starting percentage
    * @param {number} to   Final percentage
    */
-  this.animate = function(from, to) {
+   this.animate = function(from, to) {
     var startTime = Date.now();
     options.onStart(from, to);
     var animation = function() {
@@ -513,7 +497,7 @@ var EasyPieChart = function(el, opts) {
   /**
    * Initialize the plugin by creating the options object and initialize rendering
    */
-  var init = function() {
+   var init = function() {
     this.el = el;
     this.options = options;
 
@@ -568,7 +552,7 @@ var EasyPieChart = function(el, opts) {
    * @param  {number} newValue Number between 0 and 100
    * @return {object}          Instance of the plugin for method chaining
    */
-  this.update = function(newValue) {
+   this.update = function(newValue) {
     newValue = parseFloat(newValue);
     if (options.animate.enabled) {
       this.renderer.animate(currentValue, newValue);
@@ -583,7 +567,7 @@ var EasyPieChart = function(el, opts) {
    * Disable animation
    * @return {object} Instance of the plugin for method chaining
    */
-  this.disableAnimation = function() {
+   this.disableAnimation = function() {
     options.animate.enabled = false;
     return this;
   };
@@ -592,7 +576,7 @@ var EasyPieChart = function(el, opts) {
    * Enable animation
    * @return {object} Instance of the plugin for method chaining
    */
-  this.enableAnimation = function() {
+   this.enableAnimation = function() {
     options.animate.enabled = true;
     return this;
   };
@@ -605,15 +589,15 @@ return EasyPieChart;
 }));
 </script>
 
- <script>
-    var charts = document.querySelectorAll('.chart');
-    charts.forEach((chart) => {
-      new EasyPieChart(chart, {
-          scaleLength: 0,
-          barColor: '#F8CE69',
-          trackColor: '#E3E8EB',
-          lineWidth: 8,
-          size: 140,
-      });
-    })
+<script>
+  var charts = document.querySelectorAll('.chart');
+  charts.forEach((chart) => {
+    new EasyPieChart(chart, {
+      scaleLength: 0,
+      barColor: '#F8CE69',
+      trackColor: '#E3E8EB',
+      lineWidth: 8,
+      size: 140,
+    });
+  })
 </script>
