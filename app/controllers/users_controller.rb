@@ -12,9 +12,9 @@ class UsersController < ApplicationController
       @goal_percentage = Hash.new
       unless @wallets.first.nil?
         @wallets.each do |wallet|
-          @done_percentage[wallet] = learning_progress_percentage(wallet.kid_id)
-          @goal_percentage[wallet] = goal_progress_percentage(wallet.kid_id)
-      raise
+          # @done_percentage[wallet] = learning_progress_percentage(wallet.kid_id)
+          # @goal_percentage[wallet] = goal_progress_percentage(wallet.kid_id)
+
         end
       end
     else
