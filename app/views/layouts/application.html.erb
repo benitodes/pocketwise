@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
     <title>PocketWise</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
@@ -13,7 +14,7 @@
 
     <%= render 'shared/offcanvasnavigation' %>
       <div class="section">
-        <div class="container">
+        <div class="container mt-2">
            <label for="offcanvas" class="biglabel"></label>
           <%= yield %>
         </div>
