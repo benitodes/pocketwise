@@ -34,7 +34,7 @@ class GoalsController < ApplicationController
   def update
     authorize @goal
     @goal.update(goal_params)
-    redirect_to wallet_goals_path(@goal.wallet)
+    redirect_to dashboard_user_path(current_user)
   end
 
   def destroy
