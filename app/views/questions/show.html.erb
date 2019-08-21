@@ -17,7 +17,7 @@
       padding-left: 12px;
       padding-right: 12px;
       text-align: center;
-      border-radius: 2px;
+      border-radius: 10px;
       box-shadow: 0 1px 2px rgba(0,0,0,0.2);
       height: 100vh;
       display: flex;
@@ -27,8 +27,9 @@
     .img-container {
       text-align: center;
     }
+
     h2 {
-      color: #56b3a7;
+      color: #505050;
       margin: auto;
       margin-top: 12px;
       font-size: 24px;
@@ -43,7 +44,7 @@
       max-height: 100%;
        }
     .modal-body {
-      background-color: #0084C3;
+      background-color: white;
    /*   height: 100vh;*/
 
     }
@@ -56,7 +57,7 @@
 
             <div class="quiz-container">
              <div class="progress">
-              <div class="bar shadow zigZag" style="width: <%= @question_progress_percentage %>%; transition-duration: 2s; margin-left: 0;"></div>
+              <div class="bar shadow clouds" style="width: <%= @question_progress_percentage %>%; transition-duration: 2s; margin-left: 0;"></div>
 
             </div>
             <div class="card-quiz">
@@ -124,7 +125,7 @@
                               <div class="carousel-item active">
                                 <div class="img-container">
 
-                                <img src="https://ksr-ugc.imgix.net/assets/014/504/580/63621c9e6636012a06d602fe6141ddaa_original.gif?ixlib=rb-2.1.0&w=680&fit=max&v=1479106363&auto=format&gif-q=50&q=92&s=b771cc255bce0ede8d728b9be60a1a2a" alt="">
+                                <img src="https://cdn.dribbble.com/users/1061/screenshots/1914377/character-dribbble.gif" alt="">
 
                                 </div>
                                 <div>
@@ -133,7 +134,7 @@
 
                                 </div>
                                 <div style="margin-top: 24px;">
-                                 <%= link_to "CONTINUE", level_increase_level_path(@level), class: "btn button-white", style: "position:relative !important"%>
+                                 <%= link_to "CONTINUE", level_increase_level_path(@level), class: "btn button-yellow", style: "position:relative !important"%>
 
                                 </div>
                                 <!-- <a class="carousel-control-next btn btn-primary" href="#carouselExampleControls" role="button" data-slide="next" style="position:relative !important; width: 100%" > -->
