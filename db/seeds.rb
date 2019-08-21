@@ -36,7 +36,7 @@ samba = User.where(first_name: "Samba")
 mia = User.where(first_name: "Mia")
 
 samba_wallet = Wallet.create!(payout_amount: 0, payout_frequency: 'Weekly', total_allowance: 30, payout_day: 'Friday', parent_id: 2, kid_id: 3)
-mia_wallet = Wallet.create!(payout_amount: 0, payout_frequency: 'Weekly', total_allowance: 30, payout_day: 'Friday', parent_id: 2, kid_id: 4)
+mia_wallet = Wallet.create!(payout_amount: 0, payout_frequency: 'Weekly', total_allowance: 20, payout_day: 'Friday', parent_id: 2, kid_id: 4)
 
 puts "wallet has been created"
 
@@ -44,16 +44,13 @@ puts "wallet has been created"
 goal_list = [
   ['Boxing Gloves', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566356338/pocketwise/neonbrand-WwrQnL0Gi1c-unsplash_dbmtes.jpg', 15, 18, 0, false, 1],
   ['Buggy', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200276/pocketwise/buggy_uxjqye.png', 10, 50, 0, false, 1],
-  ['Stan Smith', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200274/pocketwise/stansmith_p5ndhu.jpg', 15, 69, 0, false, 2]
+  ['Stan Smith', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200274/pocketwise/stansmith_p5ndhu.jpg', 10, 69, 0, false, 2]
 ]
 
 goal_list.each do |name, picture, goal_allowance, goal_price, goal_current_saving, complete, wallet_id|
-  samba_goal = Goal.new(name: name, goal_allowance: goal_allowance, goal_price: goal_price, goal_current_saving: goal_current_saving, complete: complete, wallet_id: 1)
-  mia_goal = Goal.new(name: name, goal_allowance: goal_allowance, goal_price: goal_price, goal_current_saving: goal_current_saving, complete: complete, wallet_id: 2)
-  samba_goal.remote_picture_url = picture
-  mia_goal.remote_picture_url = picture
-  samba_goal.save
-  mia_goal.save
+  goal = Goal.new(name: name, goal_allowance: goal_allowance, goal_price: goal_price, goal_current_saving: goal_current_saving, complete: complete, wallet_id: wallet_id)
+  goal.remote_picture_url = picture
+  goal.save
 end
 
 puts "goals have been created"
@@ -225,8 +222,8 @@ puts "answers have been created"
 # create user_courses
 
 user_course_list = [
-  [Course.first.id, User.find(3), 1, 1, 1, false],
-  [Course.first.id, User.find(4), 1, 1, 1, false]
+  [Course.first.id, User.third.id, 1, 1, 1, false],
+  [Course.first.id, User.fourth.id, 1, 1, 1, false]
 ]
 
 
