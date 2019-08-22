@@ -15,7 +15,8 @@ p {
   padding: 20px; }
 a {
   font-size: 16px;
-  color: white; }
+  color: white;
+  padding: 20px; }
 .simple_form {
   text-align: left;
 }
@@ -45,9 +46,11 @@ a {
           <%= f.button :submit, "LOG IN", class: "button-red" %>
         </div>
 <% end %>
-         <%= render "devise/shared/links" %>
-      </div>
-      <%= link_to "BACK", root_path, class: "button-white" %>
+        <%= link_to "BACK", root_path, class: "button-white" %>
+
+        </div>
+       <%= render "devise/shared/links" %>
+
     </div>
   </div>
 </div>
