@@ -20,16 +20,42 @@ body {
 .container-dashboard-button {
   display: flex;
   padding: 6px;}
+.payout-notification-alert {
+  background-color: #E34E53;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  margin-top: 22px;
+}
+.payout-notification-alert img {
+    border-radius: 50%;
+  /*  border: 7px solid #E3E8EB;*/
+ }
 .payout-notification-parent {
   background-color: white;
   padding: 20px;
-  border-radius: 10px;
   margin-top: 12px;
+  border-radius: 10px;
 }
 .icon img {
   width: 16px;
   height: 16px;
 }
+.notification-icon img {
+  width: 50px;
+  height: 50px;
+  top: -28px;
+  left: 44%;
+  position: absolute;
+  border-radius: 50%;
+}
+#notification-confirm-button {
+  color: white;
+}
+.fill-flex {
+  flex-basis: 100%;
+}
+
 section {
   background-color: #E34E53;
   background-size: 30% 100%;}
@@ -77,18 +103,20 @@ a {
 <!-- Html -->
 
 <div class="container-main">
-  <div class="container-header">
-    <!-- Add this line if you need the menu -->
-    <div class="header-text">
-      <h1 class ="header">Welcome <%= user.first_name %></h1>
-    </div>
-    <div class="header-avatar">
-      <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
-    </div>
+
+  <!-- Add these lines if you need the back button menu -->
+    <div class="container-header">
+      <div class="header-back">
+      </div>
+        <div class="header-text">
+          <h1 class ="header">Welcome <%= user.first_name %></h1>
+        </div>
+        <div class="header-avatar">
+          <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
+        </div>
   </div>
-   <!-- End  menu -->
 
-
+  <!-- End menu -->
 
   <% if wallets.empty? %>
   <div class="main-card-dashboard">
@@ -98,22 +126,17 @@ a {
 
   <div class="dashboard-scrolling-wrapper ">
     <% wallets.each do |wallet| %>
+            <% if wallet.payout_amount != 0 %>
+               <div class="payout-notification-alert text-left d-flex justify-content-between">
+                   <div class="notification-icon">
 
-      <!-- Header Tom -->
-      <!-- End Header Tom -->
+                      <%= image_tag "notification-icon.jpg" %>
 
-      <!--  notification div -->
-
-        <% if wallet.payout_amount != 0 %>
-           <div class="payout-notification text-left d-flex justify-content-between">
-              <h3><%= wallet.kid.username %> completed his exercise.</h3>
-              <h3> It's paytime! </h3>
-              <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch %>
-            </div>
-        <% end %>
-
-
-      <!--  End of notification div -->
+                    </div>
+                  <h3 style="color: white"> It's paytime! </h3>
+                  <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch, id: "notification-confirm-button"  %>
+                </div>
+            <% end %>
 
       <!-- Pocket Money div -->
       <div class="card-dashboard-scrolling">
@@ -122,12 +145,14 @@ a {
             <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-kid-dashboard" %>
             <h2><%= wallet.kid.username %>'s upcoming payout:</h2>
          <!--  <h2 class="dashboard-chart-text">Upcoming payout: </h2> -->
+
           <div class="container-header">
-            <h1 class="money"><%= wallet.payout_amount %>$<h1>
+            <h1 class="money" style="margin-top: 12px; margin-bottom: 12px;"><%= wallet.payout_amount %>$<h1>
           </div>
              <!--      <p>Allowance <%= wallet.total_allowance%> <%= wallet.payout_frequency %> </p> -->
            </div>
            <div class="d-flex justify-content-between align-items-baseline" style="margin-top: 0">
+            <div></div>
             <div>
               <h2 class="dashboard-chart-text" style="margin-left: 16px;"> <%= wallet.total_allowance%>$ <%= wallet.payout_frequency.downcase %></h2>
             </div>
@@ -140,6 +165,8 @@ a {
               </div>
               <% end %>
             </div>
+
+
           </div>
         </div>
 
@@ -159,11 +186,13 @@ a {
                   </div>
                 </div>
 
-                <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
+                <div class="fill-flex d-flex flex-column justify-content-between learning-stats text-center" style="margin-left: 18px">
                   <div>
-                    <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0">Learning</h2>
-                    <h3 class="chart-text"><%= user_course.course.name %></h3>
-                    <p>Level <%= user_course.last_level %></p>
+                    <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0"><%= user_course.course.name %></h2>
+                    <h3 class="chart-text"></h3>
+
+                    <p>Level <%= user_course.last_level %> </p>
+                      <p>Question <%= user_course.last_question %></p>
                   </div>
                   <div style="margin-top: 8px;" class="links">
             <!--         <div class="text-left">
@@ -187,41 +216,70 @@ a {
             <img src="<%= wallet.goals.first.picture %>" alt="">
           </div>
         </div>
-          <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
-            <div>
-              <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0">Goals</h2>
-              <h3 class="chart-text">Saving <%= wallet.goals.first.goal_allowance %>$ <%= wallet.payout_frequency.downcase %></h3>
-              <p>  <h3>for a new <%= wallet.goals.first.name.downcase %></h3></p>
+          <div class="fill-flex d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
+            <div class="">
+              <h2 class="text-center" style="margin-bottom: 20px; margin-left: 0px; margin-top: 0"><%= wallet.goals.first.name %></h2>
+              <h2 class="text-center font-weight-light" style="font-size: 36px; margin-left: 0"><%= wallet.goals.first.goal_current_saving %>$</h2>
+
+              <div class="p-2 d-flex justify-content-between border-top" style="margin-top: 16px;">
+                <div style="width: 50%; margin-right: 12px;">
+                      <h2 class="text-center" style="margin-left: 0px"><%= wallet.goals.first.goal_price %>$ </h2>
+                     <p class="text-center">price</p>
+                </div>
+                <div>
+                  <h2 class="chart-text text-center" style="margin-left: 0px"><%= wallet.goals.first.goal_allowance %>$</h3>
+                  <p><%= wallet.payout_frequency.downcase %> </p>
+                </div>
+              <div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       <% end %>
 
-    <div class="card-dashboard d-flex justify-content-between text-left">
-      <div class="d-flex justify-content-around">
-        <% if policy(wallet).edit? %>
-        <div class="container-dashboard-button">
-          <%= link_to "SEE MORE", dashboard_user_path(wallet.kid.id), class: "button-white" %>
+
+
+      <div class="d-flex justify-content-between"  style="margin-top: 12px;">
+        <div class="card-half-width" style="width: 50%; margin-right: 12px;" >
+            <% if policy(wallet).edit? %>
+
+              <%= link_to "see more", dashboard_user_path %>
+
+            <% end %>
         </div>
-        <% end %>
-        <% if policy(wallet.kid).destroy? %>
-        <div class="container-dashboard-button">
-          <%= link_to "CLOSE ACCOUNT", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
+        <div class="card-half-width" style="width: 50%">
+          <% if policy(wallet.kid).destroy? %>
+
+            <%= link_to "close account", destroy_user_path(wallet.kid.id), method: :delete %>
+
         </div>
       </div>
-    </div>
+
+
 
   </div>
-    <% end %>
   <% end %>
+
+
+  <% end %>
+
+
+<div class="card container-main shadow-none position-relative border-0" style="background-color: #E3E8EB; height: 100vh; width: 50vh; box-shadow: none">
+    <div class="icon-plus position-absolute" style="top: 35%%; left: 40%;">
+      <%= link_to new_user_path do %>
+        <%= image_tag "plus-icon-red.png" %>
+      <% end %>
+    </div>
+</div>
+
+
+
+
   </div>
 </div>
 
 <% end %>
-
-<div class="container-dashboard-button">
-  <%= link_to "ADD A CHILD", new_user_path, class: "button-white" %>
-</div>
 
 <!-- payout notification code from here  -->
 <script>

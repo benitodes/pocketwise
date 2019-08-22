@@ -31,7 +31,11 @@
 }
 
 .card-dashboard-scrolling {
+  margin-right: 12px;
   display: inline-block;
   border-radius: 10px;
   margin-top: 0px;
-  text-align: center; }
+  text-align: center;
+  width: 92vw;
+  vertical-align: top
+}

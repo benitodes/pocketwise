@@ -19,19 +19,36 @@
   display: flex;
   border-bottom: 1px white;
   flex-direction: row;
-   justify-content: flex-end; }
-.header {
-  font-size: 16px;
-  font-weight: bold;
-   }
+  justify-content: space-between; }
+.header-back {
+  align-self: center;
+}
+.header-back .fas{
+  font-size: 20px;
+  color: #505050;
+  margin-left: auto;
+  margin-bottom: 7px;
+}
 .header-text {
-  margin-left: 12px;
   margin-top: auto;
   margin-bottom: auto;
+  flex-grow: 9;
 }
 .header-avatar {
   float: right;
   margin-left: 12px;
+  flex-grow: 0;
+}
+.header {
+  color: #505050;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  }
+.header-back {
+   align-self: center;
+   flex-grow: 0;
 }
 
 // containers for bottom dashboards buttons
