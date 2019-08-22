@@ -9,22 +9,14 @@ body {
   margin-top: 12px;
   text-align: center;
   border-radius: 10px;
-   box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 .main-card-dashboard {
   background-color: white;
   padding: 8px;
   margin-top: 12px;
   text-align: center;
   border-radius: 10px;
-   box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-.container-header {
-  display: flex;
-  border-bottom: :1px white; }
-.header {
-  margin: auto;
-  margin-left: 12px;
-  font-size: 16px;
-  font-weight: lighter; }
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 .container-dashboard-button {
   display: flex;
   padding: 6px;}
@@ -42,7 +34,7 @@ section {
   background-color: #E34E53;
   background-size: 30% 100%;}
 h1 {
-  color: white; }
+  color: #505050 }
 h2 {
   color: #505050;
   margin: auto;
@@ -87,9 +79,16 @@ a {
 <div class="container-main">
   <div class="container-header">
     <!-- Add this line if you need the menu -->
-    <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
-    <h1 class ="header">Welcome <%= user.first_name %></h1>
+    <div class="header-text">
+      <h1 class ="header">Welcome <%= user.first_name %></h1>
+    </div>
+    <div class="header-avatar">
+      <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
+    </div>
   </div>
+   <!-- End  menu -->
+
+
 
   <% if wallets.empty? %>
   <div class="main-card-dashboard">
@@ -97,44 +96,38 @@ a {
   </div>
   <% else %>
 
-  <div class="scrolling-wrapper">
+  <div class="dashboard-scrolling-wrapper ">
     <% wallets.each do |wallet| %>
 
       <!-- Header Tom -->
       <!-- End Header Tom -->
 
       <!--  notification div -->
-      <% if wallet.payout_amount != 0 %>
-      <div class="payout-notification text-left d-flex justify-content-between">
-        <div>
-          <h3><%= wallet.kid.username %> completed his exercise.</h3>
-          <h3> It's paytime! </h3>
-        </div>
-        <div>
-          <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch %>
-        </div>
-      </div>
-      <% end %>
+
+        <% if wallet.payout_amount != 0 %>
+           <div class="payout-notification text-left d-flex justify-content-between">
+              <h3><%= wallet.kid.username %> completed his exercise.</h3>
+              <h3> It's paytime! </h3>
+              <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch %>
+            </div>
+        <% end %>
+
+
       <!--  End of notification div -->
 
       <!-- Pocket Money div -->
-      <div>
-        <div class="card-dashboard payout-notification-parent">
-            <div>
-              <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-kid-dashboard" %>
-            </div>
-            <h2><%= wallet.kid.username %>'s upcoming payout:</h2>
+      <div class="card-dashboard-scrolling">
+        <div class=" payout-notification-parent">
           <div>
-
-           <!--  <h2 class="dashboard-chart-text">Upcoming payout: </h2> -->
+            <%= cl_image_tag wallet.kid.avatar, crop: :fill, class: "avatar-kid-dashboard" %>
+            <h2><%= wallet.kid.username %>'s upcoming payout:</h2>
+         <!--  <h2 class="dashboard-chart-text">Upcoming payout: </h2> -->
           <div class="container-header">
-
             <h1 class="money"><%= wallet.payout_amount %>$<h1>
           </div>
              <!--      <p>Allowance <%= wallet.total_allowance%> <%= wallet.payout_frequency %> </p> -->
            </div>
            <div class="d-flex justify-content-between align-items-baseline" style="margin-top: 0">
-            <div></div>
             <div>
               <h2 class="dashboard-chart-text" style="margin-left: 16px;"> <%= wallet.total_allowance%>$ <%= wallet.payout_frequency.downcase %></h2>
             </div>
@@ -205,15 +198,15 @@ a {
       <% end %>
 
     <div class="card-dashboard d-flex justify-content-between text-left">
-      <div class="d-flex justify-content-around border-top">
+      <div class="d-flex justify-content-around">
         <% if policy(wallet).edit? %>
         <div class="container-dashboard-button">
-          <%= link_to "SEE DASHBOARD", dashboard_user_path(wallet.kid.id), class: "button-white" %>
+          <%= link_to "SEE MORE", dashboard_user_path(wallet.kid.id), class: "button-white" %>
         </div>
         <% end %>
         <% if policy(wallet.kid).destroy? %>
         <div class="container-dashboard-button">
-          <%= link_to "DELETE KID", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
+          <%= link_to "CLOSE ACCOUNT", destroy_user_path(wallet.kid.id), method: :delete, class: "button-white" %>
         </div>
       </div>
     </div>
@@ -227,7 +220,7 @@ a {
 <% end %>
 
 <div class="container-dashboard-button">
-  <%= link_to "ADD NEW KID", new_user_path, class: "button-white" %>
+  <%= link_to "ADD A CHILD", new_user_path, class: "button-white" %>
 </div>
 
 <!-- payout notification code from here  -->

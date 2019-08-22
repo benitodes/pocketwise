@@ -30,19 +30,17 @@ aside {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   width:60%;
-  margin-left: -60%;
-  float: left;
-  height: 100%;
-  position: absolute; }
+  margin-right: -60%;
+  float: right;
+  height: 100%; }
 .section {
   width: 100%;
   height: 100%;
-  float: right;
-  margin-right: 0; }
-.toggle:checked + .wrapper > aside {
   margin-left: 0; }
+.toggle:checked + .wrapper > aside {
+  margin-right: 0; }
 .toggle:checked + .wrapper > .section {
-  margin-right: -60%; }
+  margin-left: -60%; }
 .toggler {
   display: inline-block;
   cursor: pointer; }
@@ -55,7 +53,8 @@ aside {
   margin: 15px;
   border-bottom: 2px; }
 .toggle, .biglabel {
-  display: none; }
+  display: none;
+}
 .biglabel {
   width: 100%;
   height: 100%;
@@ -65,8 +64,8 @@ aside {
   display: block; }
 aside,
 .section {
-  -webkit-transition: margin 0.3s ease-in-out;
-  -moz-transition: margin 0.3s ease-in-out;
-  -ms-transition: margin 0.3s ease-in-out;
-  -o-transition: margin 0.3s ease-in-out;
-  transition: margin 0.3s ease-in-out; }
+  -webkit-transition: margin 0.2s ease-in-out;
+  -moz-transition: margin 0.2s ease-in-out;
+  -ms-transition: margin 0.2s ease-in-out;
+  -o-transition: margin 0.2s ease-in-out;
+  transition: margin 0.2s ease-in-out; }
