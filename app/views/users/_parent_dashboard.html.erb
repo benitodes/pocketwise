@@ -188,11 +188,11 @@ a {
                   </div>
                 </div>
 
-                <div class="d-flex flex-column justify-content-between learning-stats text-left" style="margin-left: 18px">
+                <div class="d-flex flex-column justify-content-between learning-stats text-left flex-grow-1" style="margin-left: 18px">
                   <div>
                     <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0"><%= user_course.course.name %></h2>
-                    <h3 class="chart-text">currently at</h3>
-                    <p>Level <%= user_course.last_level %></p>
+                    <h3 class="chart-text"></h3>
+                    <p>Level <%= user_course.last_level %>, Question <%= user_course.last_question %></p>
                   </div>
                   <div style="margin-top: 8px;" class="links">
             <!--         <div class="text-left">
