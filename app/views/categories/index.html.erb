@@ -40,13 +40,13 @@ body {
                                 <div class="col">
                                   <% usercourses = UserCourse.where(kid_id: current_user, course_id: course) %>
                                     <% if usercourses.empty? %>
-                                       <p>NOT ENROLLED</p>
+                                       <p style="text-align: left">NOT ENROLLED</p>
                                     <% else %>
                                        <% usercourses.each do |usercourse| %>
                                          <% if usercourse && usercourse.complete == true %>
-                                           <p>COMPLETE</p>
+                                           <p style="text-align: left">COMPLETE</p>
                                          <% else usercourse && usercourse.complete == false %>
-                                           <p>ENROLLED</p>
+                                           <p style="text-align: left">ENROLLED</p>
                                          <% end %>
                                        <% end %>
                                     <% end %>
