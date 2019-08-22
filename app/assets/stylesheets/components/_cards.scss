@@ -12,13 +12,14 @@
 .card-course {
   img {
     position: relative;
-    padding: 12px;
+    //padding: 12px;
     vertical-align: middle;
     border-style: none;
-    width: 100%;
+    //width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     object-fit: cover;
     position: relative;
-    border-radius: 10px;
   }
 }
 .card-course h2 {

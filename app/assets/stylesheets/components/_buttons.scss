@@ -1,10 +1,15 @@
 .button-red {
-  color: white;
+  color: white !important;
   font-size: 12px;
   padding: 8px 24px;
   border-radius: 20px;
   background: #E34E53;
-  transition: background 0.3s ease; }
+  transition: background 0.3s ease;
+  &:hover {
+    text-decoration: none;
+    background: rgb(227, 50, 50);
+  }
+}
 .button-white {
   color: black;
   font-size: 12px;
