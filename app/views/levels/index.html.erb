@@ -64,7 +64,7 @@ body {
       <% if level.number > @user_course.last_level %>
           <%= link_to level_path(level), class: 'p-2 border-top d-flex justify-content-between align-items-center text-gray' do %>
            <p class="mb-0 ml-4">
-            <%= level.number %> :
+            <%= level.number %>.
             <%= level.name %>
            </p>
            <i class="mr-4 fas fa-arrow-right"></i>
@@ -73,7 +73,7 @@ body {
        <% elsif level.number > @user_course.last_level %>
           <%= link_to level_path(level), class: 'p-2 border-top d-flex justify-content-between align-items-center' do %>
            <p class="mb-0 ml-4">
-            <%= level.number %> :
+            <%= level.number %>.
             <%= level.name %>
            </p>
            <i class="mr-4 fas fa-arrow-right"></i>
@@ -84,7 +84,7 @@ body {
          <!--   if yes, then enable button -->
           <%= link_to level_path(level), class: 'p-2 border-top d-flex justify-content-between align-items-center' do %>
            <p class="in-progress mb-0 ml-4">
-            <%= level.number %> :
+            <%= level.number %>.
             <%= level.name %>
            </p>
            <i class="mr-4 fas fa-arrow-right"></i>

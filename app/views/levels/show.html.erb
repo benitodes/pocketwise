@@ -18,14 +18,18 @@ body {
     <h1 class ="header"><%= @course.name %></h1>
   </div>
   <div class="card-course d-flex flex-column">
-    <div class="p-2">
+    <div>
        <%= cl_image_tag @course.picture, width: 350, height: 350, crop: :fill %>
     </div>
-      Level <%= @level.number %>
-    <div class="p-2">
-      <%= @level.name %>
+    <div class=" mt-4 d-flex justify-content-center">
+      <div class="p-2">
+        <strong>Level <%= @level.number %></strong>
+      </div>
+      <div class="p-2">
+        <%= @level.name %>
+      </div>
     </div>
-    <div class="p-2">
+    <div class="p-2 d-flex justify-content-between" style="margin: 2rem !important;">
     <%= link_to "Lecture", level_lecture_path(@level, @level.lectures.first), class: 'btn button-white' %>
     <!-- user should only be able to practice once lectures complete (or level or course complete) -->
     <% if @lectures_complete  %>
