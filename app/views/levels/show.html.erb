@@ -35,17 +35,19 @@ body {
 
   <div class="card-course d-flex flex-column">
     <div>
-       <%= cl_image_tag @course.picture, width: 350, height: 250, crop: :fill %>
+       <%= cl_image_tag @course.picture, width: 100, height: 200, crop: :fill %>
     </div>
-    <div class=" mt-4 d-flex justify-content-center align-items-center">
-      <div class="p-2" style="font-size: 18px; color:#505050; font-weight: bold">
-        Level <%= @level.number %>: <%= @level.name %>
+
+    <div style="display: flex;width: 100%;justify-content: space-around;align-items: center; margin-top: 20px;">
+      <div class="p-2" style="padding-left: 0.8rem !important">
+        <p> LEVEL <%= @level.number %>: <%= @level.name.upcase %></p>
       </div>
     </div>
+
       <div class="level-description">
           <p>HTML is the foundation of all web pages. Without it, you wouldn’t be able to organize text or add images or videos to your web pages. HTML is the beginning of everything you need to know to create engaging web pages!</p>
       </div>
-    <div class="p-2 d-flex justify-content-between" style="margin: 2rem !important;">
+    <div class="p-1 d-flex justify-content-around" style="margin: 1rem !important;">
     <%= link_to "LECTURE", level_lecture_path(@level, @level.lectures.first), class: 'btn button-red button-level' %>
     <!-- user should only be able to practice once lectures complete (or level or course complete) -->
     <% if @lectures_complete  %>
