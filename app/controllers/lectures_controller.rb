@@ -16,5 +16,6 @@ class LecturesController < ApplicationController
     @user_course.save
     lectures_in_level = Lecture.where(level_id: @level).length
     @lecture_progress_percentage = @lecture.number.to_f / lectures_in_level.to_f * 100
+    @first_question_current_level = Question.where(level_id: @level).first.id
   end
 end

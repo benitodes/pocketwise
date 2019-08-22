@@ -17,9 +17,6 @@ body {
   margin-top: 12px;
   text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-.container-header {
-  display: flex;
-  border-bottom: :1px white; }
 .card-goal {
   border-radius: 10px;
   width: 60%;
@@ -27,13 +24,7 @@ body {
   border: 0px;
   margin-right: 12px;
   vertical-align: top;
-}
-.header {
-  color: #505050;
-  margin: auto;
-  margin-left: 12px;
-  font-size: 20px;
-  font-weight: bold; }
+}s
 .container-dashboard-button {
   display: flex;
   padding: 6px;
@@ -56,12 +47,7 @@ body {
   margin-bottom: 4px;
   margin-left: 7px;
 }
-.icon-plus img {
-  width: 50px;
-  height: 50px;
-  display: block;
-  margin: 0 auto;
-}
+
 section {
   background-color: #E34E53;
   background-size: 30% 100%;
@@ -101,18 +87,27 @@ a {
 </style>
 
 <div class="container-main">
-   <div class="container-header">
-  <!-- Add this line if you need the menu -->
-     <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
-      <h1 class ="header">Welcome <%= user.first_name %></h1>
-   </div>
+  <div class="container-header">
+      <div class="header-back">
+      </div>
+        <div class="header-text">
+          <h1 class ="header">Welcome <%= user.first_name %></h1>
+        </div>
+        <div class="header-avatar">
+          <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
+        </div>
+  </div>
+   <!-- End menu -->
+
 
    <div class="pocket-card-dashboard d-flex justify-content-center align-items-center">
     <div>
       <h2 style="margin-bottom: 0px;"></h2>
     </div>
     <div>
-      <h5> <%= @wallet.payout_amount %>$</h5><p>In your pocket</p>
+      <h5> <%= @wallet.payout_amount %>$</h5><p>of <%= wallet.total_allowance  %>$ <%= wallet.payout_frequency.downcase %> in your pocket</p>
+    </div>
+    <div>
     </div>
    </div>
 
@@ -179,7 +174,11 @@ a {
   <div class="dashboard-scrolling-wrapper">
     <% unless @goals.nil? %>
       <% @goals.each do |goal| %>
-        <div class="card card-goal">
+        <% if goal.complete %>
+          <div class="card card-goal" style="background-color: #F8CE69">
+        <% else %>
+          <div class="card card-goal">
+        <% end %>
           <div class="">
               <div class="p-2 d-flex justify-content-between align-items-center" style="margin-bottom: 16px;">
                   <div>
@@ -199,9 +198,13 @@ a {
               </div>
 
                 <% if goal.complete? %>
-                  <div class="p-2" style="margin-bottom: 16px;">
-                    <p>Great job!<p>
-                    <p>You saved <%= goal.goal_current_saving %> for your <%= goal.name %></p>
+                  <div>
+                    <div class="border-top" style="margin-top: 16px;">
+
+                    <div class="text-center" style="width: 50%; margin-top: 16px;">
+                     <h2 style="margin-left: 40px;">Congratulations!</h2>
+                    </div>
+                  </div>
                   </div>
                 <% else %>
                   <div class="p-2 d-flex justify-content-between border-top" style="margin-top: 16px;">

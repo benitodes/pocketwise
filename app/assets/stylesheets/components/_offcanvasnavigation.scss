@@ -31,6 +31,7 @@ aside {
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   width:60%;
   margin-right: -60%;
+  margin-top: -24px;
   float: right;
   height: 100%; }
 .section {
@@ -38,7 +39,9 @@ aside {
   height: 100%;
   margin-left: 0; }
 .toggle:checked + .wrapper > aside {
-  margin-right: 0; }
+  margin-right: 0;
+  margin-right: -4px;
+  margin-top: -24px; }
 .toggle:checked + .wrapper > .section {
   margin-left: -60%; }
 .toggler {

@@ -7,31 +7,52 @@ body {
 .header {
   color: #505050;
 }
+.button-level {
+  font-size: 16px !important;
+}
 </style>
 
 <!-- end inline css -->
 
 <div class="container-main">
-  <div class="container-header">
-  <!-- Add this line if you need the menu -->
-    <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
-    <h1 class ="header"><%= @course.name %></h1>
+
+       <!-- Add these lines if you need the back button menu -->
+    <div class="container-header">
+      <div class="header-back">
+        <button onclick="window.history.back()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </div>
+        <div class="header-text">
+          <h1 class ="header"><%= @course.name  %></h1>
+        </div>
+        <div class="header-avatar">
+          <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
+        </div>
   </div>
+
+   <!-- End menu -->
+
   <div class="card-course d-flex flex-column">
-    <div class="p-2">
-       <%= cl_image_tag @course.picture, width: 350, height: 350, crop: :fill %>
+    <div>
+       <%= cl_image_tag @course.picture, width: 350, height: 250, crop: :fill %>
     </div>
-      Level <%= @level.number %>
-    <div class="p-2">
-      <%= @level.name %>
+    <div class=" mt-4 d-flex justify-content-center align-items-center">
+      <div class="p-2">
+        <strong style="font-size: 20px;">Level <%= @level.number %></strong>
+      </div>
+      <div class="p-2">
+        <%= @level.name %>
+      </div>
     </div>
-    <div class="p-2">
-    <%= link_to "Lecture", level_lecture_path(@level, @level.lectures.first), class: 'btn button-white' %>
+          <p>dvdsffdvbfgbfgxbfbfdgbdsvsdfbdfvsfvfvsddf</p>
+    <div class="p-2 d-flex justify-content-between" style="margin: 2rem !important;">
+    <%= link_to "LECTURE", level_lecture_path(@level, @level.lectures.first), class: 'btn button-red button-level' %>
     <!-- user should only be able to practice once lectures complete (or level or course complete) -->
     <% if @lectures_complete  %>
-      <%= link_to "Practice", level_question_path(@level, @level.questions.first), class: "btn button-white" %>
+      <%= link_to "PRACTICE", level_question_path(@level, @level.questions.first), class: "btn button-red button-level" %>
     <% else %>
-      <a href="#" class="btn button-white disabled" style="color: grey"  role="button" aria-disabled="true">Practice</a>
+      <a href="#" class="btn button-red disabled" style="color: grey; font-size: 16px;"  role="button" aria-disabled="true">PRACTICE</a>
     <% end %>
   </div>
 
