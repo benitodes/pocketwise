@@ -13,8 +13,8 @@ Category.destroy_all
 
 user_list = [
   ['Benoit', 'Destresse', 'benoit@destresse.fr', 'benito', 'password', true, 'https://scontent.fjog1-1.fna.fbcdn.net/v/t1.0-1/49142979_10218077273827220_1509155936202129408_n.jpg?_nc_cat=101&_nc_oc=AQnPNRoTXKG8LPDvQdA2YXR_UIkNCoSCBuQMiEuJU_-4Cy8EgTgPKLS3YsZ-wkb95R0&_nc_ht=scontent.fjog1-1.fna&oh=8b558697642b53f1611b8c4d842819b4&oe=5DD289F7'],
-  ['Sarah', 'OhGee', 'sarah@gmail.com', 'Sarh', 'password', true, 'https://avatars1.githubusercontent.com/u/40640538?s=400&v=4'],
-  ['Samba', 'OhGee', 'samba@dance.com', 'Samb', 'password', false, 'https://scontent.fjog1-1.fna.fbcdn.net/v/t1.15752-9/68674971_380092509322012_2748574418543312896_n.jpg?_nc_cat=111&_nc_oc=AQmzy8rRh-yEwhzGqt-r4xdFxXBTv1TzLP3wR5EAPzv7tZDWkdUg9aubdfDqzopUSOg&_nc_ht=scontent.fjog1-1.fna&oh=a598bab28c1c3e5f20bb3259f60d3267&oe=5DD4A8C2'],
+  ['Sarah', 'OhGee', 'sarah@gmail.com', 'Sarah', 'password', true, 'https://avatars1.githubusercontent.com/u/40640538?s=400&v=4'],
+  ['Samba', 'OhGee', 'samba@dance.com', 'Samba', 'password', false, 'https://scontent.fjog1-1.fna.fbcdn.net/v/t1.15752-9/68674971_380092509322012_2748574418543312896_n.jpg?_nc_cat=111&_nc_oc=AQmzy8rRh-yEwhzGqt-r4xdFxXBTv1TzLP3wR5EAPzv7tZDWkdUg9aubdfDqzopUSOg&_nc_ht=scontent.fjog1-1.fna&oh=a598bab28c1c3e5f20bb3259f60d3267&oe=5DD4A8C2'],
   ['Mia', 'OhGee', 'mia@dance.com', 'Mimi', 'password', false, 'https://i.pinimg.com/564x/12/ad/a7/12ada7d6a92518d241d5a25b4d244eb2.jpg']
 ]
 
