@@ -21,7 +21,7 @@ body {
   display: flex;
   padding: 6px;}
 .payout-notification-alert {
-  background-color: #E34E53;
+  background-color: #2EC651;
   padding: 20px;
   border-radius: 10px;
   position: relative;
@@ -127,15 +127,15 @@ a {
   <div class="dashboard-scrolling-wrapper ">
     <% wallets.each do |wallet| %>
             <% if wallet.payout_amount != 0 %>
-               <div class="payout-notification-alert text-left d-flex justify-content-between">
+            <div class="payout-notification-alert text-left d-flex justify-content-between">
                    <div class="notification-icon">
 
                       <%= image_tag "notification-icon.jpg" %>
 
                     </div>
                   <h3 style="color: white"> It's paytime! </h3>
-                  <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch, id: "notification-confirm-button"  %>
-                </div>
+                  <%= link_to "confirm >", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch, id: "notification-confirm-button"  %>
+            </div>
             <% end %>
 
       <!-- Pocket Money div -->
@@ -266,7 +266,7 @@ a {
 
 
 <div class="card container-main shadow-none position-relative border-0" style="background-color: #E3E8EB; height: 100vh; width: 50vh; box-shadow: none">
-    <div class="icon-plus position-absolute" style="top: 35%%; left: 40%;">
+    <div class="icon-plus position-absolute" style="top: 35%; left: 40%;">
       <%= link_to new_user_path do %>
         <%= image_tag "plus-icon-red.png" %>
       <% end %>
@@ -647,7 +647,7 @@ return EasyPieChart;
   charts.forEach((chart) => {
     new EasyPieChart(chart, {
       scaleLength: 0,
-      barColor: '#E34E53',
+      barColor: '#2EC651',
       trackColor: '#E3E8EB',
       lineWidth: 8,
       size: 140,
