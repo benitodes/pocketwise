@@ -5,6 +5,10 @@ class LevelsController < ApplicationController
     @course = Course.find(params[:course_id])
     # only display levels for specific course
     @levels = Level.select { |l| l.course_id == @course.id }
+
+    if @levels.empty?
+      redirect_to categories_path
+    else
     # create link to usercourse table to fetch current level and current question faster
     @user_course = UserCourse.where(kid_id: current_user.id, course_id: @course).first
     @level_current = 1
@@ -19,6 +23,7 @@ class LevelsController < ApplicationController
       # reset last level, question and lecture if course is complete so kid can start over again
       reset_course_if_complete
     end
+  end
   end
 
   def show
