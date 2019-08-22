@@ -57,10 +57,10 @@ h1 {
 }
 h2 {
   margin: auto;
-  margin-left: 12px;
+  /*margin-left: 12px;*/
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 12px;
+  /*margin-bottom: 12px;*/
   color: #505050}
 h3 {
   margin: auto;
@@ -147,7 +147,7 @@ a {
             <div>
             <div style="margin-top: 8px;" class="links">
               <div class="text-left">
-                <%= link_to "SEE ALL COURSES >", categories_path %>
+                <%= link_to "COURSES", categories_path, class: 'btn button-white' %>
               </div>
             </div>
           </div>
@@ -201,10 +201,9 @@ a {
 
                 <% if goal.complete? %>
                   <div>
-                    <div class="border-top" style="margin-top: 16px;">
-
-                    <div class="text-center" style="width: 50%; margin-top: 16px;">
-                     <h2 style="margin-left: 40px;">Congratulations!</h2>
+                    <div class="border-top border-dark" style="margin-top: 16px;">
+                    <div class="d-flex justify-content-center" style="margin-top: 20px;">
+                     <h2>Congratulations!</h2>
                     </div>
                   </div>
                   </div>

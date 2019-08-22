@@ -15,3 +15,7 @@ $headers-font: "Lato", "sans-serif";
 // }
 // $my-font: "Font Name";
 
+*:not(i, li) {
+  font-family: $body-font !important;
+  font-weight: 500;
+}
