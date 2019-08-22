@@ -166,7 +166,6 @@ puts "lectures have been created"
 
 question_list = [
 
-
   ['Why do we need tables in HTML?', 'think', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 1, Level.first.id],
   ['Which element do we use to create a table?', 'To create a body on your page, you will use : <body></body> right?','https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 2, Level.first.id],
   ['Which element allow us to create a row element?', 'To create a table on your page, you will use : <table></table> right?', 'https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg', 3, Level.first.id],
