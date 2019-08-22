@@ -2,7 +2,7 @@
 
 <style>
 body {
-  background-color: #F8CE69;
+  background-color: #ffc33f;
   color: white; }
 h1 {
   font-size: 40px;
@@ -24,9 +24,14 @@ h1 {
       <%= link_to "GO TO YOUR DASHBORD", dashboard_user_path(current_user.id), class: "button-red" %>
     </div>
     <% else %>
-    <div class="container-devise-btn">
+    <div class="container-devise-btn" style="margin-bottom: 20px;">
       <%= link_to "SIGN IN", new_user_session_path, class: "button-red" %>
       <%= link_to "PARENT SIGN UP", new_user_registration_path, class: "button-red" %>
+    </div>
+
+
+    <div>
+      <img style="height: 250px;"src="https://i.pinimg.com/originals/66/70/dd/6670dd2c5e6f460541b17ec60b153f28.gif" alt="">
     </div>
   <% end %>
 </div>

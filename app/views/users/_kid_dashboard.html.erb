@@ -11,7 +11,7 @@ body {
   text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
 .pocket-card-dashboard {
-  background-color: #F8CE69;
+  background-color: #ffc33f;
   border-radius: 10px;
   padding: 12px;
   margin-top: 12px;
@@ -100,14 +100,17 @@ a {
    <!-- End menu -->
 
 
-   <div class="pocket-card-dashboard d-flex justify-content-center align-items-center">
+   <div class="pocket-card-dashboard d-flex justify-content-between align-items-center">
     <div>
-      <h2 style="margin-bottom: 0px;"></h2>
+      <h2></h2>
+    </div>
+
+    <div>
+      <h5> <%= @wallet.payout_amount %>$</h5><p>of <%= wallet.total_allowance  %>$ <%= wallet.payout_frequency.downcase %></p>
     </div>
     <div>
-      <h5> <%= @wallet.payout_amount %>$</h5><p>of <%= wallet.total_allowance  %>$ <%= wallet.payout_frequency.downcase %> in your pocket</p>
-    </div>
-    <div>
+          <img src="https://i.pinimg.com/originals/66/70/dd/6670dd2c5e6f460541b17ec60b153f28.gif" style="width: 200px; height:100%" alt="">
+
     </div>
    </div>
 
@@ -118,7 +121,6 @@ a {
 
         <div class="learning-container">
         <% unless @user_course.complete  %>
-
 
           <div>
             <% unless @user_course.complete %>
@@ -175,7 +177,7 @@ a {
     <% unless @goals.nil? %>
       <% @goals.each do |goal| %>
         <% if goal.complete %>
-          <div class="card card-goal" style="background-color: #F8CE69">
+          <div class="card card-goal" style="background-color: #ffc33f">
         <% else %>
           <div class="card card-goal">
         <% end %>
@@ -583,7 +585,7 @@ return EasyPieChart;
     charts.forEach((chart) => {
       new EasyPieChart(chart, {
           scaleLength: 0,
-          barColor: '#F8CE69',
+          barColor: '#ffc33f',
           trackColor: '#E3E8EB',
           lineWidth: 8,
           size: 140,
