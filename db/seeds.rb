@@ -15,7 +15,7 @@ user_list = [
   ['Benoit', 'Destresse', 'benoit@destresse.fr', 'benito', 'password', true, 'https://scontent.fjog1-1.fna.fbcdn.net/v/t1.0-1/49142979_10218077273827220_1509155936202129408_n.jpg?_nc_cat=101&_nc_oc=AQnPNRoTXKG8LPDvQdA2YXR_UIkNCoSCBuQMiEuJU_-4Cy8EgTgPKLS3YsZ-wkb95R0&_nc_ht=scontent.fjog1-1.fna&oh=8b558697642b53f1611b8c4d842819b4&oe=5DD289F7'],
   ['Sarah', 'OhGee', 'sarah@gmail.com', 'Sarah', 'password', true, 'https://avatars1.githubusercontent.com/u/40640538?s=400&v=4'],
   ['Samba', 'OhGee', 'samba@dance.com', 'Samba', 'password', false, 'https://scontent.fjog1-1.fna.fbcdn.net/v/t1.15752-9/68674971_380092509322012_2748574418543312896_n.jpg?_nc_cat=111&_nc_oc=AQmzy8rRh-yEwhzGqt-r4xdFxXBTv1TzLP3wR5EAPzv7tZDWkdUg9aubdfDqzopUSOg&_nc_ht=scontent.fjog1-1.fna&oh=a598bab28c1c3e5f20bb3259f60d3267&oe=5DD4A8C2'],
-  ['Mia', 'OhGee', 'mia@dance.com', 'Mimi', 'password', false, 'https://i.pinimg.com/564x/12/ad/a7/12ada7d6a92518d241d5a25b4d244eb2.jpg']
+  ['Mia', 'OhGee', 'mia@dance.com', 'Mia', 'password', false, 'https://i.pinimg.com/564x/12/ad/a7/12ada7d6a92518d241d5a25b4d244eb2.jpg']
 ]
 
 # create new users from array
@@ -44,9 +44,9 @@ puts "wallet has been created"
 
 # goals
 goal_list = [
-  ['Gloves', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566356338/pocketwise/neonbrand-WwrQnL0Gi1c-unsplash_dbmtes.jpg', 15, 18, 15, false, 1],
-  ['Buggy', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200276/pocketwise/buggy_uxjqye.png', 10, 50, 0, false, 1],
-  ['Sneakers', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200274/pocketwise/stansmith_p5ndhu.jpg', 10, 69, 0, false, 2]
+  ['Gloves', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566356338/pocketwise/neonbrand-WwrQnL0Gi1c-unsplash_dbmtes.jpg', 15, 18, 15, false, User.first.id],
+  ['Buggy', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200276/pocketwise/buggy_uxjqye.png', 10, 50, 0, false, User.first.id],
+  ['Sneakers', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200274/pocketwise/stansmith_p5ndhu.jpg', 10, 69, 0, false, User.second.id]
 ]
 
 goal_list.each do |name, picture, goal_allowance, goal_price, goal_current_saving, complete, wallet_id|
@@ -96,14 +96,15 @@ course_list = [
     'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288542/pocketwise/python_svfh60.png', 1],
 
 
+
   ['German Basics', 'HTML is the foundation of all web pages. Without HTML, you wouldn’t be able to organize text or add images or videos to your web pages.
     HTML is the beginning of everything you need to know to create engaging web pages!',
-    'https://www.paintballuae.com/pub/media/wysiwyg/footballnew.png', 2],
+    'https://images.unsplash.com/photo-1455884981818-54cb785db6fc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1590&q=80', 2],
 
 
   ['German Intermediate', 'Without CSS, every web page would be drab plain text and images that flowed straight down the page.
     With CSS, you can add color and background images and change the layout of your page — your web pages can feel like works of art!',
-    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566451331/pocketwise/german_level_2_nr6uw9.jpg', 2],
+    'https://images.unsplash.com/photo-1549737221-bef65e2604a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60', 2],
 
 
   ['Maths Basics', 'HTML is the foundation of all web pages. Without HTML, you wouldn’t be able to organize text or add images or videos to your web pages.
@@ -236,4 +237,18 @@ user_course_list.each do |course_id, kid_id, last_level, last_question, last_lec
 end
 
 puts "user_course list has been completed"
+
+# create completed levels
+
+completed_levels_list = [
+  [UserCourse.first.id, Level.first.id],
+  [UserCourse.second.id, Level.second.id]
+]
+
+
+completed_levels_list.each do |user_course_id, level_id|
+  CompletedLevel.create!(user_course_id: user_course_id, level_id: level_id)
+end
+
+puts "completed_level list has been completed"
 
