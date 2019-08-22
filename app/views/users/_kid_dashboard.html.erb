@@ -118,7 +118,9 @@ a {
       <h2 style="margin-bottom: 0px;"></h2>
     </div>
     <div>
-      <h5> <%= @wallet.payout_amount %>$</h5><p>In your pocket</p>
+      <h5> <%= @wallet.payout_amount %>$</h5><p>of <%= wallet.total_allowance  %>$ <%= wallet.payout_frequency.downcase %> in your pocket</p>
+    </div>
+    <div>
     </div>
    </div>
 
