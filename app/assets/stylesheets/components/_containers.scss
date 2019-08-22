@@ -19,11 +19,21 @@
   display: flex;
   border-bottom: 1px white;
   flex-direction: row;
-   justify-content: flex-end; }
+   justify-content: space-between; }
 .header {
+  color: #505050;
   font-size: 16px;
   font-weight: bold;
    }
+.heade-back {
+  align-self: center;
+}
+.header-back .fas{
+  font-size: 20px;
+  color: #505050;
+  margin-left: auto;
+  margin-bottom: 7px;
+}
 .header-text {
   margin-left: 12px;
   margin-top: auto;
@@ -32,6 +42,12 @@
 .header-avatar {
   float: right;
   margin-left: 12px;
+}
+.header {
+  color: #505050;
+}
+.header-back {
+   align-self: center;
 }
 
 // containers for bottom dashboards buttons
