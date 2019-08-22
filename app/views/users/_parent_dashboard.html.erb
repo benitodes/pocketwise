@@ -17,9 +17,6 @@ body {
   text-align: center;
   border-radius: 10px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-.container-header {
-  display: flex;
-  border-bottom: :1px white; }
 .container-dashboard-button {
   display: flex;
   padding: 6px;}
@@ -82,11 +79,16 @@ a {
 <div class="container-main">
   <div class="container-header">
     <!-- Add this line if you need the menu -->
-    <h1 class ="header">Welcome <%= user.first_name %></h1>
-
-    <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
-
+    <div class="header-text">
+      <h1 class ="header">Welcome <%= user.first_name %></h1>
+    </div>
+    <div class="header-avatar">
+      <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
+    </div>
   </div>
+   <!-- End  menu -->
+
+
 
   <% if wallets.empty? %>
   <div class="main-card-dashboard">
