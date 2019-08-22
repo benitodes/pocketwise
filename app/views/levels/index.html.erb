@@ -7,11 +7,23 @@ body {
 .header {
   color: #505050;
 }
+.in-progress {
+  font-size: 12px;
+  color: black !important;
+}
+.in-progress:hover {
+  text-decoration: none;
+}
+.text-gray {
+  color: #D3D3D3 !important;
+  pointer-events: none;
+}
 </style>
 
 <!-- end inline css -->
 
 <div class="container-main">
+  
     <!-- Add these lines if you need the back button menu -->
     <div class="container-header">
       <div class="header-back">
@@ -28,71 +40,78 @@ body {
         </div>
       </div>
   </div>
-   <!-- End menu -->
 
 <div class="card-course d-flex flex-column">
-   <div class="row">
-      <div class="col-6">
-        <%= cl_image_tag @course.picture, width: 150, height: 150, crop: :fill %>
-      </div>
-        <div class="col mt-5">
+   <div style="margin-top: 0px">
+<!--       <div class="col-6">
+ -->        <%= cl_image_tag @course.picture, width: "100%", height: 150, crop: :fill %>
+      <!-- </div> -->
+        <div class="my-2">
            <!-- button displays start if there is no user course table yet (if kid hasn't started course, otherwise it shows resulme  -->
-            <% if @user_course && @course.user_courses.where(kid: current_user).first.complete %>
-                <div class="p-2">
-                  <%= link_to "START OVER", level_question_path(@level_current, @question_current), class: 'button-red' %>
-                </div>
-                  <% elsif @course.user_courses.where(kid: current_user).first %>
-                <div class="p-2">
-                    <%= link_to "RESUME", level_question_path(@level_current, @question_current), class: 'button-red' %>
-                </div>
-                <% else  %>
-                <div class="p-2">
-                  <%= link_to "ENROLL", course_user_courses_path(@course), method: :post, class: 'button-red' %>
-                </div>
-            <% end  %>
-                <div class="p-2">
-                  <p>currently at level <%= @level_current %>, question <%= @question_current %></p>
-                </div>
+            <div style="display: flex;width: 100%;justify-content: space-around;align-items: center;">
+              <div class="p-2" style="padding-left: 0.8rem !important">
+                <p class="m-0">CURRENTLY AT LEVEL <%= @level_current %></p>
+              </div>
+              <% if @user_course && @course.user_courses.where(kid: current_user).first.complete %>
+                  <div class="p-2 mb-1">
+                    <%= link_to "START OVER", level_question_path(@level_current, @question_current), class: 'button-red' %>
+                  </div>
+                    <% elsif @course.user_courses.where(kid: current_user).first %>
+                  <div class="p-2 mb-1">
+                      <%= link_to "RESUME", level_question_path(@level_current, @question_current), class: 'button-red' %>
+                  </div>
+                  <% else  %>
+                  <div class="p-2 mb-1">
+                    <%= link_to "ENROLL", course_user_courses_path(@course), method: :post, class: 'button-red' %>
+                  </div>
+              <% end  %>
+            </div>
          </div>
     </div>
 
+<% if @user_course %>
+     <% @levels.each do |level| %>
+       <!-- if not then check if level has already been started by user, if not disable button -->
+
+      <% if level.number > @user_course.last_level %>
+          <%= link_to level_path(level), class: 'p-2 border-top d-flex justify-content-between align-items-center text-gray' do %>
+           <p class="mb-0 ml-4">
+            <%= level.number %>.
+            <%= level.name %>
+           </p>
+           <i class="mr-4 fas fa-arrow-right"></i>
+          <% end %>
+<!-- if user has completed the course already he can visit all levels all questions all lectures -->
+       <% elsif level.number > @user_course.last_level %>
+          <%= link_to level_path(level), class: 'p-2 border-top d-flex justify-content-between align-items-center' do %>
+           <p class="mb-0 ml-4">
+            <%= level.number %>.
+            <%= level.name %>
+           </p>
+           <i class="mr-4 fas fa-arrow-right"></i>
+          <% end %>
 
 
+       <% else %>
+         <!--   if yes, then enable button -->
+          <%= link_to level_path(level), class: 'p-2 border-top d-flex justify-content-between align-items-center' do %>
+           <p class="in-progress mb-0 ml-4">
+            <%= level.number %>.
+            <%= level.name %>
+           </p>
+           <i class="mr-4 fas fa-arrow-right"></i>
+          <% end %>
+       <% end %>
+     <% end %>
 
 
-
-  <div class="p-2">
-    <h3>Levels:</h3>
-  </div>
-
-
-    <% if @user_course %>
-      <% @levels.each do |level| %>
-        <!-- if user has completed the course already he can visit all levels all questions all lectures -->
-        <% if @user_course.complete %>
-          <div class="p-1 border-top">
-            <%= link_to level.name, level_path(level) %>
-          </div>
-        <!-- if not then check if level has already been started by user, if not disable button -->
-        <% elsif level.number > @user_course.last_level %>
-          <div class="p-1 border-top">
-            <%= link_to level.name, level_path(level), style: "color: grey" %>
-          </div>
-        <% else %>
-          <!--   if yes, then enable button -->
-          <div class="p-1 border-top">
-            <%= link_to level.name, level_path(level) %>
-          </div>
-        <% end %>
-      <% end %>
-
-
-    <% else %>
-      <% @levels.each do |level| %>
-        <div class="p-2">
-          <%= link_to level.name, level_path(level), class: 'btn button-white disabled', style: 'color: grey' %>
-        </div>
-      <% end %>
-    <% end %>
+   <% else %>
+     <% @levels.each do |level| %>
+          <%= link_to level_path(level), class: 'p-2 border-top d-flex justify-content-between align-items-center btn button-white disabled text-gray' do %>
+         <p class="mb-0 ml-4"><%= level.name %></p>
+           <i class="mr-4 fas fa-arrow-right"></i>
+          <% end %>
+     <% end %>
+   <% end %>
 </div>
 </div>
