@@ -158,7 +158,7 @@ a {
          <!--  <h2 class="dashboard-chart-text">Upcoming payout: </h2> -->
 
           <div class="container-header">
-            <h1 class="money"><%= wallet.payout_amount %>$<h1>
+            <h1 class="money" style="margin-top: 12px; margin-bottom: 12px;"><%= wallet.payout_amount %>$<h1>
           </div>
              <!--      <p>Allowance <%= wallet.total_allowance%> <%= wallet.payout_frequency %> </p> -->
            </div>
@@ -201,7 +201,9 @@ a {
                   <div>
                     <h2 style="margin-bottom: 20px; margin-left: 0px; margin-top: 0"><%= user_course.course.name %></h2>
                     <h3 class="chart-text"></h3>
-                    <p>Level <%= user_course.last_level %>, Question <%= user_course.last_question %></p>
+
+                    <p>Level <%= user_course.last_level %> </p>
+                      <p>Question <%= user_course.last_question %></p>
                   </div>
                   <div style="margin-top: 8px;" class="links">
             <!--         <div class="text-left">
@@ -253,7 +255,7 @@ a {
         <div class="card-half-width" style="width: 50%; margin-right: 12px;" >
             <% if policy(wallet).edit? %>
 
-              <%= link_to "see more", dashboard_user_path(wallet.kid.id) %>
+              <%= link_to "see more", dashboard_user_path %>
 
             <% end %>
         </div>
@@ -273,7 +275,7 @@ a {
 
   <% end %>
   <div class="card container-main shadow-none position-relative border-0" style="background-color: #E3E8EB; height: 100vh; width: 50vh; box-shadow: none">
-            <div class="icon-plus position-absolute" style="top: 40%; left: 40%;">
+            <div class="icon-plus position-absolute" style="top: 35%; left: 40%;">
               <%= link_to new_user_path do %>
                 <%= image_tag "plus-icon-red.png" %>
               <% end %>
