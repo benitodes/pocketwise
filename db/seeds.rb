@@ -103,7 +103,7 @@ course_list = [
 
   ['German Intermediate', 'Without CSS, every web page would be drab plain text and images that flowed straight down the page.
     With CSS, you can add color and background images and change the layout of your page — your web pages can feel like works of art!',
-    'https://targetcareers.co.uk/sites/targetcareers.co.uk/files/public/styles/header_1500x550/public/field/image/football.jpg?itok=O1dRVOeD', 2],
+    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566451331/pocketwise/german_level_2_nr6uw9.jpg', 2],
 
 
   ['Maths Basics', 'HTML is the foundation of all web pages. Without HTML, you wouldn’t be able to organize text or add images or videos to your web pages.
