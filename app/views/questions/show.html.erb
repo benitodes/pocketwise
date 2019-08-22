@@ -54,24 +54,24 @@
 
 
             <div class="quiz-container">
-             <div class="progress">
+             <div class="progress" style="height: 20px;">
               <div class="bar shadow clouds" style="width: <%= @question_progress_percentage %>%; transition-duration: 2s; margin-left: 0;"></div>
 
             </div>
             <div class="card-quiz">
               <div>
-                <h2 style="margin-top: 30px; margin-left: 20px;"><%= @question.question_content %></h2>
+                <h2 style="margin-top: 30px; margin-left: 20px; font-size: 34px;"><%= @question.question_content %></h2>
               </div>
 
               <div>
 
 
-                <div class="radio-tile-group">
+                <div class="radio-tile-group" style="margin-bottom: 50px;">
                   <% @answers.each do |a| %>
                   <div class="input-container">
                     <input id="customRadio<%= a.id %>" class="radio-button" type="radio" name="radio" value="<%= a.correct %>"/>
                     <div class="radio-tile">
-                      <label for="answer" class="radio-tile-label">
+                      <label for="answer" class="radio-tile-label" >
                         <% if a.correct %>
                         <% if @next_question %>
                         <%= link_to a.answer_content, level_question_path(@level, @next_question) %>
