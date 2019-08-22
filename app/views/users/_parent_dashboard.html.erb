@@ -103,23 +103,20 @@ a {
 <!-- Html -->
 
 <div class="container-main">
+
   <!-- Add these lines if you need the back button menu -->
     <div class="container-header">
       <div class="header-back">
-        </button>
       </div>
-      <div class="user-info d-flex">
         <div class="header-text">
           <h1 class ="header">Welcome <%= user.first_name %></h1>
         </div>
         <div class="header-avatar">
           <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
         </div>
-      </div>
   </div>
-   <!-- End menu -->
 
-
+  <!-- End menu -->
 
   <% if wallets.empty? %>
   <div class="main-card-dashboard">
@@ -140,14 +137,6 @@ a {
                   <%= link_to "confirm", wallet_path(wallet, :wallet => { payout_amount: 0 }), method: :patch, id: "notification-confirm-button"  %>
                 </div>
             <% end %>
-
-      <!-- Header Tom -->
-      <!-- End Header Tom -->
-
-      <!--  notification div -->
-
-
-      <!--  End of notification div -->
 
       <!-- Pocket Money div -->
       <div class="card-dashboard-scrolling">
