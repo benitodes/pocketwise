@@ -126,3 +126,12 @@
 
 
 
+.card-half-width {
+  height: 56px;
+  background-color: white;
+  border-radius: 7px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+}
