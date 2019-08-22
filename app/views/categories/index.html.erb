@@ -4,12 +4,6 @@
 body {
   background-color: #E3E8EB;
 }
-.header {
-  color: #505050;
-}
-h1 {
-  text-align: center;
-}
 </style>
 
 <!-- end inline css -->
@@ -22,15 +16,14 @@ h1 {
           <i class="fas fa-chevron-left"></i>
         </button>
       </div>
-      <div class="user-info d-flex">
         <div class="header-text">
           <h1 class ="header">Pick a course</h1>
         </div>
         <div class="header-avatar">
           <label for="offcanvas" class="toggler"><%= cl_image_tag current_user.avatar, crop: :fill, for: "offcanvas", class: "avatar" %></label>
         </div>
-      </div>
   </div>
+
    <!-- End menu -->
 
 
