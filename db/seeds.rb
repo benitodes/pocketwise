@@ -109,12 +109,12 @@ course_list = [
 
   ['Maths Basics', 'HTML is the foundation of all web pages. Without HTML, you wouldn’t be able to organize text or add images or videos to your web pages.
     HTML is the beginning of everything you need to know to create engaging web pages!',
-    'http://www.provoke-online.com/images/lifestyle/lifestyle/einstein.jpg', 3],
+    'https://images.unsplash.com/photo-1548690596-f1722c190938?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1506&q=80', 3],
 
 
   ['Maths Intermediate', 'Without CSS, every web page would be drab plain text and images that flowed straight down the page.
     With CSS, you can add color and background images and change the layout of your page — your web pages can feel like works of art!',
-    'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566288544/pocketwise/Maths_level_2_o5fzne.png', 3],
+    'http://www.provoke-online.com/images/lifestyle/lifestyle/einstein.jpg', 3],
 
 ]
 
