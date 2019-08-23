@@ -70,7 +70,7 @@ h3 {
   color: #505050;}
 h5 {
   font-size: 48px;
-  color: black;
+  color: #505050;
 }
 p {
   margin: auto;
@@ -139,12 +139,12 @@ a {
                 <div>
                   <p><strong><%= @course.first.name %></strong></p>
                   <p>Level <%= @user_course.last_level %>, Question <%= @user_course.last_question %></p>
-                  <div class="text-left">
-                    <%= link_to "RESUME >", level_question_path(@user_course.last_level, @user_course.last_question) %>
-                  </div>
                 </div>
               </div>
             <div>
+                  <div class="text-left">
+                    <%= link_to "RESUME >", level_question_path(@user_course.last_level, @user_course.last_question), class: 'btn button-white button-yellow' %>
+                  </div>
             <div style="margin-top: 8px;" class="links">
               <div class="text-left">
                 <%= link_to "COURSES", categories_path, class: 'btn button-white' %>
@@ -176,11 +176,7 @@ a {
   <div class="dashboard-scrolling-wrapper">
     <% unless @goals.nil? %>
       <% @goals.each do |goal| %>
-        <% if goal.complete %>
-          <div class="card card-goal" style="background-color: #ffc33f">
-        <% else %>
           <div class="card card-goal">
-        <% end %>
           <div class="">
               <div class="p-2 d-flex justify-content-between align-items-center" style="margin-bottom: 16px;">
                   <div>
@@ -201,9 +197,9 @@ a {
 
                 <% if goal.complete? %>
                   <div>
-                    <div class="border-top border-dark" style="margin-top: 16px;">
+                    <div class="border-top" style="margin-top: 16px;">
                     <div class="d-flex justify-content-center" style="margin-top: 20px;">
-                     <h2>Congratulations!</h2>
+                     <h2 style="letter-spacing: 2px;">COMPLETED</h2>
                     </div>
                   </div>
                   </div>
