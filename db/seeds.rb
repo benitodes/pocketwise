@@ -30,7 +30,7 @@ end
 puts "users have been created"
 
 # create wallet
-# byebug
+#
 
 benoit = User.where(first_name: "Benoit")
 sarah = User.where(first_name: "Sarah")
@@ -44,7 +44,7 @@ puts "wallet has been created"
 
 # goals
 goal_list = [
-  ['Gloves', 'https://images.unsplash.com/photo-1521800641212-77d98bb90d21?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80', 15, 18, 15, false, User.first.id],
+  ['Gloves', 'https://images.unsplash.com/photo-1521800641212-77d98bb90d21?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80', 15, 18, 0, false, User.first.id],
   ['Buggy', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200276/pocketwise/buggy_uxjqye.png', 10, 50, 0, false, User.first.id],
   ['Sneakers', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200274/pocketwise/stansmith_p5ndhu.jpg', 10, 69, 0, false, User.second.id]
 ]
@@ -54,6 +54,7 @@ goal_list.each do |name, picture, goal_allowance, goal_price, goal_current_savin
   goal.remote_picture_url = picture
   goal.save
 end
+
 
 puts "goals have been created"
 
@@ -161,6 +162,7 @@ lecture_list.each do |title, description, picture, number, level_id|
   Lecture.create!(title: title, description: description, picture: picture, number: number, level_id: level_id)
 end
 
+
 puts "lectures have been created"
 
 # create questions
@@ -228,7 +230,7 @@ puts "answers have been created"
 
 user_course_list = [
   [Course.first.id, User.third.id, 2, 1, 1, false],
-  [Course.first.id, User.fourth.id, 1, 1, 1, false]
+  [Course.first.id, User.fourth.id, 3, 1, 1, false]
 ]
 
 
@@ -242,13 +244,19 @@ puts "user_course list has been completed"
 
 completed_levels_list = [
   [UserCourse.first.id, Level.first.id],
-  [UserCourse.second.id, Level.second.id]
+  [2, Level.first.id],
+  [2, Level.second.id]
 ]
 
 
 completed_levels_list.each do |user_course_id, level_id|
   CompletedLevel.create!(user_course_id: user_course_id, level_id: level_id)
 end
+
+g = Goal.first
+g.complete = false
+g.goal_current_saving = 15
+g.save
 
 puts "completed_level list has been completed"
 
