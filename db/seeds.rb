@@ -44,7 +44,7 @@ puts "wallet has been created"
 
 # goals
 goal_list = [
-  ['Gloves', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566356338/pocketwise/neonbrand-WwrQnL0Gi1c-unsplash_dbmtes.jpg', 15, 18, 15, false, User.first.id],
+  ['Gloves', 'https://images.unsplash.com/photo-1521800641212-77d98bb90d21?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80', 15, 18, 15, false, User.first.id],
   ['Buggy', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200276/pocketwise/buggy_uxjqye.png', 10, 50, 0, false, User.first.id],
   ['Sneakers', 'https://res.cloudinary.com/dxx1c1rby/image/upload/v1566200274/pocketwise/stansmith_p5ndhu.jpg', 10, 69, 0, false, User.second.id]
 ]
