@@ -53,7 +53,7 @@ body {
     <% if @lectures_complete  %>
       <%= link_to "PRACTICE", level_question_path(@level, @level.questions.first), class: "btn button-red button-level" %>
     <% else %>
-      <a href="#" class="btn button-red disabled" style="color: grey; font-size: 16px;"  role="button" aria-disabled="true">PRACTICE</a>
+      <a href="#" class="btn button-red disabled" style="color: grey;"  role="button" aria-disabled="true">PRACTICE</a>
     <% end %>
   </div>
 
